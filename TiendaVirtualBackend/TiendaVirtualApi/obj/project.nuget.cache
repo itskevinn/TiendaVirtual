@@ -1,27 +1,15 @@
 {
   "version": 2,
-  "dgSpecHash": "DPA1NyRe1/1moN3SRkwFWDYrbQTO+r4lIA/Bv0UPiokipo/Ol57QfWEpJIpkb/IUxDzgl1DLknJ3buGyjPcwMg==",
-  "success": false,
+  "dgSpecHash": "5GBI76sSzMEhEpwXgQwjhFfGJa4wQy8EhQBYyq0U86gTECm7xKV+hX9ldZvjVqD3lNSHTiHt7Hn1ITcOuztUfg==",
+  "success": true,
   "projectFilePath": "C:\\Users\\kevin\\OneDrive\\Documentos\\GitHub\\TiendaVirtual\\TiendaVirtualBackend\\TiendaVirtualApi\\TiendaVirtualApi.csproj",
-  "expectedPackageFiles": [],
-  "logs": [
-    {
-      "code": "NU1201",
-      "level": "Error",
-      "message": "El proyecto Logic no es compatible con netcoreapp3.1 (.NETCoreApp,Version=v3.1). El proyecto Logic admite: net5.0 (.NETCoreApp,Version=v5.0)",
-      "libraryId": "Logic",
-      "targetGraphs": [
-        ".NETCoreApp,Version=v3.1"
-      ]
-    },
-    {
-      "code": "NU1201",
-      "level": "Error",
-      "message": "El proyecto Entity no es compatible con netcoreapp3.1 (.NETCoreApp,Version=v3.1). El proyecto Entity admite: net5.0 (.NETCoreApp,Version=v5.0)",
-      "libraryId": "Entity",
-      "targetGraphs": [
-        ".NETCoreApp,Version=v3.1"
-      ]
-    }
-  ]
+  "expectedPackageFiles": [
+    "C:\\Users\\kevin\\.nuget\\packages\\microsoft.extensions.apidescription.server\\3.0.0\\microsoft.extensions.apidescription.server.3.0.0.nupkg.sha512",
+    "C:\\Users\\kevin\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
+    "C:\\Users\\kevin\\.nuget\\packages\\swashbuckle.aspnetcore\\5.6.3\\swashbuckle.aspnetcore.5.6.3.nupkg.sha512",
+    "C:\\Users\\kevin\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\5.6.3\\swashbuckle.aspnetcore.swagger.5.6.3.nupkg.sha512",
+    "C:\\Users\\kevin\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\5.6.3\\swashbuckle.aspnetcore.swaggergen.5.6.3.nupkg.sha512",
+    "C:\\Users\\kevin\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\5.6.3\\swashbuckle.aspnetcore.swaggerui.5.6.3.nupkg.sha512"
+  ],
+  "logs": []
 }
