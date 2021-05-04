@@ -1,0 +1,132 @@
+{
+  "version": 3,
+  "targets": {
+    ".NETCoreApp,Version=v3.1": {
+      "Entity/1.0.0": {
+        "type": "project",
+        "framework": "Unsupported,Version=v0.0",
+        "compile": {
+          "bin/placeholder/Entity.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Entity.dll": {}
+        }
+      },
+      "Logic/1.0.0": {
+        "type": "project",
+        "framework": "Unsupported,Version=v0.0",
+        "compile": {
+          "bin/placeholder/Logic.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Logic.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Entity/1.0.0": {
+      "type": "project",
+      "path": "../Entity/Entity.csproj",
+      "msbuildProject": "../Entity/Entity.csproj"
+    },
+    "Logic/1.0.0": {
+      "type": "project",
+      "path": "../Logic/Logic.csproj",
+      "msbuildProject": "../Logic/Logic.csproj"
+    }
+  },
+  "projectFileDependencyGroups": {
+    ".NETCoreApp,Version=v3.1": [
+      "Entity >= 1.0.0",
+      "Logic >= 1.0.0"
+    ]
+  },
+  "packageFolders": {
+    "C:\\Users\\kevin\\.nuget\\packages\\": {}
+  },
+  "project": {
+    "version": "1.0.0",
+    "restore": {
+      "projectUniqueName": "C:\\Users\\kevin\\OneDrive\\Documentos\\GitHub\\TiendaVirtual\\TiendaVirtualBackend\\TiendaVirtualApi\\TiendaVirtualApi.csproj",
+      "projectName": "TiendaVirtualApi",
+      "projectPath": "C:\\Users\\kevin\\OneDrive\\Documentos\\GitHub\\TiendaVirtual\\TiendaVirtualBackend\\TiendaVirtualApi\\TiendaVirtualApi.csproj",
+      "packagesPath": "C:\\Users\\kevin\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\kevin\\OneDrive\\Documentos\\GitHub\\TiendaVirtual\\TiendaVirtualBackend\\TiendaVirtualApi\\obj\\",
+      "projectStyle": "PackageReference",
+      "configFilePaths": [
+        "C:\\Users\\kevin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+      ],
+      "originalTargetFrameworks": [
+        "netcoreapp3.1"
+      ],
+      "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "https://api.nuget.org/v3/index.json": {}
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
+          "projectReferences": {
+            "C:\\Users\\kevin\\OneDrive\\Documentos\\GitHub\\TiendaVirtual\\TiendaVirtualBackend\\Entity\\Entity.csproj": {
+              "projectPath": "C:\\Users\\kevin\\OneDrive\\Documentos\\GitHub\\TiendaVirtual\\TiendaVirtualBackend\\Entity\\Entity.csproj"
+            },
+            "C:\\Users\\kevin\\OneDrive\\Documentos\\GitHub\\TiendaVirtual\\TiendaVirtualBackend\\Logic\\Logic.csproj": {
+              "projectPath": "C:\\Users\\kevin\\OneDrive\\Documentos\\GitHub\\TiendaVirtual\\TiendaVirtualBackend\\Logic\\Logic.csproj"
+            }
+          }
+        }
+      },
+      "warningProperties": {
+        "warnAsError": [
+          "NU1605"
+        ]
+      }
+    },
+    "frameworks": {
+      "netcoreapp3.1": {
+        "targetAlias": "netcoreapp3.1",
+        "imports": [
+          "net461",
+          "net462",
+          "net47",
+          "net471",
+          "net472",
+          "net48"
+        ],
+        "assetTargetFallback": true,
+        "warn": true,
+        "frameworkReferences": {
+          "Microsoft.AspNetCore.App": {
+            "privateAssets": "none"
+          },
+          "Microsoft.NETCore.App": {
+            "privateAssets": "all"
+          }
+        },
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.103\\RuntimeIdentifierGraph.json"
+      }
+    }
+  },
+  "logs": [
+    {
+      "code": "NU1201",
+      "level": "Error",
+      "message": "El proyecto Logic no es compatible con netcoreapp3.1 (.NETCoreApp,Version=v3.1). El proyecto Logic admite: net5.0 (.NETCoreApp,Version=v5.0)",
+      "libraryId": "Logic",
+      "targetGraphs": [
+        ".NETCoreApp,Version=v3.1"
+      ]
+    },
+    {
+      "code": "NU1201",
+      "level": "Error",
+      "message": "El proyecto Entity no es compatible con netcoreapp3.1 (.NETCoreApp,Version=v3.1). El proyecto Entity admite: net5.0 (.NETCoreApp,Version=v5.0)",
+      "libraryId": "Entity",
+      "targetGraphs": [
+        ".NETCoreApp,Version=v3.1"
+      ]
+    }
+  ]
+}

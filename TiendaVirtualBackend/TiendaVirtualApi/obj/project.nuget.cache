@@ -1,0 +1,27 @@
+{
+  "version": 2,
+  "dgSpecHash": "DPA1NyRe1/1moN3SRkwFWDYrbQTO+r4lIA/Bv0UPiokipo/Ol57QfWEpJIpkb/IUxDzgl1DLknJ3buGyjPcwMg==",
+  "success": false,
+  "projectFilePath": "C:\\Users\\kevin\\OneDrive\\Documentos\\GitHub\\TiendaVirtual\\TiendaVirtualBackend\\TiendaVirtualApi\\TiendaVirtualApi.csproj",
+  "expectedPackageFiles": [],
+  "logs": [
+    {
+      "code": "NU1201",
+      "level": "Error",
+      "message": "El proyecto Logic no es compatible con netcoreapp3.1 (.NETCoreApp,Version=v3.1). El proyecto Logic admite: net5.0 (.NETCoreApp,Version=v5.0)",
+      "libraryId": "Logic",
+      "targetGraphs": [
+        ".NETCoreApp,Version=v3.1"
+      ]
+    },
+    {
+      "code": "NU1201",
+      "level": "Error",
+      "message": "El proyecto Entity no es compatible con netcoreapp3.1 (.NETCoreApp,Version=v3.1). El proyecto Entity admite: net5.0 (.NETCoreApp,Version=v5.0)",
+      "libraryId": "Entity",
+      "targetGraphs": [
+        ".NETCoreApp,Version=v3.1"
+      ]
+    }
+  ]
+}
