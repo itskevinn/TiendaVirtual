@@ -1,4 +1,4 @@
-namespace TiendaVirtualBackend.Entity
+namespace Entity
 {
   public class Producto
   {

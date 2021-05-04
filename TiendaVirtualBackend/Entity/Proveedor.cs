@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace TiendaVirtualBackend.Entity
+namespace Entity
 {
   public class Proveedor
   {
