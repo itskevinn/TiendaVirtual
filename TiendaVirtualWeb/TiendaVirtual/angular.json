@@ -119,6 +119,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "TiendaVirtual"
+    }
+  },
+  "defaultProject": "TiendaVirtual",
+  "cli": {
+    "analytics": "49b8d81e-0ebe-4225-9354-37e9b0f42308"
+  }
 }

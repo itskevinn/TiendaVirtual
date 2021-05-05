@@ -6,21 +6,26 @@ namespace Entity
   {
     public string Id { get; set; }
     public List<Detalle> Detalles { get; set; }
-    public decimal SubTotal
-    {
-      get; set;
-    }
-    public decimal Descuento { get; set; }
+    public decimal SubTotal { get; set; }
+    public decimal DescuentoTotal { get; set; }
     public decimal Iva { get; set; }
     public decimal Total { get; set; }
     public void CalcularTotal()
     {
-      Total = SubTotal - Descuento;
+      CalcularSubTotal();
+      Total = SubTotal - DescuentoTotal;
       Total = SubTotal + CalcularIva();
+    }
+    public void CalcularDescuentoTotal()
+    {
+      foreach (Detalle detalle in Detalles)
+      {
+        DescuentoTotal += detalle.TotalDescontado;
+      }
     }
     private decimal CalcularIva()
     {
-      return Total * Iva;
+      return Total * (Iva / 100);
     }
     public void CalcularSubTotal()
     {

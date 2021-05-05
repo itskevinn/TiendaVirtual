@@ -1,6 +1,6 @@
 namespace Entity
 {
-  public class Interesado
+  public class Interesado : Usuario
   {
 
   }

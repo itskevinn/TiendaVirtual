@@ -12,7 +12,7 @@ namespace Data
     public DbSet<Detalle> Detalles { get; set; }
     public DbSet<Factura> Facturas { get; set; }
     public DbSet<Interesado> Interesados { get; set; }
-    public DbSet<Producto> Producto { get; set; }
+    public DbSet<Producto> Productos { get; set; }
     public DbSet<Proveedor> Proveedores { get; set; }
 
   }
