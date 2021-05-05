@@ -9,32 +9,51 @@ namespace Logic
   public class DetalleService
   {
     private TiendaVirtualContext context;
+    private readonly ProductoService productoService;
     public DetalleService(TiendaVirtualContext tiendaVirtualContext)
     {
       context = tiendaVirtualContext;
+      productoService = new ProductoService(tiendaVirtualContext);
     }
     public GuardarDetalleResponse Guardar(Detalle detalle)
     {
       try
       {
-        Detalle detalleBuscado = context.Detalles.Find(detalle.Id);
+        Detalle detalleBuscado = context.Detalles.Find(detalle.IdDetalle);
+        Producto productoBuscado = productoService.ConsultarPorId(detalle.IdProducto);
+        if (productoBuscado == null)
+        {
+          return new GuardarDetalleResponse("No se encontró el producto", true);
+        }
         if (detalleBuscado != null)
         {
-          context.Detalles.Add(detalle);
-          context.SaveChanges();
-          return new GuardarDetalleResponse(detalle, "Detalle guardado con éxito", false);
+          return new GuardarDetalleResponse("Detalle duplicado", true);
         }
-        return new GuardarDetalleResponse("Detalle duplicado, por favor, rectifique la información", true);
+        detalle.Producto = productoBuscado;
+        if (productoService.ReducirCantidad(productoBuscado, detalle.Cantidad).Error)
+        {
+          var mensajeModificacion = productoService.ReducirCantidad(productoBuscado, detalle.Cantidad).Mensaje;
+          return new GuardarDetalleResponse(detalle, mensajeModificacion, true);
+        };
+        detalle.CalcularTotal();
+        context.Detalles.Add(detalle);
+        context.SaveChanges();
+        return new GuardarDetalleResponse(detalle, "Detalle guardado con éxito", false);
+
       }
-      catch (System.Exception)
+      catch (Exception e)
       {
-        return new GuardarDetalleResponse("Ha ocurrido un error en el servidor. Por favor, vuelva a internar más tarde", true);
+        return new GuardarDetalleResponse($"Ha ocurrido un error en el servidor. {e.Message} Por favor, vuelva a internar más tarde", true);
       }
 
     }
     public List<Detalle> Consultar()
     {
       return context.Detalles.ToList();
+    }
+    public Detalle Consultar(string id)
+    {
+      return context.Detalles.Find(id);
     }
     public EditarDetalleResponse Editar(string id, Detalle detalleActualizado)
     {
@@ -44,7 +63,7 @@ namespace Logic
         if (detalleAActualizar != null)
         {
           detalleAActualizar.Cantidad = detalleActualizado.Cantidad;
-          detalleAActualizar.Producto = detalleActualizado.Producto;
+          detalleAActualizar.IdProducto = detalleActualizado.IdProducto;
           detalleAActualizar.CalcularTotal();
           context.Detalles.Update(detalleAActualizar);
           context.SaveChanges();

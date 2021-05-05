@@ -17,8 +17,8 @@ namespace Logic
     {
       try
       {
-        Producto productoBuscado = context.Productos.Find(producto.Id);
-        if (productoBuscado != null)
+        Producto productoBuscado = ConsultarPorId(producto.Id);
+        if (productoBuscado == null)
         {
           context.Productos.Add(producto);
           context.SaveChanges();
@@ -26,15 +26,64 @@ namespace Logic
         }
         return new GuardarProductoResponse("Producto duplicado, por favor, rectifique la información", true);
       }
-      catch (System.Exception)
+      catch (System.Exception e)
       {
-        return new GuardarProductoResponse("Ha ocurrido un error en el servidor. Por favor, vuelva a internar más tarde", true);
+        return new GuardarProductoResponse($"Ha ocurrido un error en el servidor. {e.Message} Por favor, vuelva a internar más tarde", true);
       }
 
+    }
+    public Producto ConsultarPorId(string id)
+    {
+      List<Producto> productos = context.Productos.ToList();
+      foreach (Producto producto in productos)
+      {
+        if (producto.Id == id)
+        {
+          return producto;
+        }
+      }
+      return null;
+    }
+
+    public ModificarCantidadResponse AumentarCantidad(Producto producto, int cantidad)
+    {
+      var productoAModificar = context.Productos.Find(producto.IdObjeto);
+      productoAModificar.CantidadDisponible += cantidad;
+      context.Productos.Update(productoAModificar);
+      context.SaveChanges();
+      return new ModificarCantidadResponse("Cantidad aumentada", false);
+    }
+    public ModificarCantidadResponse ReducirCantidad(Producto producto, int cantidad)
+    {
+      var productoAModificar = context.Productos.Find(producto.IdObjeto);
+      if (producto.CantidadDisponible == 0)
+      {
+        return new ModificarCantidadResponse($"El producto {producto.Nombre} no está disponible", true);
+      }
+      if (cantidad > producto.CantidadDisponible)
+      {
+        return new ModificarCantidadResponse($"Sólo hay {producto.CantidadDisponible} unidades de {producto.Nombre}", true);
+      }
+      if ((productoAModificar.CantidadDisponible - cantidad) <= 0)
+      {
+        return new ModificarCantidadResponse($"No hay unidades de {productoAModificar.Nombre} disponibles", true);
+      };
+      productoAModificar.CantidadDisponible -= cantidad;
+      context.Productos.Update(productoAModificar);
+      context.SaveChanges();
+      return new ModificarCantidadResponse("Cantidad reducida", false);
     }
     public List<Producto> Consultar()
     {
       return context.Productos.ToList();
+    }
+    public Producto Consultar(string id)
+    {
+      return context.Productos.Find(id);
+    }
+    public List<Producto> ProductosPorProveedor(string nit)
+    {
+      return context.Productos.Where(p => p.NitProveedor == nit).ToList();
     }
     public EditarProductoResponse Editar(string id, Producto productoActualizado)
     {
@@ -43,10 +92,11 @@ namespace Logic
         var productoAActualizar = context.Productos.Find(id);
         if (productoAActualizar != null)
         {
-          productoAActualizar.Cantidad = productoActualizado.Cantidad;
+          productoAActualizar.CantidadDisponible = productoActualizado.CantidadDisponible;
           productoAActualizar.Descripcion = productoActualizado.Descripcion;
           productoAActualizar.NitProveedor = productoActualizado.NitProveedor;
-          productoAActualizar.Precio = productoActualizado.Precio;
+          productoAActualizar.PrecioBase = productoActualizado.PrecioBase;
+          productoAActualizar.Iva = productoActualizado.Iva;
           productoAActualizar.Nombre = productoActualizado.Nombre;
           productoAActualizar.Id = productoActualizado.Id;
           context.Productos.Update(productoAActualizar);
@@ -130,6 +180,16 @@ namespace Logic
       {
         Mensaje = mensaje;
         Error = error;
+      }
+    }
+    public class ModificarCantidadResponse
+    {
+      public string Mensaje { get; set; }
+      public bool Error { get; set; }
+      public ModificarCantidadResponse(string mensaje, bool error)
+      {
+        Error = error;
+        Mensaje = mensaje;
       }
     }
   }

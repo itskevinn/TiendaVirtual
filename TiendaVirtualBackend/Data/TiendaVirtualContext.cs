@@ -14,6 +14,5 @@ namespace Data
     public DbSet<Interesado> Interesados { get; set; }
     public DbSet<Producto> Productos { get; set; }
     public DbSet<Proveedor> Proveedores { get; set; }
-
   }
 }

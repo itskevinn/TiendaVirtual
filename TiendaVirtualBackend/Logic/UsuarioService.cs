@@ -17,8 +17,8 @@ namespace Logic
     {
       try
       {
-        Usuario usuarioBuscado = context.Usuarios.Find(usuario.Id);
-        if (usuarioBuscado != null)
+        Usuario usuarioBuscado = context.Usuarios.Find(usuario.IdUsuario);
+        if (usuarioBuscado == null)
         {
           context.Usuarios.Add(usuario);
           context.SaveChanges();

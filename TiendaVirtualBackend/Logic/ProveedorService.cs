@@ -3,22 +3,25 @@ using System.Collections.Generic;
 using System.Linq;
 using Data;
 using Entity;
+using Microsoft.EntityFrameworkCore;
 
 namespace Logic
 {
-  public class Proveedoreservice
+  public class ProveedorService
   {
     private TiendaVirtualContext context;
-    public Proveedoreservice(TiendaVirtualContext tiendaVirtualContext)
+    private readonly ProductoService productoService;
+    public ProveedorService(TiendaVirtualContext tiendaVirtualContext)
     {
       context = tiendaVirtualContext;
+      productoService = new ProductoService(tiendaVirtualContext);
     }
     public GuardarProveedorResponse Guardar(Proveedor proveedor)
     {
       try
       {
         Proveedor proveedorBuscado = context.Proveedores.Find(proveedor.Nit);
-        if (proveedorBuscado != null)
+        if (proveedorBuscado == null)
         {
           context.Proveedores.Add(proveedor);
           context.SaveChanges();
@@ -26,15 +29,28 @@ namespace Logic
         }
         return new GuardarProveedorResponse("Proveedor duplicado, por favor, rectifique la información", true);
       }
-      catch (System.Exception)
+      catch (System.Exception e)
       {
-        return new GuardarProveedorResponse("Ha ocurrido un error en el servidor. Por favor, vuelva a internar más tarde", true);
+        return new GuardarProveedorResponse($"Ha ocurrido un error en el servidor. {e.Message} Por favor, vuelva a internar más tarde", true);
       }
 
     }
     public List<Proveedor> Consultar()
     {
-      return context.Proveedores.ToList();
+      List<Proveedor> proveedores = context.Proveedores.ToList();
+      return AsignarProductos(proveedores);
+    }
+
+    private List<Proveedor> AsignarProductos(List<Proveedor> proveedores)
+    {
+      proveedores = context.Proveedores.ToList();
+      proveedores.ForEach((p) => p.Productos = productoService.ProductosPorProveedor(p.Nit));
+      return proveedores;
+    }
+
+    public Proveedor Consultar(string id)
+    {
+      return context.Proveedores.Find(id);
     }
     public EditarProveedorResponse Editar(string nit, Proveedor proveedorActualizado)
     {

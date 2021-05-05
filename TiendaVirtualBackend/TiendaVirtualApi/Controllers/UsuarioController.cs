@@ -42,7 +42,7 @@ namespace Controllers
     {
       var usuario = new Usuario
       {
-        Id = usuarioInputModel.Id,
+        IdUsuario = usuarioInputModel.IdUsuario,
         _Usuario = usuarioInputModel._Usuario,
         Contrasena = usuarioInputModel.Contrasena,
         Rol = usuarioInputModel.Rol,

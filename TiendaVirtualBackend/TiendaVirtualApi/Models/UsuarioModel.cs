@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Entity;
 
 namespace Models
@@ -16,7 +12,7 @@ namespace Models
     {
       public UsuarioViewModel(Usuario usuario)
       {
-        Id = usuario.Id;
+        IdUsuario = usuario.IdUsuario;
         _Usuario = usuario._Usuario;
         Rol = usuario.Rol;
       }

@@ -3,53 +3,63 @@ using System.Collections.Generic;
 using System.Linq;
 using Data;
 using Entity;
+using Microsoft.EntityFrameworkCore;
 
 namespace Logic
 {
   public class FacturaService
   {
     private TiendaVirtualContext context;
+    private readonly DetalleService detalleService;
     public FacturaService(TiendaVirtualContext tiendaVirtualContext)
     {
       context = tiendaVirtualContext;
+      detalleService = new DetalleService(tiendaVirtualContext);
     }
-    public GuardarFacturaResponse Guardar(Factura detalle)
+    public GuardarFacturaResponse Guardar(Factura factura)
     {
       try
       {
-        Factura detalleBuscado = context.Facturas.Find(detalle.Id);
-        if (detalleBuscado != null)
+        Factura facturaBuscada = context.Facturas.Find(factura.IdFactura);
+        if (facturaBuscada == null)
         {
-          context.Facturas.Add(detalle);
+          foreach (Detalle detalle in factura.Detalles)
+          {
+            detalleService.Guardar(detalle);
+          }
+          factura.CalcularTotales();
+          context.Facturas.Add(factura);
           context.SaveChanges();
-          return new GuardarFacturaResponse(detalle, "Factura guardado con éxito", false);
+          return new GuardarFacturaResponse(factura, "Factura guardada con éxito", false);
         }
         return new GuardarFacturaResponse("Factura duplicada, por favor, rectifique la información", true);
       }
-      catch (System.Exception)
+      catch (System.Exception e)
       {
-        return new GuardarFacturaResponse("Ha ocurrido un error en el servidor. Por favor, vuelva a internar más tarde", true);
+        return new GuardarFacturaResponse($"Ha ocurrido un error en el servidor. {e.Message} Por favor, vuelva a internar más tarde", true);
       }
 
     }
     public List<Factura> Consultar()
     {
-      return context.Facturas.ToList();
+      return context.Facturas.Include((f) => f.Detalles).ToList();
     }
-    public EditarFacturaResponse Editar(string id, Factura detalleActualizado)
+    public Factura Consultar(string id)
+    {
+      return context.Facturas.Find(id);
+    }
+    public EditarFacturaResponse Editar(string id, Factura facturaActualizado)
     {
       try
       {
-        var detalleAActualizar = context.Facturas.Find(id);
-        if (detalleAActualizar != null)
+        var facturaAActualizar = context.Facturas.Find(id);
+        if (facturaAActualizar != null)
         {
-          detalleAActualizar.Detalles = detalleActualizado.Detalles;
-          detalleAActualizar.Iva = detalleActualizado.Iva;
-          detalleAActualizar.CalcularSubTotal();
-          detalleAActualizar.CalcularTotal();
-          context.Facturas.Update(detalleAActualizar);
+          facturaAActualizar.Detalles = facturaActualizado.Detalles;
+          facturaAActualizar.CalcularTotales();
+          context.Facturas.Update(facturaAActualizar);
           context.SaveChanges();
-          return new EditarFacturaResponse(detalleAActualizar, "Factura editada correctamente", false);
+          return new EditarFacturaResponse(facturaAActualizar, "Factura editada correctamente", false);
         }
         else
         {
@@ -65,12 +75,12 @@ namespace Logic
     {
       try
       {
-        var detalleAEliminar = context.Facturas.Find(id);
-        if (detalleAEliminar != null)
+        var facturaAEliminar = context.Facturas.Find(id);
+        if (facturaAEliminar != null)
         {
-          context.Facturas.Remove(detalleAEliminar);
+          context.Facturas.Remove(facturaAEliminar);
           context.SaveChanges();
-          return new EliminarFacturaResponse(detalleAEliminar, "Factura eliminada correctamente");
+          return new EliminarFacturaResponse(facturaAEliminar, "Factura eliminada correctamente");
         }
         return new EliminarFacturaResponse("No se encontró la factura");
       }
@@ -81,13 +91,13 @@ namespace Logic
     }
     public class EliminarFacturaResponse
     {
-      public Factura Detalle { get; set; }
+      public Factura Factura { get; set; }
       public string Mensaje { get; set; }
       public bool Error { get; set; }
-      public EliminarFacturaResponse(Factura detalle, string mensaje)
+      public EliminarFacturaResponse(Factura factura, string mensaje)
       {
         Mensaje = mensaje;
-        Detalle = detalle;
+        Factura = factura;
         Error = false;
       }
       public EliminarFacturaResponse(string mensaje)
@@ -101,9 +111,9 @@ namespace Logic
       public Factura Factura { get; set; }
       public string Mensaje { get; set; }
       public bool Error { get; set; }
-      public EditarFacturaResponse(Factura detalle, string mensaje, bool error)
+      public EditarFacturaResponse(Factura factura, string mensaje, bool error)
       {
-        Factura = detalle;
+        Factura = factura;
         Mensaje = mensaje;
         Error = error;
       }
