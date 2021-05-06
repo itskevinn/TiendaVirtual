@@ -1,0 +1,51 @@
+<div class="container">
+  <br>
+  <div class="row">
+    <div class="col align-self-start">
+      <h2>Productos</h2>
+    </div>
+    <div class="col align-self-center">
+      <input type="text" class="form-control form-control-md search-input" placeholder="Buscar" />
+    </div>
+    <div class="col align-self-end">
+      <div>
+        <button [routerLink]="['/RegistrarProducto']" class="btn btn-outline-primary new-button">
+          <span class="btn-label"><i class="fas fa-plus"></i></span>
+          Nuevo
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="table-responsive">
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th socpe="col">#</th>
+          <th scope="col">Id</th>
+          <th scope="col">Nombre</th>
+          <th scope="col">Descripción</th>
+          <th scope="col">Precio</th>
+          <th scope="col">Cantidad disponible</th>
+          <th scope="col">Acción</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let producto of productos index as i">
+          <td>{{ i + 1 }}</td>
+          <td>{{ producto.id }}</td>
+          <td>{{ producto.nombre }}</td>
+          <td>{{ producto.descripcion }}</td>
+          <td>{{ producto.precio }}</td>
+          <td>{{ producto.cantidad }}</td>
+          <td>
+            <a routerLink="/Producto/{{ producto.nit }}">Ver</a>
+            <a> / </a>
+            <a routerLink="/EditarProducto/{{
+            producto.id 
+          }}">Editar</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

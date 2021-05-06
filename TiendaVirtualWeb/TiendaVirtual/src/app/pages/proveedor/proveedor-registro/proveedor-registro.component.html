@@ -1,1 +1,27 @@
-<p>proveedor-registro works!</p>
+<div class="container">
+  <br>
+  <button [routerLink]="['/Proveedores']" type="button" class="btn">
+    <span class="btn-label"><i class="fas fa-arrow-left"></i></span> Regresar</button>
+  <h1>Registrar proveedor</h1>
+  <br>
+  <div class="row">
+    <div class="col align-self-center">
+      <div class="col-md-6 offset-md-3">
+        <form [formGroup]="formGroup">
+          <p-toast position="top-center" preventOpenDuplicates=true autoZIndex=true key="tl"></p-toast>
+          <div class="input-group mb-2 ">
+            <input type="text" formControlName="nit" class="form-control px-5" placeholder="NIT del proveedor"
+              aria-label="NIT del proveedor">
+            <input type="text" formControlName="nombre" class="form-control" placeholder="Nombre del proveedor"
+              aria-label="nombre">
+          </div>
+          <div class="input-group mb-2">
+          </div>
+        </form>
+      </div>
+      <div class="text-center">
+        <button type="button" (click)="onSubmit()" class="btn btn-outline-success">Registrar</button>
+      </div>
+    </div>
+  </div>
+</div>

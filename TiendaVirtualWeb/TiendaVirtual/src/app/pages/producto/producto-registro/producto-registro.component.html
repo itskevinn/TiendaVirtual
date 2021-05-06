@@ -1,0 +1,34 @@
+<div class="container">
+  <br>
+  <button [routerLink]="['/Proveedores']" type="button" class="btn">
+    <span class="btn-label"><i class="fas fa-arrow-left"></i></span> Regresar</button>
+  <h1>Registrar proveedor</h1>
+  <br>
+  <div class="row">
+    <div class="col align-self-center">
+      <div class="col-md-6 offset-md-3">
+        <form [formGroup]="formGroup">
+          <p-toast position="top-center" preventOpenDuplicates=true autoZIndex=true key="tl"></p-toast>
+          <div class="input-group mb-2 ">
+            <input type="text" formControlName="id" class="form-control px-5" placeholder="Id del producto"
+              aria-label="Id del producto">
+            <input type="text" formControlName="nombre" class="form-control" placeholder="Nombre del producto">
+            <textarea type="text" formControlName="descripcion" class="form-control"
+              placeholder="Descripción del producto"> </textarea>
+            <input type="number" formControlName="cantidad" class="form-control"
+              placeholder="Cantidad inicial disponible">
+            <input type="number" formControlName="descuento" class="form-control" placeholder="Porcentaje de descuento">
+            <input type="number" formControlName="iva" class="form-control" placeholder="Porcentaje de IVA">
+            <input type="text" formControlName="nitProveedor" class="form-control" placeholder="NIT del proveedor">
+            <input type="number" formControlName="precio" class="form-control" placeholder="Precio">
+          </div>
+          <div class="input-group mb-2">
+          </div>
+        </form>
+      </div>
+      <div class="text-center">
+        <button type="button" (click)="onSubmit()" class="btn btn-outline-success">Registrar</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,3 +1,4 @@
+import { ProveedorConsultaComponent } from './pages/proveedor/proveedor-consulta/proveedor-consulta.component';
 import { MessageService } from 'primeng/api';
 import { UsuarioRegistroComponent } from './pages/usuario/usuario-registro/usuario-registro.component';
 import { UsuarioConsultaComponent } from './pages/usuario/usuario-consulta/usuario-consulta.component';
@@ -13,7 +14,8 @@ import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { ToastModule } from 'primeng/toast';
 import { ProveedorRegistroComponent } from './pages/proveedor/proveedor-registro/proveedor-registro.component';
-import { ProveedorConsultaComponent } from './pages/proveedor/proveedor-consulta/proveedor-consulta.component';
+import { ProductoConsultaComponent } from './pages/producto/producto-consulta/producto-consulta.component';
+import { ProductoRegistroComponent } from './pages/producto/producto-registro/producto-registro.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +25,8 @@ import { ProveedorConsultaComponent } from './pages/proveedor/proveedor-consulta
     UsuarioRegistroComponent,
     ProveedorRegistroComponent,
     ProveedorConsultaComponent,
+    ProductoConsultaComponent,
+    ProductoRegistroComponent,
   ],
   imports: [
     BrowserModule,
