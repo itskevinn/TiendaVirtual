@@ -1,0 +1,31 @@
+<div class="container">
+  <br>
+  <button [routerLink]="['/Usuarios']" type="button" class="btn">
+    <span class="btn-label"><i class="fas fa-arrow-left"></i></span> Regresar</button>
+  <h1>Registrar usuario</h1>
+  <br>
+  <div class="row">
+    <div class="col align-self-center">
+      <div class="col-md-6 offset-md-3">
+        <form [formGroup]="formGroup">
+          <p-toast position="top-center" preventOpenDuplicates=true autoZIndex=true key="tl"></p-toast>
+          <div class="input-group mb-2 ">
+            <input type="text" formControlName="_usuario" class="form-control px-5" placeholder="Usuario"
+              aria-label="Usuario">
+            <input type="password" formControlName="contrasena" class="form-control" placeholder="Contraseña"
+              aria-label="Contraseña">
+          </div>
+          <div class="input-group mb-2">
+            <select class="form-select" aria-label="Select de rol" (change)="cambiarRol($event)">
+              <option selected>Seleccione un rol</option>
+              <option *ngFor="let rol of roles">{{rol}}</option>
+            </select>
+          </div>
+        </form>
+      </div>
+      <div class="text-center">
+        <button type="button" (click)="onSubmit()" class="btn btn-outline-success">Registrar</button>
+      </div>
+    </div>
+  </div>
+</div>

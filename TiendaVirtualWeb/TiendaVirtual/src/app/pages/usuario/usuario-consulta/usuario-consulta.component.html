@@ -1,0 +1,44 @@
+<div class="container">
+  <br>
+  <div class="row">
+    <div class="col align-self-start">
+      <h1>Usuarios</h1>
+    </div>
+    <div class="col align-self-center">
+      <input type="text" class="form-control form-control-md search-input" placeholder="Buscar" />
+    </div>
+    <div class="col align-self-end">
+      <div>
+        <button [routerLink]="['/RegistrarUsuario']" class="btn btn-outline-primary new-button">
+          <span class="btn-label"><i class="fas fa-plus"></i></span>
+          Nuevo
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th socpe="col">#</th>
+        <th scope="col">Usuario</th>
+        <th scope="col">Rol</th>
+        <th scope="col">Acción</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let usuario of usuarios index as i">
+        <td>{{ i + 1 }}</td>
+        <td>{{ usuario._Usuario }}</td>
+        <td>{{ usuario.rol }}</td>
+        <td>
+          <a routerLink="/Usuario/{{ usuario.id }}">Ver</a>
+          <a> / </a>
+          <a routerLink="/EditarUsuario/{{
+            usuario.id
+            }}">Editar</a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

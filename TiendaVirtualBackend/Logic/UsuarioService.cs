@@ -20,7 +20,7 @@ namespace Logic
     {
       try
       {
-        Usuario usuarioBuscado = context.Usuarios.Find(usuario.IdUsuario);
+        Usuario usuarioBuscado = context.Usuarios.Where((u) => u._Usuario == usuario._Usuario).FirstOrDefault();
         if (usuarioBuscado == null)
         {
           usuario.Facturas = facturaService.ConsultarPorUsuario(usuario.IdUsuario);
