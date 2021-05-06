@@ -14,6 +14,7 @@ namespace Models
       {
         IdUsuario = usuario.IdUsuario;
         _Usuario = usuario._Usuario;
+        Facturas = usuario.Facturas;
         Rol = usuario.Rol;
       }
     }

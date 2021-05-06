@@ -3,15 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using Data;
 using Entity;
+using Microsoft.EntityFrameworkCore;
 
 namespace Logic
 {
   public class UsuarioService
   {
     private TiendaVirtualContext context;
+    private readonly FacturaService facturaService;
     public UsuarioService(TiendaVirtualContext tiendaVirtualContext)
     {
       context = tiendaVirtualContext;
+      facturaService = new FacturaService(tiendaVirtualContext);
     }
     public GuardarUsuarioResponse Guardar(Usuario usuario)
     {
@@ -20,6 +23,7 @@ namespace Logic
         Usuario usuarioBuscado = context.Usuarios.Find(usuario.IdUsuario);
         if (usuarioBuscado == null)
         {
+          usuario.Facturas = facturaService.ConsultarPorUsuario(usuario.IdUsuario);
           context.Usuarios.Add(usuario);
           context.SaveChanges();
           return new GuardarUsuarioResponse(usuario, "Usuario guardado con éxito", false);
@@ -34,11 +38,15 @@ namespace Logic
     }
     public List<Usuario> Consultar()
     {
-      return context.Usuarios.ToList();
+      List<Usuario> usuarios = context.Usuarios.ToList();
+      usuarios.ForEach((u) => u.Facturas = facturaService.ConsultarPorUsuario(u.IdUsuario));
+      return usuarios;
     }
     public Usuario Consultar(string id)
     {
-      return context.Usuarios.Find(id);
+      Usuario usuario = context.Usuarios.Find(id);
+      usuario.Facturas = facturaService.ConsultarPorUsuario(usuario.IdUsuario);
+      return usuario;
     }
     public EditarUsuarioResponse Editar(string id, Usuario usuarioActualizado)
     {

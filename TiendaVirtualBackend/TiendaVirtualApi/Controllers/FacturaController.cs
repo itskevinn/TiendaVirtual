@@ -45,6 +45,7 @@ namespace Controllers
       {
         IdFactura = facturaInputModel.IdFactura,
         Detalles = facturaInputModel.Detalles,
+        IdUsuario = facturaInputModel.IdUsuario
       };
       return factura;
     }

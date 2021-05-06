@@ -55,6 +55,10 @@ namespace Logic
     {
       return context.Detalles.Find(id);
     }
+    public List<Detalle> ConsultarPorFactura(int id)
+    {
+      return context.Detalles.Where((d) => d.IdFactura == id).ToList();
+    }
     public EditarDetalleResponse Editar(string id, Detalle detalleActualizado)
     {
       try

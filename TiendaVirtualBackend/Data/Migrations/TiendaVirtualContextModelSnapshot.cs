@@ -27,6 +27,9 @@ namespace Data.Migrations
                     b.Property<int>("Cantidad")
                         .HasColumnType("int");
 
+                    b.Property<int>("IdFactura")
+                        .HasColumnType("int");
+
                     b.Property<string>("IdProducto")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -61,10 +64,10 @@ namespace Data.Migrations
                     b.Property<decimal>("DescuentoTotal")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<decimal>("IvaTotal")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<string>("IdUsuario")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<decimal>("SubTotal")
+                    b.Property<decimal>("IvaTotal")
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<decimal>("Total")
@@ -81,7 +84,7 @@ namespace Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<int>("Cantidad")
+                    b.Property<int>("CantidadDisponible")
                         .HasColumnType("int");
 
                     b.Property<string>("Descripcion")
@@ -130,6 +133,7 @@ namespace Data.Migrations
             modelBuilder.Entity("Entity.Usuario", b =>
                 {
                     b.Property<string>("IdUsuario")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Contrasena")

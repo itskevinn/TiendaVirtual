@@ -12,10 +12,11 @@ namespace Entity
     public int IdFactura { get; set; }
     [NotMapped]
     public List<Detalle> Detalles { get; set; }
-    public decimal SubTotal { get; set; }
     public decimal DescuentoTotal { get; set; }
     public decimal IvaTotal { get; set; }
     public decimal Total { get; set; }
+    public string IdUsuario { get; set; }
+
     public void CalcularTotales()
     {
       CalcularDescuentoTotal();

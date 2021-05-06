@@ -17,7 +17,8 @@ namespace Data.Migrations
                     ValorConDescuento = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     ValorIva = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     SubTotal = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    IdProducto = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    IdProducto = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IdFactura = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -30,10 +31,10 @@ namespace Data.Migrations
                 {
                     IdFactura = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    SubTotal = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     DescuentoTotal = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     IvaTotal = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    Total = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
+                    Total = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    IdUsuario = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -52,7 +53,7 @@ namespace Data.Migrations
                     Iva = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Descuento = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     NitProveedor = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Cantidad = table.Column<int>(type: "int", nullable: false)
+                    CantidadDisponible = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {

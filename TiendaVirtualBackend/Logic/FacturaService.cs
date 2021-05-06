@@ -11,20 +11,31 @@ namespace Logic
   {
     private TiendaVirtualContext context;
     private readonly DetalleService detalleService;
+    private readonly ProductoService productoService;
     public FacturaService(TiendaVirtualContext tiendaVirtualContext)
     {
       context = tiendaVirtualContext;
       detalleService = new DetalleService(tiendaVirtualContext);
+      productoService = new ProductoService(tiendaVirtualContext);
     }
     public GuardarFacturaResponse Guardar(Factura factura)
     {
       try
       {
         Factura facturaBuscada = context.Facturas.Find(factura.IdFactura);
+        Usuario usuario = context.Usuarios.Find(factura.IdUsuario);
         if (facturaBuscada == null)
         {
+          if (usuario == null)
+          {
+            return new GuardarFacturaResponse("Usuario no encontrado", true);
+          }
           foreach (Detalle detalle in factura.Detalles)
           {
+            if (detalleService.Guardar(detalle).Error)
+            {
+              return new GuardarFacturaResponse(detalleService.Guardar(detalle).Mensaje, true);
+            }
             detalleService.Guardar(detalle);
           }
           factura.CalcularTotales();
@@ -42,7 +53,13 @@ namespace Logic
     }
     public List<Factura> Consultar()
     {
-      return context.Facturas.Include((f) => f.Detalles).ToList();
+      List<Factura> facturas = context.Facturas.ToList();
+      facturas.ForEach((f) => f.Detalles = detalleService.ConsultarPorFactura(f.IdFactura));
+      return facturas;
+    }
+    public List<Factura> ConsultarPorUsuario(string idUsuario)
+    {
+      return context.Facturas.Where((f) => f.IdUsuario == idUsuario).ToList();
     }
     public Factura Consultar(string id)
     {

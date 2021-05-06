@@ -19,6 +19,7 @@ namespace Entity
     public Producto Producto { get; set; }
     [Required(ErrorMessage = "Se requiere el id del producto a facturar")]
     public string IdProducto { get; set; }
+    public int IdFactura { get; set; }
 
     public void CalcularSubTotal()
     {

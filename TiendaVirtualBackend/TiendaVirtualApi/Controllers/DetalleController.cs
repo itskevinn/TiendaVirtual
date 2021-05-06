@@ -43,7 +43,6 @@ namespace Controllers
     {
       var detalle = new Detalle
       {
-        IdDetalle = detalleInputModel.IdDetalle,
         Cantidad = detalleInputModel.Cantidad,
         IdProducto = detalleInputModel.IdProducto,
       };

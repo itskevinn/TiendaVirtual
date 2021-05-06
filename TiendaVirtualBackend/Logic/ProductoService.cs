@@ -18,6 +18,10 @@ namespace Logic
       try
       {
         Producto productoBuscado = ConsultarPorId(producto.Id);
+        if (context.Proveedores.Find(producto.NitProveedor) == null)
+        {
+          return new GuardarProductoResponse("No se encuentra el proveedor, por favor, regístrelo", true);
+        }
         if (productoBuscado == null)
         {
           context.Productos.Add(producto);
