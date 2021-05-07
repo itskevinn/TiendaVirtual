@@ -45,7 +45,6 @@ namespace Controllers
         IdUsuario = usuarioInputModel.IdUsuario,
         _Usuario = usuarioInputModel._Usuario,
         Contrasena = usuarioInputModel.Contrasena,
-        Facturas = usuarioInputModel.Facturas,
         Rol = usuarioInputModel.Rol,
       };
       return usuario;

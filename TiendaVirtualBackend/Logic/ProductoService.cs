@@ -66,12 +66,8 @@ namespace Logic
       }
       if (cantidad > producto.CantidadDisponible)
       {
-        return new ModificarCantidadResponse($"Sólo hay {producto.CantidadDisponible} unidades de {producto.Nombre}", true);
+        return new ModificarCantidadResponse($"Unidades insuficientes. Sólo hay {producto.CantidadDisponible} unidades de {producto.Nombre}", true);
       }
-      if ((productoAModificar.CantidadDisponible - cantidad) <= 0)
-      {
-        return new ModificarCantidadResponse($"No hay unidades de {productoAModificar.Nombre} disponibles", true);
-      };
       productoAModificar.CantidadDisponible -= cantidad;
       context.Productos.Update(productoAModificar);
       context.SaveChanges();

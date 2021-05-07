@@ -29,7 +29,6 @@ namespace Logic
         {
           return new GuardarDetalleResponse("Detalle duplicado", true);
         }
-        detalle.Producto = productoBuscado;
         if (productoService.ReducirCantidad(productoBuscado, detalle.Cantidad).Error)
         {
           var mensajeModificacion = productoService.ReducirCantidad(productoBuscado, detalle.Cantidad).Mensaje;

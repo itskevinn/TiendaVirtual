@@ -5,3 +5,12 @@
 .new-button {
   margin-bottom: 9px !important;
 }
+.producto-card {
+  border-radius: 15px;
+}
+.card-button {
+  border-radius: 7px !important;
+}
+.nav-button {
+  border-radius: 10px !important;
+}

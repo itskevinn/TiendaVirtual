@@ -16,8 +16,5 @@ namespace Entity
     public string Contrasena { get; set; }
     [Required(ErrorMessage = "Seleccione un rol")]
     public string Rol { get; set; }
-    [NotMapped]
-    public List<Factura> Facturas { get; set; }
-
   }
 }

@@ -43,7 +43,6 @@ namespace Logic
 
     private List<Proveedor> AsignarProductos(List<Proveedor> proveedores)
     {
-      proveedores = context.Proveedores.ToList();
       proveedores.ForEach((p) => p.Productos = productoService.ProductosPorProveedor(p.Nit));
       return proveedores;
     }

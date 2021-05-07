@@ -23,13 +23,14 @@ namespace Logic
       try
       {
         Factura facturaBuscada = context.Facturas.Find(factura.IdFactura);
-        Usuario usuario = context.Usuarios.Find(factura.IdUsuario);
+        Interesado interesado = context.Interesados.Find(factura.IdInteresado);
         if (facturaBuscada == null)
         {
-          if (usuario == null)
+          if (interesado == null)
           {
-            return new GuardarFacturaResponse("Usuario no encontrado", true);
+            factura.IdInteresado = "No registrado";
           }
+          factura.Detalles.ForEach((d) => d.IdFactura = factura.IdFactura);
           foreach (Detalle detalle in factura.Detalles)
           {
             if (detalleService.Guardar(detalle).Error)
@@ -57,9 +58,9 @@ namespace Logic
       facturas.ForEach((f) => f.Detalles = detalleService.ConsultarPorFactura(f.IdFactura));
       return facturas;
     }
-    public List<Factura> ConsultarPorUsuario(string idUsuario)
+    public List<Factura> ConsultarPorInteresado(string idInteresado)
     {
-      return context.Facturas.Where((f) => f.IdUsuario == idUsuario).ToList();
+      return context.Facturas.Where((f) => f.IdInteresado == idInteresado).ToList();
     }
     public Factura Consultar(string id)
     {

@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Data.Migrations
 {
     [DbContext(typeof(TiendaVirtualContext))]
-    [Migration("20210506012957_InitialCreate")]
+    [Migration("20210507073412_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -29,12 +29,18 @@ namespace Data.Migrations
                     b.Property<int>("Cantidad")
                         .HasColumnType("int");
 
+                    b.Property<decimal>("Descuento")
+                        .HasColumnType("decimal(18,2)");
+
                     b.Property<int>("IdFactura")
                         .HasColumnType("int");
 
                     b.Property<string>("IdProducto")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("PrecioBase")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<decimal>("SubTotal")
                         .HasColumnType("decimal(18,2)");
@@ -66,8 +72,11 @@ namespace Data.Migrations
                     b.Property<decimal>("DescuentoTotal")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<string>("IdUsuario")
+                    b.Property<string>("IdInteresado")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("InteresadoId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<decimal>("IvaTotal")
                         .HasColumnType("decimal(18,2)");
@@ -77,7 +86,25 @@ namespace Data.Migrations
 
                     b.HasKey("IdFactura");
 
+                    b.HasIndex("InteresadoId");
+
                     b.ToTable("Facturas");
+                });
+
+            modelBuilder.Entity("Entity.Interesado", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("IdInteresado")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("IdUsuario")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Interesados");
                 });
 
             modelBuilder.Entity("Entity.Producto", b =>
@@ -142,10 +169,6 @@ namespace Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Discriminator")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Rol")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -157,15 +180,18 @@ namespace Data.Migrations
                     b.HasKey("IdUsuario");
 
                     b.ToTable("Usuarios");
+                });
 
-                    b.HasDiscriminator<string>("Discriminator").HasValue("Usuario");
+            modelBuilder.Entity("Entity.Factura", b =>
+                {
+                    b.HasOne("Entity.Interesado", null)
+                        .WithMany("Facturas")
+                        .HasForeignKey("InteresadoId");
                 });
 
             modelBuilder.Entity("Entity.Interesado", b =>
                 {
-                    b.HasBaseType("Entity.Usuario");
-
-                    b.HasDiscriminator().HasValue("Interesado");
+                    b.Navigation("Facturas");
                 });
 #pragma warning restore 612, 618
         }

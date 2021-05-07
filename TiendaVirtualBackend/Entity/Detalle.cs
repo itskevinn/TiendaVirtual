@@ -11,9 +11,11 @@ namespace Entity
     [Required(ErrorMessage = "Se requiere la cantidad del producto")]
     public int Cantidad { get; set; }
     public decimal Total { get; set; }
+    public decimal Descuento { get; set; }
     public decimal ValorDescontado { get; set; }
     public decimal ValorConDescuento { get; set; }
     public decimal ValorIva { get; set; }
+    public decimal PrecioBase { get; set; }
     public decimal SubTotal { get; set; }
     [NotMapped]
     public Producto Producto { get; set; }
@@ -23,10 +25,20 @@ namespace Entity
 
     public void CalcularSubTotal()
     {
+      if (PrecioBase != 0)
+      {
+        SubTotal = PrecioBase * Cantidad;
+        return;
+      }
       SubTotal = Producto.PrecioBase * Cantidad;
     }
     public void CalcularDescontado()
     {
+      if (Descuento != 0)
+      {
+        ValorDescontado = SubTotal * (Descuento / 100);
+        return;
+      }
       ValorDescontado = SubTotal * (Producto.Descuento / 100);
     }
     public void CalcularValorConDescuento()

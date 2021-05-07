@@ -18,7 +18,7 @@ namespace Models
       {
         IdFactura = factura.IdFactura;
         Detalles = factura.Detalles;
-        IdUsuario = factura.IdUsuario;
+        IdUsuario = factura.IdInteresado;
       }
     }
   }

@@ -1,0 +1,15 @@
+<div class="card shadow-sm producto-card">
+  <div class="card-body">
+    <h3 style="color: cornflowerblue;">{{ producto.nombre }}</h3>
+    <h4>{{ producto.precio |currency:"COP":"$" }}</h4>
+    <p class="card-text">{{ producto.descripcion }}</p>
+  </div>
+  <div class="card-footer">
+      <div class="btn-group mx-auto">
+        <button type="button" (click)="agregarAlCarrito()"
+          class="btn btn-sm btn-outline-success mx-1 card-button">Añadir
+          al Carrito</button>
+        <button type="button" class="btn btn-sm btn-outline-secondary card-button">Ver detalles</button>
+      </div>
+  </div>
+</div>

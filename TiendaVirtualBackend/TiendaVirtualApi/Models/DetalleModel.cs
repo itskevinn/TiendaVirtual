@@ -6,6 +6,8 @@ namespace Models
   {
     public class DetalleInputModel
     {
+      public decimal PrecioBase { get; set; }
+      public decimal Descuento { get; set; }
       public int Cantidad { get; set; }
       public string IdProducto { get; set; }
       public int IdFactura { get; set; }
@@ -18,6 +20,8 @@ namespace Models
         Cantidad = detalle.Cantidad;
         IdProducto = detalle.IdProducto;
         IdFactura = detalle.IdFactura;
+        PrecioBase = detalle.PrecioBase;
+        Descuento = detalle.Descuento;
       }
     }
   }

@@ -15,7 +15,7 @@ namespace Entity
     public decimal DescuentoTotal { get; set; }
     public decimal IvaTotal { get; set; }
     public decimal Total { get; set; }
-    public string IdUsuario { get; set; }
+    public string IdInteresado { get; set; }
 
     public void CalcularTotales()
     {

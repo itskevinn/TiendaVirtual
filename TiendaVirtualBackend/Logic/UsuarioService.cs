@@ -23,7 +23,6 @@ namespace Logic
         Usuario usuarioBuscado = context.Usuarios.Where((u) => u._Usuario == usuario._Usuario).FirstOrDefault();
         if (usuarioBuscado == null)
         {
-          usuario.Facturas = facturaService.ConsultarPorUsuario(usuario.IdUsuario);
           context.Usuarios.Add(usuario);
           context.SaveChanges();
           return new GuardarUsuarioResponse(usuario, "Usuario guardado con éxito", false);
@@ -39,13 +38,11 @@ namespace Logic
     public List<Usuario> Consultar()
     {
       List<Usuario> usuarios = context.Usuarios.ToList();
-      usuarios.ForEach((u) => u.Facturas = facturaService.ConsultarPorUsuario(u.IdUsuario));
       return usuarios;
     }
     public Usuario Consultar(string id)
     {
       Usuario usuario = context.Usuarios.Find(id);
-      usuario.Facturas = facturaService.ConsultarPorUsuario(usuario.IdUsuario);
       return usuario;
     }
     public EditarUsuarioResponse Editar(string id, Usuario usuarioActualizado)

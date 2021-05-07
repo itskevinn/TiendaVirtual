@@ -24,20 +24,20 @@ export class ProductoRegistroComponent implements OnInit {
     this.producto.id = ''
     this.producto.nombre = ''
     this.producto.descripcion = '';
-    this.producto.cantidad = 0;
-    this.producto.descuento = 0;
-    this.producto.iva = 0;
+    this.producto.cantidad = null;
+    this.producto.descuento = null;
+    this.producto.iva = null;
     this.producto.nitProveedor = '';
-    this.producto.precio = 0;
+    this.producto.precio = null;
     this.formGroup = this.formBuilder.group({
       id: [this.producto.id, Validators.required],
       nombre: [this.producto.nombre, Validators.required],
-      descripcion: [this.producto.descripcion, Validators.required],
+      nitProveedor: [this.producto.nitProveedor, Validators.required],
       cantidad: [this.producto.cantidad, Validators.required],
       descuento: [this.producto.descuento, Validators.required],
       iva: [this.producto.iva, Validators.required],
-      nitProveedor: [this.producto.nitProveedor, Validators.required],
       precio: [this.producto.precio, Validators.required],
+      descripcion: [this.producto.descripcion, Validators.required],
     })
   }
   onSubmit() {

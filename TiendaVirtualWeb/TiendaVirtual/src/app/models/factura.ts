@@ -1,6 +1,10 @@
 import { Detalle } from './detalle';
 export class Factura {
   detalles: Detalle[];
-  idUsuario: string;
-  idFactura: string;
+  idInteresado: string;
+  idFactura: number;
+  subTotal: number;
+  totalDescuento: number;
+  totalIva: number;
+  total: number;
 }

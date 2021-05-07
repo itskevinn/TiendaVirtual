@@ -13,9 +13,11 @@ namespace Data.Migrations
                     IdDetalle = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Cantidad = table.Column<int>(type: "int", nullable: false),
                     Total = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Descuento = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     ValorDescontado = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     ValorConDescuento = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     ValorIva = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    PrecioBase = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     SubTotal = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     IdProducto = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     IdFactura = table.Column<int>(type: "int", nullable: false)
@@ -26,19 +28,16 @@ namespace Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Facturas",
+                name: "Interesados",
                 columns: table => new
                 {
-                    IdFactura = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    DescuentoTotal = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    IvaTotal = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    Total = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    IdInteresado = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     IdUsuario = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Facturas", x => x.IdFactura);
+                    table.PrimaryKey("PK_Interesados", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -79,13 +78,40 @@ namespace Data.Migrations
                     IdUsuario = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     _Usuario = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Contrasena = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Rol = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Discriminator = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Rol = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Usuarios", x => x.IdUsuario);
                 });
+
+            migrationBuilder.CreateTable(
+                name: "Facturas",
+                columns: table => new
+                {
+                    IdFactura = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    DescuentoTotal = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    IvaTotal = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Total = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    IdInteresado = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    InteresadoId = table.Column<string>(type: "nvarchar(450)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Facturas", x => x.IdFactura);
+                    table.ForeignKey(
+                        name: "FK_Facturas_Interesados_InteresadoId",
+                        column: x => x.InteresadoId,
+                        principalTable: "Interesados",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Facturas_InteresadoId",
+                table: "Facturas",
+                column: "InteresadoId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -104,6 +130,9 @@ namespace Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "Usuarios");
+
+            migrationBuilder.DropTable(
+                name: "Interesados");
         }
     }
 }
