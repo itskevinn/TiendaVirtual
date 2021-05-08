@@ -5,6 +5,10 @@ namespace Entity
 {
   public class Detalle
   {
+    public Detalle()
+    {
+      Producto = new Producto();
+    }
     [Key]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public string IdDetalle { get; set; }
@@ -18,7 +22,7 @@ namespace Entity
     public decimal PrecioBase { get; set; }
     public decimal SubTotal { get; set; }
     [NotMapped]
-    public Producto Producto { get; set; }
+    private Producto Producto { get; set; }
     [Required(ErrorMessage = "Se requiere el id del producto a facturar")]
     public string IdProducto { get; set; }
     public int IdFactura { get; set; }
@@ -31,7 +35,25 @@ namespace Entity
       }
       return SubTotal = Producto.PrecioBase * Cantidad;
     }
-
+    public Producto ObtenerProducto()
+    {
+      return Producto;
+    }
+    public void ColocarProducto(Producto producto)
+    {
+      Producto = new Producto
+      {
+        CantidadDisponible = producto.CantidadDisponible,
+        Descripcion = producto.Descripcion,
+        Descuento = producto.Descuento,
+        Id = producto.Id,
+        IdObjeto = producto.IdObjeto,
+        Iva = producto.Iva,
+        NitProveedor = producto.NitProveedor,
+        Nombre = producto.Nombre,
+        PrecioBase = producto.PrecioBase
+      };
+    }
     public void CalcularDescontado()
     {
       if (Descuento != 0 && PrecioBase != 0)

@@ -36,9 +36,9 @@ namespace Entity
         IdFactura = detalle.IdFactura,
         IdProducto = detalle.IdProducto,
         PrecioBase = detalle.PrecioBase,
-        Producto = detalle.Producto,
         Total = detalle.Total,
       };
+      Detalle.ColocarProducto(detalle.ObtenerProducto());
       Detalle.CalcularSubTotal();
       Detalle.CalcularDescontado();
       Detalle.CalcularValorIva();
