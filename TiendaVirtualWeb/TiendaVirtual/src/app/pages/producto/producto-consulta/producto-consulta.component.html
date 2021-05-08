@@ -1,7 +1,13 @@
 <div class="container">
   <br>
-  <app-page-header titulo="Productos" redireccionamiento="RegistrarProducto"></app-page-header>
-  <div class="d-grid">
+  <div *ngIf="usuario.rol=='Lider de Avalúos';else sinRedireccionamiento">
+    <app-page-header titulo="Productos" redireccionamiento="/RegistrarProducto"></app-page-header>
+  </div>
+  <ng-template #sinRedireccionamiento>
+    <app-page-header titulo="Productos"></app-page-header>
+  </ng-template>
+
+  <div class=" d-grid">
     <div class="row">
       <div class={{columnas}}>
         <div class="col" *ngFor="let producto of productos">

@@ -7,7 +7,7 @@
       <input type="text" class="form-control form-control-md search-input" placeholder="Buscar" />
     </div>
     <div class="col align-self-end">
-      <div>
+      <div *ngIf="redireccionamiento">
         <button [routerLink]="'../'+[redireccionamiento]" class="btn btn-outline-primary new-button">
           <span class="btn-label"><i class="fas fa-plus"></i></span>
           Nuevo

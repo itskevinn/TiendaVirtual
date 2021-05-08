@@ -1,3 +1,4 @@
+import { Usuario } from './../../../models/usuario';
 import { ProductoService } from './../../../services/producto.service';
 import { Component, Input, OnInit } from '@angular/core';
 import { Producto } from 'src/app/models/producto';
@@ -12,14 +13,18 @@ export class ProductoConsultaComponent implements OnInit {
   productos: Producto[] = []
   @Input() claseColumnas?: string;
   columnas: string
+  usuario: Usuario
 
   constructor(private productoService: ProductoService,) { }
 
   ngOnInit(): void {
     this.consultarProductos();
     this.validarClaseColumnas();
+    this.consultarUsuario();
   }
-
+  consultarUsuario() {
+    this.usuario = JSON.parse(localStorage.getItem('usuarioLoggeado'));
+  }
   consultarProductos() {
     this.productoService.gets()
       .subscribe(r => this.productos = r);
