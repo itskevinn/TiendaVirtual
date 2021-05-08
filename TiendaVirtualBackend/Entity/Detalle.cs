@@ -23,15 +23,15 @@ namespace Entity
     public string IdProducto { get; set; }
     public int IdFactura { get; set; }
 
-    public void CalcularSubTotal()
+    public decimal CalcularSubTotal()
     {
       if (PrecioBase != 0)
       {
-        SubTotal = PrecioBase * Cantidad;
-        return;
+        return SubTotal = PrecioBase * Cantidad;
       }
-      SubTotal = Producto.PrecioBase * Cantidad;
+      return SubTotal = Producto.PrecioBase * Cantidad;
     }
+
     public void CalcularDescontado()
     {
       if (Descuento != 0 && PrecioBase != 0)

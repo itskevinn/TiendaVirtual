@@ -45,9 +45,12 @@ namespace Controllers
       {
         IdFactura = facturaInputModel.IdFactura,
         Tipo = facturaInputModel.Tipo,
-        Detalles = facturaInputModel.Detalles,
         IdInteresado = facturaInputModel.IdInteresado
       };
+      facturaInputModel.Detalles.ForEach((d) =>
+      {
+        factura.AgregarDetalle(d);
+      });
       return factura;
     }
 

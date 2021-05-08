@@ -18,7 +18,7 @@ namespace Models
       public FacturaViewModel(Factura factura)
       {
         IdFactura = factura.IdFactura;
-        Detalles = factura.Detalles;
+        Detalles = factura.ObtenerDetalles();
         IdInteresado = factura.IdInteresado;
         Total = factura.Total;
         IvaTotal = factura.IvaTotal;

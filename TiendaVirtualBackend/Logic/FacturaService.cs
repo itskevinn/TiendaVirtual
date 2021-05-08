@@ -27,31 +27,24 @@ namespace Logic
     {
       try
       {
-        Factura facturaBuscada = context.Facturas.Find(factura.IdFactura);
         Interesado interesado = context.Interesados.Find(factura.IdInteresado);
-        if (facturaBuscada == null)
+        if (interesado == null && factura.Tipo == "venta")
         {
-          if (interesado == null && factura.Tipo == "venta")
-          {
-            factura.IdInteresado = "No registrado";
-          }
-
-          factura.Detalles.ForEach((d) => d.Tipo = factura.Tipo == "venta" ? "resta" : "aumento");
-          factura.Detalles.ForEach((d) => d.IdFactura = GenerarIdFacturaTemporal());
-          foreach (Detalle detalle in factura.Detalles)
-          {
-            if (detalleService.Guardar(detalle).Error)
-            {
-              return new GuardarFacturaResponse(detalleService.Guardar(detalle).Mensaje, true);
-            }
-            detalleService.Guardar(detalle);
-          }
-          factura.CalcularTotales();
-          context.Facturas.Add(factura);
-          context.SaveChanges();
-          return new GuardarFacturaResponse(factura, "Factura guardada con éxito", false);
+          factura.IdInteresado = "No registrado";
         }
-        return new GuardarFacturaResponse("Factura duplicada, por favor, rectifique la información", true);
+        foreach (Detalle detalle in factura.ObtenerDetalles())
+        {
+          if (detalleService.Guardar(detalle).Error)
+          {
+            return new GuardarFacturaResponse(detalleService.Guardar(detalle).Mensaje, true);
+          }
+          detalleService.Guardar(detalle);
+        }
+      
+        factura.CalcularTotales();
+        context.Facturas.Add(factura);
+        context.SaveChanges();
+        return new GuardarFacturaResponse(factura, "Factura guardada con éxito", false);
       }
       catch (System.Exception e)
       {
@@ -62,13 +55,13 @@ namespace Logic
     public List<Factura> Consultar()
     {
       List<Factura> facturas = context.Facturas.ToList();
-      facturas.ForEach((f) => f.Detalles = detalleService.ConsultarPorFactura(f.IdFactura));
+      facturas.ForEach((f) => detalleService.ConsultarPorFactura(f.IdFactura).ForEach((d) => f.AgregarDetalle(d)));
       return facturas;
     }
     public List<Factura> ConsultarPorTipo(string tipo)
     {
       List<Factura> facturas = context.Facturas.Where((f) => f.Tipo.ToLower() == tipo).ToList();
-      facturas.ForEach((f) => f.Detalles = detalleService.ConsultarPorFactura(f.IdFactura));
+      facturas.ForEach((f) => detalleService.ConsultarPorFactura(f.IdFactura).ForEach((d) => f.AgregarDetalle(d)));
       return facturas;
     }
     public List<Factura> ConsultarPorInteresado(string idInteresado)

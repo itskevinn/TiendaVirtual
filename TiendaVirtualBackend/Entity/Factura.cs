@@ -7,18 +7,48 @@ namespace Entity
 {
   public class Factura
   {
+    public Factura()
+    {
+      Detalles = new List<Detalle>();
+      Detalle = new Detalle();
+    }
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     [Key]
+
     public int IdFactura { get; set; }
     public string Tipo { get; set; }
     [NotMapped]
-    public List<Detalle> Detalles { get; set; }
+    private List<Detalle> Detalles { get; set; }
     public decimal DescuentoTotal { get; set; }
+    private Detalle Detalle { get; set; }
     public decimal IvaTotal { get; set; }
     public decimal Total { get; set; }
     public decimal SubTotal { get; set; }
     public string IdInteresado { get; set; }
-
+    public void AgregarDetalle(Detalle detalle)
+    {
+      Detalle = new Detalle
+      {
+        Tipo = this.Tipo == "venta" ? "resta" : "aumento",
+        Cantidad = detalle.Cantidad,
+        Descuento = detalle.Descuento,
+        IdDetalle = detalle.IdDetalle,
+        IdFactura = detalle.IdFactura,
+        IdProducto = detalle.IdProducto,
+        PrecioBase = detalle.PrecioBase,
+        Producto = detalle.Producto,
+        Total = detalle.Total,
+      };
+      Detalle.CalcularSubTotal();
+      Detalle.CalcularDescontado();
+      Detalle.CalcularValorIva();
+      Detalle.CalcularTotal();
+      Detalles.Add(Detalle);
+    }
+    public List<Detalle> ObtenerDetalles()
+    {
+      return Detalles;
+    }
     public void CalcularTotales()
     {
       CalcularSubTotal();
