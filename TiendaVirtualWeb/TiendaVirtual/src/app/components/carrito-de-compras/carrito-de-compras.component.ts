@@ -5,7 +5,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Producto } from './../../models/producto';
 import { Detalle } from './../../models/detalle';
 import { MensajeService } from '../../services/mensaje.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-carrito-de-compras',
@@ -13,11 +13,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./carrito-de-compras.component.css']
 })
 export class CarritoDeComprasComponent implements OnInit {
+  @Input() tipo: string;
   detalles: Detalle[] = [];
   factura: Factura;
   total: number
   detalle: Detalle;
   productos: Producto[] = [];
+  idInteresado: string;
   descuento: number;
   cantidades: number[];
   subTotalDetalle: number;
@@ -27,6 +29,7 @@ export class CarritoDeComprasComponent implements OnInit {
   constructor(private facturaService: FacturaService, private mensajeService: MensajeService, private formBuilder: FormBuilder, private modalService: MessageService) { }
 
   ngOnInit(): void {
+    console.log(this.tipo);
     this.mensajeService.recibirMensaje().subscribe((producto: Producto) => {
       var producto = producto;
       if (this.validarProductoRegistrado(producto.id) == false) {
@@ -44,7 +47,6 @@ export class CarritoDeComprasComponent implements OnInit {
         }
         this.detalle.descuento = this.detalle.descuento == 0 ? this.detalle.producto.descuento : this.detalle.descuento;
         this.detalle.precioBase = this.detalle.precioBase == 0 ? this.detalle.producto.precio : this.detalle.precioBase;
-        //TODO: Arreglar cálculo en Backend
         console.log(this.detalle);
         this.calcularTotalDetalle();
         this.detalles.push(this.detalle);
@@ -63,20 +65,53 @@ export class CarritoDeComprasComponent implements OnInit {
     });
     return registrado;
   }
-  finalizarCompra() {
-    this.factura = new Factura();
-    this.factura.detalles = this.detalles;
-    this.factura.idFactura = 0;
-    this.factura.idInteresado = '1ef682ab-c1cf-4e07-80a9-4a6d177001c6';
-    this.factura.total = this.calcularTotalFactura();
-    this.factura.totalDescuento = this.calcularTotalDescuentoFactura();
-    this.factura.totalIva = this.calcularTotalIvaFactura();
-    this.factura.subTotal = this.calcularSubTotalFactura();
-    this.facturaService.post(this.factura).subscribe((f) => {
-      console.log(f);
-      this.mostrarToast("Compra realizada", "Compra realizada con éxito", "success")
+  validarCantidadDetalles() {
+    this.detalles.forEach((d) => {
+      if (d.cantidad == 0) {
+        return true;
+      }
     })
+    return false;
   }
+  validarIdInteresado() {
+    if (this.factura.idInteresado == "") {
+      return true;
+    }
+    return false;
+  }
+  finalizarCompra() {
+    if (this.validarCantidadDetalles() === false) {
+      this.factura = new Factura();
+      this.factura.detalles = this.detalles;
+      this.factura.tipo = this.tipo;
+      if (this.tipo == "compra") {
+        this.factura.idInteresado = JSON.parse(localStorage.getItem("usuarioLoggeado"))._usuario;
+      }
+      this.factura.idInteresado = this.idInteresado;
+      this.factura.total = this.calcularTotalFactura();
+      this.factura.descuentoTotal = this.calcularTotalDescuentoFactura();
+      this.factura.ivaTotal = this.calcularTotalIvaFactura();
+      this.factura.subTotal = this.calcularSubTotalFactura();
+      this.facturaService.post(this.factura).subscribe((f) => {
+        console.log(f);
+        if (f.tipo.toLowerCase() == "venta") {
+          this.mostrarToast("Venta realizada", "Venta realizada con éxito", "success")
+        }
+        else {
+          this.mostrarToast("Compra realizada", "Compra realizada con éxito", "success")
+        }
+        this.limpiarInputs();
+      })
+    }
+    else {
+      this.mostrarToast("Error", "Falta una cantidad en los productos agregados", "Error");
+    }
+  };
+  limpiarInputs() {
+    this.factura = new Factura();
+    this.detalles = [];
+  }
+
   validarCambio(e) {
     this.calcularTotalDetalle();
     this.calcularSubTotalFactura();

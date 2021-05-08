@@ -31,6 +31,8 @@ import { CarritoDeComprasComponent } from './components/carrito-de-compras/carri
 import { ButtonModule } from 'primeng/button';
 import { MenuModule } from 'primeng/menu';
 import { MenuItem } from 'primeng/api';
+import { LoginComponent } from './pages/login/login.component';
+import { InicioComponent } from './pages/inicio/inicio.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +50,9 @@ import { MenuItem } from 'primeng/api';
     VentaRegistroComponent,
     ProductoCardComponent,
     PageHeaderComponent,
-    CarritoDeComprasComponent
+    CarritoDeComprasComponent,
+    LoginComponent,
+    InicioComponent
   ],
   imports: [
     BrowserModule,

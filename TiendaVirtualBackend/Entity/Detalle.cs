@@ -10,10 +10,10 @@ namespace Entity
     public string IdDetalle { get; set; }
     [Required(ErrorMessage = "Se requiere la cantidad del producto")]
     public int Cantidad { get; set; }
+    public string Tipo { get; set; }
     public decimal Total { get; set; }
     public decimal Descuento { get; set; }
     public decimal ValorDescontado { get; set; }
-    public decimal ValorConDescuento { get; set; }
     public decimal ValorIva { get; set; }
     public decimal PrecioBase { get; set; }
     public decimal SubTotal { get; set; }
@@ -34,26 +34,30 @@ namespace Entity
     }
     public void CalcularDescontado()
     {
-      if (Descuento != 0)
+      if (Descuento != 0 && PrecioBase != 0)
       {
-        ValorDescontado = SubTotal * (Descuento / 100);
+        ValorDescontado = PrecioBase * (Descuento / 100);
+        ValorDescontado = ValorDescontado * Cantidad;
         return;
       }
-      ValorDescontado = SubTotal * (Producto.Descuento / 100);
-    }
-    public void CalcularValorConDescuento()
-    {
-      ValorConDescuento = SubTotal - ValorDescontado;
+      ValorDescontado = Producto.PrecioBase * (Producto.Descuento / 100);
+      ValorDescontado = ValorDescontado * Cantidad;
     }
     public void CalcularValorIva()
     {
-      ValorIva = ValorConDescuento * (Producto.Iva / 100);
+      if (PrecioBase != 0)
+      {
+        ValorIva = PrecioBase * (Producto.Iva / 100);
+        ValorIva = ValorIva * Cantidad;
+        return;
+      }
+      ValorIva = Producto.PrecioBase * (Producto.Iva / 100);
+      ValorIva = ValorIva * Cantidad;
     }
     public void CalcularTotal()
     {
       CalcularSubTotal();
       CalcularDescontado();
-      CalcularValorConDescuento();
       CalcularValorIva();
       Total = SubTotal - ValorDescontado + ValorIva;
     }

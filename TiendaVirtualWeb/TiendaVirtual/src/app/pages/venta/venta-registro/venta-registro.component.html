@@ -1,1 +1,15 @@
-<p>venta-registro works!</p>
+<div class="container">
+  <br>
+  <button (click)="volver()" type="button" class="btn">
+    <span class="btn-label"><i class="fas fa-arrow-left"></i></span> Regresar</button>
+  <h1>Registrar Venta</h1>
+  <br>
+  <div class="row">
+    <div class="col-md-6">
+      <app-producto-consulta claseColumnas="row row-cols-1 row-cols-sm-2 row-cols-md-2 g-2"></app-producto-consulta>
+    </div>
+    <div class="col-md-6">
+      <app-carrito-de-compras tipo="venta"></app-carrito-de-compras>
+    </div>
+  </div>
+</div>

@@ -18,6 +18,11 @@ namespace Logic
       detalleService = new DetalleService(tiendaVirtualContext);
       productoService = new ProductoService(tiendaVirtualContext);
     }
+    private int GenerarIdFacturaTemporal()
+    {
+      int id = context.Facturas.Count();
+      return id + 1;
+    }
     public GuardarFacturaResponse Guardar(Factura factura)
     {
       try
@@ -30,7 +35,8 @@ namespace Logic
           {
             factura.IdInteresado = "No registrado";
           }
-          factura.Detalles.ForEach((d) => d.IdFactura = factura.IdFactura);
+          factura.Detalles.ForEach((d) => d.Tipo = factura.Tipo == "venta" ? "resta" : "aumento");
+          factura.Detalles.ForEach((d) => d.IdFactura = GenerarIdFacturaTemporal());
           foreach (Detalle detalle in factura.Detalles)
           {
             if (detalleService.Guardar(detalle).Error)
@@ -55,6 +61,12 @@ namespace Logic
     public List<Factura> Consultar()
     {
       List<Factura> facturas = context.Facturas.ToList();
+      facturas.ForEach((f) => f.Detalles = detalleService.ConsultarPorFactura(f.IdFactura));
+      return facturas;
+    }
+    public List<Factura> ConsultarPorTipo(string tipo)
+    {
+      List<Factura> facturas = context.Facturas.Where((f) => f.Tipo.ToLower() == tipo).ToList();
       facturas.ForEach((f) => f.Detalles = detalleService.ConsultarPorFactura(f.IdFactura));
       return facturas;
     }

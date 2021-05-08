@@ -1,0 +1,32 @@
+<div class="container">
+  <br>
+  <app-page-header titulo="Ventas realizadas" redireccionamiento="RegistrarVenta"></app-page-header>
+  <div class="table-responsive">
+    <table class="table table-responsive table-bordered">
+      <thead>
+        <tr>
+          <th socpe="col">#</th>
+          <th scope="col">ID Interesado</th>
+          <th scope="col">Total Descontado</th>
+          <th scope="col">Total IVA</th>
+          <th scope="col">SubTotal</th>
+          <th scope="col">Total</th>
+          <th scope="col">Acción</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let factura of facturas">
+          <td>{{ factura.idFactura }}</td>
+          <td>{{ factura.idInteresado}}</td>
+          <td>{{ factura.descuentoTotal }}</td>
+          <td>{{ factura.ivaTotal }}</td>
+          <td>{{ factura.subTotal }}</td>
+          <td>{{ factura.total }}</td>
+          <td>
+            <a routerLink="/Factura/{{ factura.id }}">Ver</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

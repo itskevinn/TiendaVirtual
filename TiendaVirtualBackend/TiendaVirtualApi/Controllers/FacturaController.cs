@@ -44,8 +44,9 @@ namespace Controllers
       var factura = new Factura
       {
         IdFactura = facturaInputModel.IdFactura,
+        Tipo = facturaInputModel.Tipo,
         Detalles = facturaInputModel.Detalles,
-        IdInteresado = facturaInputModel.IdUsuario
+        IdInteresado = facturaInputModel.IdInteresado
       };
       return factura;
     }
@@ -67,17 +68,10 @@ namespace Controllers
       var facturaViewModel = new FacturaViewModel(factura);
       return facturaViewModel;
     }
-    [HttpPut("{id}")]
-    public ActionResult<string> Put(Factura factura, string id)
+    [HttpGet("PorTipo/{tipo}")]
+    public IEnumerable<FacturaViewModel> GetByType(string tipo)
     {
-      var mensaje = _facturaService.Editar(id, factura).Mensaje;
-      return Ok(mensaje);
-    }
-    [HttpDelete("{id}")]
-    public ActionResult<string> Delete(string id)
-    {
-      var mensaje = _facturaService.Eliminar(id).Mensaje;
-      return Ok(mensaje);
+      return _facturaService.ConsultarPorTipo(tipo).Select(f => new FacturaViewModel(f));
     }
   }
 }

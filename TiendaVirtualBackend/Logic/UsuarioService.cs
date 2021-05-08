@@ -45,6 +45,17 @@ namespace Logic
       Usuario usuario = context.Usuarios.Find(id);
       return usuario;
     }
+    public Usuario IniciarSesion(string usuario, string contrasena)
+    {
+      try
+      {
+        return context.Usuarios.Where((u) => u._Usuario.ToLower() == usuario.ToLower() && u.Contrasena == contrasena).FirstOrDefault();
+      }
+      catch (Exception)
+      {
+        return null;
+      }
+    }
     public EditarUsuarioResponse Editar(string id, Usuario usuarioActualizado)
     {
       try

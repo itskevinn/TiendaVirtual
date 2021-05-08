@@ -5,11 +5,19 @@
     <p class="card-text">{{ producto.descripcion }}</p>
   </div>
   <div class="card-footer">
-      <div class="btn-group mx-auto">
-        <button type="button" (click)="agregarAlCarrito()"
-          class="btn btn-sm btn-outline-success mx-1 card-button">Añadir
-          al Carrito</button>
-        <button type="button" class="btn btn-sm btn-outline-secondary card-button">Ver detalles</button>
+    <div *ngIf="usuario.rol=='Lider de Avalúos'; else noLider">
+      <div class="btn-group">
+        <button type=" button" class="btn btn-sm col-sm-12 btn-outline-info mx-1 card-button">Editar</button>
+        <button type="button" class="btn btn-sm col-sm-12 btn-outline-danger card-button">Eliminar</button>
       </div>
+    </div>
+    <ng-template #noLider>
+      <div class="btn-group" *ngIf="validarRuta() ">
+        <button type=" button" (click)="agregarAlCarrito()"
+          class="btn btn-sm col-sm-12 btn-outline-success mx-1 card-button">Añadir
+          al Carrito</button>
+        <button type="button" class="btn btn-sm col-sm-12 btn-outline-secondary card-button">Ver detalles</button>
+      </div>
+    </ng-template>
   </div>
 </div>

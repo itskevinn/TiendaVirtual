@@ -43,10 +43,10 @@ namespace Data.Migrations
                     b.Property<decimal>("SubTotal")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<decimal>("Total")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<string>("Tipo")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<decimal>("ValorConDescuento")
+                    b.Property<decimal>("Total")
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<decimal>("ValorDescontado")
@@ -78,6 +78,12 @@ namespace Data.Migrations
 
                     b.Property<decimal>("IvaTotal")
                         .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("SubTotal")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("Tipo")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("Total")
                         .HasColumnType("decimal(18,2)");

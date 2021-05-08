@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { Factura } from './../../../models/factura';
 import { Component, OnInit } from '@angular/core';
 import { MessageService } from 'primeng/api';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-compra-registro',
@@ -13,7 +14,7 @@ export class CompraRegistroComponent implements OnInit {
 
   factura: Factura;
   formGroup: FormGroup;
-  constructor(private formBuilder: FormBuilder, private facturaService: FacturaService, private messageService: MessageService) {
+  constructor(private formBuilder: FormBuilder, private facturaService: FacturaService, private messageService: MessageService, private location: Location) {
 
   }
   ngOnInit(): void {
@@ -22,6 +23,9 @@ export class CompraRegistroComponent implements OnInit {
   }
   crearFormulario() {
     
+  }
+  volver(){
+    this.location.back();
   }
   onSubmit() {
     if (this.formGroup.invalid) {

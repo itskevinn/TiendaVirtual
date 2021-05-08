@@ -10,25 +10,29 @@
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" routerLink="/">Inicio</a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" *ngIf="usuario && usuario.rol=='Lider de Avalúos'">
           <a class="nav-link" routerLink="/Proveedores">Proveedores</a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" *ngIf="usuario && usuario.rol=='Lider de Avalúos'">
           <a class="nav-link" routerLink="/Usuarios">Usuarios</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" routerLink="/Productos">Productos</a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" *ngIf="usuario && usuario.rol=='Profesional de Ventas'">
           <a class="nav-link" routerLink="/Compras">Compras</a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" *ngIf="usuario && usuario.rol=='Profesional de Ventas'">
           <a class="nav-link" routerLink="/Ventas">Ventas</a>
         </li>
       </ul>
-      <div class="d-flex">
-        <button class="btn nav-button btn-outline-success" routerLink="/">Iniciar Sesión</button>
+      <div class="d-flex" *ngIf="!usuario; else loggeado">
+        <button class="btn nav-button btn-outline-success" routerLink="/Login">Iniciar Sesión</button>
       </div>
+      <ng-template #loggeado>
+        <button class="btn nav-button btn-outline-danger" (click)="cerrarSesion()">Cerrar Sesión</button>
+      </ng-template>
+
     </div>
   </div>
 </nav>

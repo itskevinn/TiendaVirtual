@@ -11,6 +11,7 @@ namespace Entity
     public string IdInteresado { get; set; }
     [NotMapped]
     public Usuario Usuario { get; set; }
+    public string Rol { get; set; }
     public string IdUsuario { get; set; }
     public List<Factura> Facturas { get; set; }
   }

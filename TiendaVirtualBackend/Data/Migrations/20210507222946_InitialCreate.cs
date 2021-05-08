@@ -12,10 +12,10 @@ namespace Data.Migrations
                 {
                     IdDetalle = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Cantidad = table.Column<int>(type: "int", nullable: false),
+                    Tipo = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Total = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Descuento = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     ValorDescontado = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    ValorConDescuento = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     ValorIva = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     PrecioBase = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     SubTotal = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
@@ -91,9 +91,11 @@ namespace Data.Migrations
                 {
                     IdFactura = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    Tipo = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     DescuentoTotal = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     IvaTotal = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Total = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    SubTotal = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     IdInteresado = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     InteresadoId = table.Column<string>(type: "nvarchar(450)", nullable: true)
                 },

@@ -4,7 +4,8 @@ export class Factura {
   idInteresado: string;
   idFactura: number;
   subTotal: number;
-  totalDescuento: number;
-  totalIva: number;
+  descuentoTotal: number;
+  tipo: string;
+  ivaTotal: number;
   total: number;
 }

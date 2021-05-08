@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ProductoService } from 'src/app/services/producto.service';
 import { MessageService } from 'primeng/api';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-producto-registro',
@@ -13,12 +14,15 @@ export class ProductoRegistroComponent implements OnInit {
 
   producto: Producto;
   formGroup: FormGroup;
-  constructor(private formBuilder: FormBuilder, private productoService: ProductoService, private messageService: MessageService) {
+  constructor(private location: Location,private formBuilder: FormBuilder, private productoService: ProductoService, private messageService: MessageService) {
 
   }
   ngOnInit(): void {
     this.producto = new Producto()
     this.crearFormulario()
+  }
+  volver(){
+    this.location.back();
   }
   crearFormulario() {
     this.producto.id = ''
@@ -37,7 +41,7 @@ export class ProductoRegistroComponent implements OnInit {
       descuento: [this.producto.descuento, Validators.required],
       iva: [this.producto.iva, Validators.required],
       precio: [this.producto.precio, Validators.required],
-      descripcion: [this.producto.descripcion, Validators.required],
+      descripcion: [this.producto.descripcion],
     })
   }
   onSubmit() {

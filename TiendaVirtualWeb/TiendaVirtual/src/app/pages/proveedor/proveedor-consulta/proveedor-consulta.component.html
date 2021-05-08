@@ -1,28 +1,30 @@
 <div class="container">
   <br>
   <app-page-header titulo="Proveedores" redireccionamiento="RegistrarProveedor"></app-page-header>
-  <table class="table table-bordered">
-    <thead>
-      <tr>
-        <th socpe="col">#</th>
-        <th scope="col">NIT</th>
-        <th scope="col">Nombre</th>
-        <th scope="col">Acción</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let proveedor of proveedores index as i">
-        <td>{{ i + 1 }}</td>
-        <td>{{ proveedor.nit }}</td>
-        <td>{{ proveedor.nombre }}</td>
-        <td>
-          <a routerLink="/Proveedor/{{ proveedor.nit }}">Ver</a>
-          <a> / </a>
-          <a routerLink="/EditarProveedor/{{
-            proveedor.nit
-            }}">Editar</a>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+  <div class="table-responsive">
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th socpe="col">#</th>
+          <th scope="col">NIT</th>
+          <th scope="col">Nombre</th>
+          <th scope="col">Acción</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let proveedor of proveedores index as i">
+          <td>{{ i + 1 }}</td>
+          <td>{{ proveedor.nit }}</td>
+          <td>{{ proveedor.nombre }}</td>
+          <td>
+            <a routerLink="/Proveedor/{{ proveedor.nit }}">Ver</a>
+            <a> / </a>
+            <a routerLink="/EditarProveedor/{{
+              proveedor.nit
+              }}">Editar</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>

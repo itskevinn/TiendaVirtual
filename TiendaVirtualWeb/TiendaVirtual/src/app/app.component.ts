@@ -1,5 +1,7 @@
+import { LoginService } from 'src/app/services/login.service';
 import { Component } from '@angular/core';
 import { PrimeNGConfig } from 'primeng/api';
+import { Usuario } from './models/usuario';
 
 @Component({
   selector: 'app-root',
@@ -8,7 +10,16 @@ import { PrimeNGConfig } from 'primeng/api';
 })
 export class AppComponent {
   title = 'TiendaVirtual';
-  constructor(private primengConfig: PrimeNGConfig) { }
+  usuario: Usuario;
+  ingreso = false;
+  constructor(private primengConfig: PrimeNGConfig, private loginService: LoginService) {
+    this.loginService.usuarioLoggeado.subscribe(
+      (x) => (this.usuario = x)
+    );
+    if (this.usuario) {
+      this.ingreso = true;
+    }
+  }
 
   ngOnInit() {
     this.primengConfig.ripple = true;

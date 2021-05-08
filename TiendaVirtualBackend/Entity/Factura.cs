@@ -10,15 +10,18 @@ namespace Entity
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     [Key]
     public int IdFactura { get; set; }
+    public string Tipo { get; set; }
     [NotMapped]
     public List<Detalle> Detalles { get; set; }
     public decimal DescuentoTotal { get; set; }
     public decimal IvaTotal { get; set; }
     public decimal Total { get; set; }
+    public decimal SubTotal { get; set; }
     public string IdInteresado { get; set; }
 
     public void CalcularTotales()
     {
+      CalcularSubTotal();
       CalcularDescuentoTotal();
       CalcularIvaTotal();
       Total = Detalles.Sum((d) => d.Total);
@@ -30,6 +33,10 @@ namespace Entity
     public void CalcularIvaTotal()
     {
       IvaTotal = Detalles.Sum((d) => d.ValorIva);
+    }
+    public void CalcularSubTotal()
+    {
+      SubTotal = Detalles.Sum((d) => d.SubTotal);
     }
   }
 }

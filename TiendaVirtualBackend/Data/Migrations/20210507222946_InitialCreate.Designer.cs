@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Data.Migrations
 {
     [DbContext(typeof(TiendaVirtualContext))]
-    [Migration("20210507073412_InitialCreate")]
+    [Migration("20210507222946_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -45,10 +45,10 @@ namespace Data.Migrations
                     b.Property<decimal>("SubTotal")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<decimal>("Total")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<string>("Tipo")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<decimal>("ValorConDescuento")
+                    b.Property<decimal>("Total")
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<decimal>("ValorDescontado")
@@ -80,6 +80,12 @@ namespace Data.Migrations
 
                     b.Property<decimal>("IvaTotal")
                         .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("SubTotal")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("Tipo")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("Total")
                         .HasColumnType("decimal(18,2)");

@@ -1,3 +1,7 @@
+import { AutentificacionLiderAvaluosGuard } from './guard/autentificacion-lider-avaluos.guard';
+import { InicioComponent } from './pages/inicio/inicio.component';
+import { AutentificacionGuard } from './guard/autentificacion.guard';
+import { LoginComponent } from './pages/login/login.component';
 import { CarritoDeComprasComponent } from './components/carrito-de-compras/carrito-de-compras.component';
 import { VentaConsultaComponent } from './pages/venta/venta-consulta/venta-consulta.component';
 import { CompraRegistroComponent } from './pages/compra/compra-registro/compra-registro.component';
@@ -11,20 +15,22 @@ import { UsuarioRegistroComponent } from './pages/usuario/usuario-registro/usuar
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { VentaRegistroComponent } from './pages/venta/venta-registro/venta-registro.component';
+import { AutentificacionVentasGuard } from './guard/autentificacion-ventas.guard';
 
 
 const routes: Routes = [
-  { path: 'RegistrarUsuario', component: UsuarioRegistroComponent },
-  { path: 'Usuarios', component: UsuarioConsultaComponent },
-  { path: 'Proveedores', component: ProveedorConsultaComponent },
-  { path: 'RegistrarProveedor', component: ProveedorRegistroComponent },
-  { path: 'Productos', component: ProductoConsultaComponent },
-  { path: 'RegistrarProducto', component: ProductoRegistroComponent },
-  { path: 'Compras', component: CompraConsultaComponent },
-  { path: 'RegistrarCompra', component: CompraRegistroComponent },
-  { path: 'Ventas', component: VentaConsultaComponent },
-  { path: 'RegistrarVenta', component: VentaRegistroComponent },
-  { path: 'Carrito', component: CarritoDeComprasComponent }
+  { path: 'Inicio', component: InicioComponent, canActivate: [AutentificacionGuard] },
+  { path: 'RegistrarUsuario', component: UsuarioRegistroComponent, canActivate: [AutentificacionLiderAvaluosGuard] },
+  { path: 'Usuarios', component: UsuarioConsultaComponent, canActivate: [AutentificacionLiderAvaluosGuard] },
+  { path: 'Proveedores', component: ProveedorConsultaComponent, canActivate: [AutentificacionLiderAvaluosGuard] },
+  { path: 'RegistrarProveedor', component: ProveedorRegistroComponent, canActivate: [AutentificacionLiderAvaluosGuard] },
+  { path: 'Productos', component: ProductoConsultaComponent, canActivate: [AutentificacionGuard] },
+  { path: 'RegistrarProducto', component: ProductoRegistroComponent, canActivate: [AutentificacionLiderAvaluosGuard] },
+  { path: 'Compras', component: CompraConsultaComponent, canActivate: [AutentificacionVentasGuard] },
+  { path: 'RegistrarCompra', component: CompraRegistroComponent, canActivate: [AutentificacionVentasGuard] },
+  { path: 'Ventas', component: VentaConsultaComponent, canActivate: [AutentificacionVentasGuard] },
+  { path: 'RegistrarVenta', component: VentaRegistroComponent, canActivate: [AutentificacionVentasGuard] },
+  { path: 'Login', component: LoginComponent }
 ];
 
 @NgModule({

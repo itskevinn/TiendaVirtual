@@ -1,66 +1,15 @@
 <div class="container">
   <br>
-  <button [routerLink]="['/Productos']" type="button" class="btn">
+  <button (click)="volver()" type="button" class="btn">
     <span class="btn-label"><i class="fas fa-arrow-left"></i></span> Regresar</button>
-  <h1>Registrar producto</h1>
+  <h1>Registrar Compra</h1>
   <br>
-  <p-card>
-    <form [formGroup]="formGroup">
-      <p-toast position="top-center" preventOpenDuplicates=true autoZIndex=true key="tl"></p-toast>
-      <div class="p-fluid p-grid">
-        <div class="p-field p-col-12 p-md-3">
-          <span class="p-float-label">
-            <input type="text" id="id" pInputText formControlName="id">
-            <label for="id">Id</label>
-          </span>
-        </div>
-        <div class="p-field p-col-12 p-md-3">
-          <span class="p-float-label">
-            <input type="text" id="nombre" pInputText formControlName="nombre">
-            <label for="nombre">Nombre</label>
-          </span>
-        </div>
-        <div class="p-field p-col-12 p-md-3">
-          <span class="p-float-label">
-            <input type="text" id="nit" formControlName="nitProveedor" pInputText>
-            <label for="nit">NIT del proveedor</label>
-          </span>
-        </div>
-        <div class="p-field p-col-12 p-md-3">
-          <span class="p-float-label">
-            <p-inputNumber formControlName="cantidad" inputId="cantidad"></p-inputNumber>
-            <label for="cantidad">Cantidad inicial disponible</label>
-          </span>
-        </div>
-        <div class="p-field p-col-12 p-md-3">
-          <span class="p-float-label">
-            <p-inputNumber formControlName="descuento" inputId="descuento"></p-inputNumber>
-            <label for="descuento">% de descuento</label>
-          </span>
-        </div>
-        <div class="p-field p-col-12 p-md-3">
-          <span class="p-float-label">
-            <p-inputNumber inputId="iva" formControlName="iva"></p-inputNumber>
-            <label for="iva">% de IVA</label>
-          </span>
-        </div>
-        <div class="p-field p-col-12 p-md-3">
-          <span class="p-float-label">
-            <p-inputNumber inputId="precio" formControlName="precio"></p-inputNumber>
-            <label for="precio">Precio base</label>
-          </span>
-        </div>
-        <div class="p-field p-col-12">
-          <span class="p-float-label">
-            <textarea inputId="descripcion" formControlName="descripcion" autoResize="true" rows="3" cols="10"
-              pInputTextarea></textarea>
-            <label for="descripcion">Descripción</label>
-          </span>
-        </div>
-      </div>
-    </form>
-  </p-card>
-  <div class="text-center py-3">
-    <button type="button" (click)="onSubmit()" class="btn btn-outline-success">Registrar</button>
+  <div class="row">
+    <div class="col-md-5">
+      <app-producto-consulta claseColumnas="row row-cols-1 row-cols-sm-2 row-cols-md-2 g-2"></app-producto-consulta>
+    </div>
+    <div class="col-md-7">
+      <app-carrito-de-compras tipo="compra"></app-carrito-de-compras>
+    </div>
   </div>
 </div>

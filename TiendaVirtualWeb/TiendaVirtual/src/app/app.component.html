@@ -1,2 +1,7 @@
-<app-navbar></app-navbar>
-<router-outlet></router-outlet>
+<div *ngIf="ingreso == false; else ingresado">
+  <app-login></app-login>
+</div>
+<ng-template #ingresado>
+  <app-navbar></app-navbar>
+  <router-outlet></router-outlet>
+</ng-template>

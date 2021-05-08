@@ -27,4 +27,11 @@ export class FacturaService {
       })
     );
   }
+  getsByType(tipo: string): Observable<Factura[]> {
+    return this.http.get<Factura[]>(`${this.baseUrl + "/Factura/PorTipo"}/${tipo}`).pipe(
+      tap((f) => {
+        console.log(f);
+      })
+    )
+  }
 }

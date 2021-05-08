@@ -1,34 +1,54 @@
-<h3> Carrito de compras</h3>
+<div class="btn-group mt-2">
+  <div class="col-sm-6">
+    <h3> Carrito de compras</h3>
+  </div>
+  <div class="col-sm-6" *ngIf="tipo=='venta'">
+    <input type="text" class="form-control" [(ngModel)]="idInteresado" placeholder="ID del Interesado">
+  </div>
+</div>
 <p-toast position="top-center" preventOpenDuplicates=true autoZIndex=true key="tl"></p-toast>
-
 <ul class="list-group list-group-flush">
   <li *ngFor="let detalle of detalles" class="list-group-item d-flex justify-content-between align-items-start">
-    <label> {{detalle.producto.nombre}}</label>
-    <div class="form-group mx-2">
-      <label>Cantidad</label>
-      <input placeholder="Cantidad" id="{{detalle.producto.id}}"
-        onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57"
-        [(ngModel)]="detalle.cantidad" (ngModelChange)="validarCambio($event)" type="number" min="0"
-        class="form-control">
-    </div>
-    <div class="form-group mx-2">
-      <label>Precio: </label>
-      <input id="{{detalle.producto.id+1}}" placeholder="{{detalle.producto.precio|currency}}"
-        [(ngModel)]="this.detalle.precioBase"
-        onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57"
-        (ngModelChange)="validarCambio($event)" type="number" min="0" class="form-control">
-    </div>
-    <div class="form-group mx-2">
-      <label>Descuento:</label>
-      <input
-        onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57"
-        [(ngModel)]="this.detalle.descuento" (ngModelChange)="validarCambio($event)" class="form-control" type="number"
-        min="0" placeholder=" {{this.detalle.descuento}}%">
-    </div>
-    <div class="mx-1">
-      <label>Total: {{detalle.total|currency}}</label>
-    </div>
-    <button class="btn-close" (click)="eliminarDetalle(detalle.producto.id)"></button>
+    <div class="row row-cols-lg-6">
+        <div class="col-2">
+          <label> {{detalle.producto.nombre}}</label>
+        </div>
+        <div class="col-sm-6">
+            <div class="form-floating">
+              <input placeholder="Cantidad" id="{{detalle.producto.id}}"
+                onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57"
+                [(ngModel)]="detalle.cantidad" (ngModelChange)="validarCambio($event)" type="number" min="0"
+                class="form-control">
+              <label for="{{detalle.producto.id}}">Cantidad</label>
+            </div>
+        </div>
+        <div class="col">
+          <div class="form-group mx-2">
+            <label>Precio: </label>
+            <input id="{{detalle.producto.id+1}}" placeholder="{{detalle.producto.precio|currency}}"
+              [(ngModel)]="this.detalle.precioBase"
+              onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57"
+              (ngModelChange)="validarCambio($event)" type="number" min="0" class="form-control">
+          </div>
+        </div>
+        <div class="col">
+          <div class="form-group mx-2">
+            <label>Descuento:</label>
+            <input
+              onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57"
+              [(ngModel)]="this.detalle.descuento" (ngModelChange)="validarCambio($event)" class="form-control"
+              type="number" min="0" placeholder=" {{this.detalle.descuento}}%">
+          </div>
+        </div>
+        <div class="col">
+          <div class="mx-1">
+            <label>Total: {{detalle.total|currency}}</label>
+          </div>
+        </div>
+        <div class="col">
+          <button class="btn-close" (click)="eliminarDetalle(detalle.producto.id)"></button>
+        </div>
+      </div>
   </li>
   <hr>
   <label>SubTotal: {{calcularSubTotalFactura() |currency}} </label>

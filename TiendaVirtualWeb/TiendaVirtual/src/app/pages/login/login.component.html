@@ -1,0 +1,15 @@
+<div class="form-signin">
+  <div class="container">
+    <h1 class="h3 mb-3 fw-normal">Iniciar Sesión</h1>
+    <div class="form-floating mb-3">
+      <input [(ngModel)]="loginValues.usuario" type="email" class="form-control" id="floatingInput">
+      <label for=" floatingInput">Usuario</label>
+    </div>
+    <div class="form-floating mb-3">
+      <input [(ngModel)]="loginValues.contrasena" type="password" class="form-control" id="floatingPassword"
+        placeholder="Password">
+      <label for="floatingPassword">Contraseña</label>
+    </div>
+    <button class="w-100 btn btn-lg btn-primary" (click)="iniciarSesion()" type="submit">Iniciar Sesión</button>
+  </div>
+</div>

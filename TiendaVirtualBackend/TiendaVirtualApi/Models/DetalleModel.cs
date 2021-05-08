@@ -19,7 +19,7 @@ namespace Models
       {
         Cantidad = detalle.Cantidad;
         IdProducto = detalle.IdProducto;
-        IdFactura = detalle.IdFactura;
+        /*IdFactura = detalle.IdFactura;*/
         PrecioBase = detalle.PrecioBase;
         Descuento = detalle.Descuento;
       }

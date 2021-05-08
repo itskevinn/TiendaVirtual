@@ -29,11 +29,22 @@ namespace Logic
         {
           return new GuardarDetalleResponse("Detalle duplicado", true);
         }
-        if (productoService.ReducirCantidad(productoBuscado, detalle.Cantidad).Error)
+        if (detalle.Tipo.ToLower() == "aumento")
         {
-          var mensajeModificacion = productoService.ReducirCantidad(productoBuscado, detalle.Cantidad).Mensaje;
-          return new GuardarDetalleResponse(detalle, mensajeModificacion, true);
-        };
+          if (productoService.AumentarCantidad(productoBuscado, detalle.Cantidad).Error)
+          {
+            var mensajeModificacion = productoService.AumentarCantidad(productoBuscado, detalle.Cantidad).Mensaje;
+            return new GuardarDetalleResponse(detalle, mensajeModificacion, true);
+          };
+        }
+        if (detalle.Tipo.ToLower() == "resta")
+        {
+          if (productoService.ReducirCantidad(productoBuscado, detalle.Cantidad).Error)
+          {
+            var mensajeModificacion = productoService.ReducirCantidad(productoBuscado, detalle.Cantidad).Mensaje;
+            return new GuardarDetalleResponse(detalle, mensajeModificacion, true);
+          };
+        }
         detalle.CalcularTotal();
         context.Detalles.Add(detalle);
         context.SaveChanges();
