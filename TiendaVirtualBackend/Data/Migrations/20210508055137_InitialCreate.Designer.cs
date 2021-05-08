@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Data.Migrations
 {
     [DbContext(typeof(TiendaVirtualContext))]
-    [Migration("20210507222946_InitialCreate")]
+    [Migration("20210508055137_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -106,6 +106,9 @@ namespace Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("IdUsuario")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Rol")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");

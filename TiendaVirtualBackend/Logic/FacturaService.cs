@@ -31,10 +31,11 @@ namespace Logic
         Interesado interesado = context.Interesados.Find(factura.IdInteresado);
         if (facturaBuscada == null)
         {
-          if (interesado == null)
+          if (interesado == null && factura.Tipo == "venta")
           {
             factura.IdInteresado = "No registrado";
           }
+
           factura.Detalles.ForEach((d) => d.Tipo = factura.Tipo == "venta" ? "resta" : "aumento");
           factura.Detalles.ForEach((d) => d.IdFactura = GenerarIdFacturaTemporal());
           foreach (Detalle detalle in factura.Detalles)
@@ -78,81 +79,7 @@ namespace Logic
     {
       return context.Facturas.Find(id);
     }
-    public EditarFacturaResponse Editar(string id, Factura facturaActualizado)
-    {
-      try
-      {
-        var facturaAActualizar = context.Facturas.Find(id);
-        if (facturaAActualizar != null)
-        {
-          facturaAActualizar.Detalles = facturaActualizado.Detalles;
-          facturaAActualizar.CalcularTotales();
-          context.Facturas.Update(facturaAActualizar);
-          context.SaveChanges();
-          return new EditarFacturaResponse(facturaAActualizar, "Factura editada correctamente", false);
-        }
-        else
-        {
-          return new EditarFacturaResponse("Factura no encontrada", true);
-        }
-      }
-      catch (Exception e)
-      {
-        return new EditarFacturaResponse($"Ocurrió un error al editar la factura {e.Message}", true);
-      }
-    }
-    public EliminarFacturaResponse Eliminar(string id)
-    {
-      try
-      {
-        var facturaAEliminar = context.Facturas.Find(id);
-        if (facturaAEliminar != null)
-        {
-          context.Facturas.Remove(facturaAEliminar);
-          context.SaveChanges();
-          return new EliminarFacturaResponse(facturaAEliminar, "Factura eliminada correctamente");
-        }
-        return new EliminarFacturaResponse("No se encontró la factura");
-      }
-      catch (Exception e)
-      {
-        return new EliminarFacturaResponse("Ocurrió un error al eliminar la factura" + e.Message);
-      }
-    }
-    public class EliminarFacturaResponse
-    {
-      public Factura Factura { get; set; }
-      public string Mensaje { get; set; }
-      public bool Error { get; set; }
-      public EliminarFacturaResponse(Factura factura, string mensaje)
-      {
-        Mensaje = mensaje;
-        Factura = factura;
-        Error = false;
-      }
-      public EliminarFacturaResponse(string mensaje)
-      {
-        Mensaje = mensaje;
-        Error = true;
-      }
-    }
-    public class EditarFacturaResponse
-    {
-      public Factura Factura { get; set; }
-      public string Mensaje { get; set; }
-      public bool Error { get; set; }
-      public EditarFacturaResponse(Factura factura, string mensaje, bool error)
-      {
-        Factura = factura;
-        Mensaje = mensaje;
-        Error = error;
-      }
-      public EditarFacturaResponse(string mensaje, bool error)
-      {
-        Error = error;
-        Mensaje = mensaje;
-      }
-    }
+
     public class GuardarFacturaResponse
     {
       public Factura Factura { get; set; }

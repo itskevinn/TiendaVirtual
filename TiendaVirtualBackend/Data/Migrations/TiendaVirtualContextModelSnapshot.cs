@@ -106,6 +106,9 @@ namespace Data.Migrations
                     b.Property<string>("IdUsuario")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Rol")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
                     b.ToTable("Interesados");

@@ -85,9 +85,11 @@ export class CarritoDeComprasComponent implements OnInit {
       this.factura.detalles = this.detalles;
       this.factura.tipo = this.tipo;
       if (this.tipo == "compra") {
-        this.factura.idInteresado = JSON.parse(localStorage.getItem("usuarioLoggeado"))._usuario;
+        this.factura.idInteresado = JSON.parse(localStorage.getItem("usuarioLoggeado"))._Usuario;
       }
-      this.factura.idInteresado = this.idInteresado;
+      if (this.tipo == "venta") {
+        this.factura.idInteresado = this.idInteresado;
+      }
       this.factura.total = this.calcularTotalFactura();
       this.factura.descuentoTotal = this.calcularTotalDescuentoFactura();
       this.factura.ivaTotal = this.calcularTotalIvaFactura();
@@ -154,14 +156,6 @@ export class CarritoDeComprasComponent implements OnInit {
       iva += d.iva;
     })
     return iva;
-  }
-  crearFormulario() {
-    this.detalle.cantidad = null;
-    this.detalle.idProducto = '';
-    this.detalle.idFactura = null;
-    this.formGroup = this.formBuilder.group({
-      cantidad: [this.detalle.cantidad, Validators.required],
-    })
   }
 
   calcularIvaDetalle() {

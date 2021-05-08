@@ -15,8 +15,8 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let factura of facturas">
-          <td>{{ factura.idFactura }}</td>
+        <tr *ngFor="let factura of facturas index as i">
+          <td>{{ i+1}}</td>
           <td>{{ factura.idInteresado}}</td>
           <td>{{ factura.descuentoTotal }}</td>
           <td>{{ factura.ivaTotal }}</td>

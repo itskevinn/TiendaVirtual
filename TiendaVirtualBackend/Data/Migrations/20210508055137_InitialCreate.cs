@@ -33,6 +33,7 @@ namespace Data.Migrations
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     IdInteresado = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Rol = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     IdUsuario = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>

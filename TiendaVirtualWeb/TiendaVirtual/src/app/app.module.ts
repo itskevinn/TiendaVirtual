@@ -33,6 +33,7 @@ import { MenuModule } from 'primeng/menu';
 import { MenuItem } from 'primeng/api';
 import { LoginComponent } from './pages/login/login.component';
 import { InicioComponent } from './pages/inicio/inicio.component';
+import { EditarProductoComponent } from './pages/producto/editar-producto/editar-producto.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +53,8 @@ import { InicioComponent } from './pages/inicio/inicio.component';
     PageHeaderComponent,
     CarritoDeComprasComponent,
     LoginComponent,
-    InicioComponent
+    InicioComponent,
+    EditarProductoComponent
   ],
   imports: [
     BrowserModule,

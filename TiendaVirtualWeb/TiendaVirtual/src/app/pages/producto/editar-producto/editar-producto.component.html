@@ -1,0 +1,49 @@
+<div class="container">
+  <br>
+  <button (click)="volver()" type="button" class="btn">
+    <span class="btn-label"><i class="fas fa-arrow-left"></i></span> Regresar</button>
+  <h1>Registrar producto</h1>
+  <br>
+  <form [formGroup]="formGroup">
+    <p-toast position="top-center" preventOpenDuplicates=true autoZIndex=true key="tl"></p-toast>
+    <div class="p-fluid p-grid">
+      <div class="p-field p-col-12 p-md-3">
+        <label for="id">Id</label>
+        <input type="text" id="id" class="form-control" formControlName="id">
+      </div>
+      <div class="p-field p-col-12 p-md-3">
+        <label for="nombre">Nombre</label>
+        <input type="text" id="nombre" class="form-control" formControlName="nombre">
+
+      </div>
+      <div class="p-field p-col-12 p-md-3">
+        <label for="nit">NIT del proveedor</label>
+        <input type="text" id="nit" class="form-control" formControlName="nitProveedor">
+      </div>
+      <div class="p-field p-col-12 p-md-3">
+        <label for="cantidad">Cantidad inicial disponible</label>
+        <input class="form-control" type="number" formControlName="cantidad" inputId="cantidad">
+      </div>
+      <div class="p-field p-col-12 p-md-3">
+        <label for="descuento">% de descuento</label>
+        <input class="form-control" type="number" formControlName="descuento" inputId="descuento">
+      </div>
+      <div class="p-field p-col-12 p-md-3">
+        <label for="iva">% de IVA</label>
+        <input class="form-control" type="number" inputId="iva" formControlName="iva">
+      </div>
+      <div class="p-field p-col-12 p-md-3">
+        <label for="precio">Precio base</label>
+        <input class="form-control" type="number" inputId="precio" formControlName="precio">
+      </div>
+      <div class="p-field p-col-12">
+        <label for="descripcion">Descripción</label>
+        <textarea inputId="descripcion" formControlName="descripcion" autoResize="true" rows="3" cols="10"
+          class="form-control"></textarea>
+      </div>
+    </div>
+  </form>
+  <div class="text-center py-3">
+    <button type="button" (click)="onSubmit()" class="btn btn-outline-success">Registrar</button>
+  </div>
+</div>

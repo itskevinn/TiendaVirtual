@@ -66,17 +66,5 @@ namespace Controllers
       var detalleViewModel = new DetalleViewModel(detalle);
       return detalleViewModel;
     }
-    [HttpPut("{id}")]
-    public ActionResult<string> Put(Detalle detalle, string id)
-    {
-      var mensaje = _detalleService.Editar(id, detalle).Mensaje;
-      return Ok(mensaje);
-    }
-    [HttpDelete("{id}")]
-    public ActionResult<string> Delete(string id)
-    {
-      var mensaje = _detalleService.Eliminar(id).Mensaje;
-      return Ok(mensaje);
-    }
   }
 }
