@@ -1,22 +1,27 @@
 <div class="card shadow-sm producto-card">
   <div class="card-body">
     <h3 style="color: cornflowerblue;">{{ producto.nombre }}</h3>
-    <h4>{{ producto.precio |currency:"COP":"$" }}</h4>
+    <h4>{{ producto.precioBase |currency:"COP":"$" }}</h4>
     <p class="card-text">{{ producto.descripcion }}</p>
   </div>
   <div class="card-footer">
     <div *ngIf="usuario.rol=='Lider de Avalúos'; else noLider">
       <div class="btn-group">
-        <button type=" button" class="btn btn-sm col-sm-12 btn-outline-info mx-1 card-button">Editar</button>
-        <button type="button" class="btn btn-sm col-sm-12 btn-outline-danger card-button">Eliminar</button>
+        <button type="button" routerLink="/EditarProducto/{{producto.id}}"
+          class="btn btn-sm col-sm-12 btn-outline-info mx-1 card-button">Editar</button>
+        <button type="button" routerLink="/Producto/{{producto.id}}"
+          class="btn btn-sm col-sm-12 btn-outline-secondary card-button">Ver Detalles</button>
       </div>
     </div>
     <ng-template #noLider>
-      <div class="btn-group" *ngIf="validarRuta() ">
+      <div class="btn-group" *ngIf="validarRutaFacturacion() ">
         <button type=" button" (click)="agregarAlCarrito()"
           class="btn btn-sm col-sm-12 btn-outline-success mx-1 card-button">Añadir
           al Carrito</button>
-        <button type="button" class="btn btn-sm col-sm-12 btn-outline-secondary card-button">Ver detalles</button>
+      </div>
+      <div *ngIf="validarRutaProducto() && usuario.rol=='Profesional de Ventas'">
+        <button type="button" routerLink="/Producto/{{producto.id}}"
+          class="btn btn-sm col-sm-12 btn-outline-secondary card-button">Ver detalles</button>
       </div>
     </ng-template>
   </div>

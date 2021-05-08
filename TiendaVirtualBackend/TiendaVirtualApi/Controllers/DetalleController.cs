@@ -59,12 +59,12 @@ namespace Controllers
 
 
     [HttpGet("{id}")]
-    public ActionResult<DetalleViewModel> Get(string id)
+    public ActionResult<IEnumerable<DetalleViewModel>> GetByProducto(string id)
     {
-      var detalle = _detalleService.Consultar(id);
+      var detalle = _detalleService.ConsultarPorProducto(id);
       if (detalle == null) return NotFound();
-      var detalleViewModel = new DetalleViewModel(detalle);
-      return detalleViewModel;
+      var detalles = _detalleService.ConsultarPorProducto(id).Select((d) => new DetalleViewModel(d));
+      return detalles.ToList();
     }
   }
 }

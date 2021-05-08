@@ -46,8 +46,8 @@ namespace Controllers
         Id = productoInputModel.Id,
         Nombre = productoInputModel.Nombre,
         Descripcion = productoInputModel.Descripcion,
-        PrecioBase = productoInputModel.Precio,
-        CantidadDisponible = productoInputModel.Cantidad,
+        PrecioBase = productoInputModel.PrecioBase,
+        CantidadDisponible = productoInputModel.CantidadDisponible,
         Descuento = productoInputModel.Descuento,
         NitProveedor = productoInputModel.NitProveedor,
         Iva = productoInputModel.Iva,
@@ -73,10 +73,19 @@ namespace Controllers
       return productoViewModel;
     }
     [HttpPut("{id}")]
-    public ActionResult<string> Put(Producto producto, string id)
+    public ActionResult<ProductoViewModel> Put(Producto producto, string id)
     {
-      var mensaje = _productoService.Editar(id, producto).Mensaje;
-      return Ok(mensaje);
+      var response = _productoService.Editar(id, producto);
+      if (response.Error)
+      {
+        ModelState.AddModelError("Error al editar el producto", response.Mensaje);
+        var detallesProblema = new ValidationProblemDetails(ModelState)
+        {
+          Status = StatusCodes.Status400BadRequest
+        };
+        return BadRequest(detallesProblema);
+      }
+      return Ok(response.Producto);
     }
     [HttpDelete("{id}")]
     public ActionResult<string> Delete(string id)

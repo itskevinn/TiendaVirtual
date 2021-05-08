@@ -79,7 +79,7 @@ namespace Logic
     }
     public Producto Consultar(string id)
     {
-      return context.Productos.Find(id);
+      return context.Productos.Where((p) => p.Id == id).FirstOrDefault();
     }
     public List<Producto> ProductosPorProveedor(string nit)
     {
@@ -89,7 +89,7 @@ namespace Logic
     {
       try
       {
-        var productoAActualizar = context.Productos.Find(id);
+        var productoAActualizar = context.Productos.Where((p) => p.Id == id).FirstOrDefault();
         if (productoAActualizar != null)
         {
           productoAActualizar.CantidadDisponible = productoActualizado.CantidadDisponible;

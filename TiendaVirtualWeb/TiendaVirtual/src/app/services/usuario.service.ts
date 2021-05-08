@@ -24,4 +24,12 @@ export class UsuarioService {
       })
     )
   }
+  get(id: string): Observable<Usuario> {
+    var url = `${this.baseUrl + '/Usuario'}/${id}`;
+    return this.http.get<Usuario>(url).pipe((
+      tap((r) => {
+        console.log(r);
+      })
+    ))
+  }
 }

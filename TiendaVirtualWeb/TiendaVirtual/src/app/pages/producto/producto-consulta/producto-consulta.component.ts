@@ -1,6 +1,7 @@
 import { ProductoService } from './../../../services/producto.service';
 import { Component, Input, OnInit } from '@angular/core';
 import { Producto } from 'src/app/models/producto';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-producto-consulta',
@@ -11,18 +12,20 @@ export class ProductoConsultaComponent implements OnInit {
   productos: Producto[] = []
   @Input() claseColumnas?: string;
   columnas: string
-  constructor(private productoService: ProductoService) { }
+
+  constructor(private productoService: ProductoService,) { }
 
   ngOnInit(): void {
     this.consultarProductos();
     this.validarClaseColumnas();
   }
+
   consultarProductos() {
     this.productoService.gets()
       .subscribe(r => this.productos = r);
   }
   validarClaseColumnas() {
-    if (this.claseColumnas ) {
+    if (this.claseColumnas) {
       this.columnas = this.claseColumnas;
     }
     else {

@@ -7,6 +7,8 @@ export class Detalle {
   idProducto: string;
   idFactura: number;
   producto: Producto;
+  valorDescontado: number;
+  valorIva: number;
   precioBase: number;
   iva: number;
   subTotal: number;

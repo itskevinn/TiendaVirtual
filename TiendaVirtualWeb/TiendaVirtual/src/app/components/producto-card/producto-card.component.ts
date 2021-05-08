@@ -17,8 +17,13 @@ export class ProductoCardComponent implements OnInit {
   ngOnInit(): void {
     this.usuario = JSON.parse(localStorage.getItem('usuarioLoggeado'))
   }
-  validarRuta(){
+  validarRutaFacturacion(){
     if (this.location.isCurrentPathEqualTo("/RegistrarCompra") || this.location.isCurrentPathEqualTo("/RegistrarVenta")) {
+      return true;
+    }
+  }
+  validarRutaProducto(){
+    if(this.location.isCurrentPathEqualTo("/Productos")){
       return true;
     }
   }

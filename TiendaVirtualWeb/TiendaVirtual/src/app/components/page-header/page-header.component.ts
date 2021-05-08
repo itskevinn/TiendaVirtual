@@ -13,7 +13,5 @@ export class PageHeaderComponent implements OnInit {
 
   ngOnInit(): void {
   }
-  volver() {
-    this.location.back();
-  }
+
 }

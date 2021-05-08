@@ -21,7 +21,7 @@ namespace Data
       .SelectMany(x => x.GetProperties()).Where(x => x.ClrType == typeof(decimal) || x.ClrType == typeof(decimal?)))
       {
         tipoEntidades.SetPrecision(18);
-        tipoEntidades.SetScale(6);
+        tipoEntidades.SetScale(0);
       }
     }
   }

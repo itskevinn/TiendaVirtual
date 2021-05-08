@@ -1,0 +1,56 @@
+<div class="container" *ngIf="producto">
+
+  <app-back-button></app-back-button>
+
+  <h1>{{producto.nombre}}</h1>
+  <br>
+  <div class="row">
+    <div class="col-4">
+      <h6>Precio: {{producto.precioBase | currency}}</h6>
+    </div>
+    <div class="col-4">
+      <h6>IVA: {{producto.iva}}%</h6>
+    </div>
+    <div class="col-4">
+      <h6>DESCUENTO: {{producto.descuento}}%</h6>
+    </div>
+  </div>
+  <div class="row mt-5">
+    <div class="col-md-12">
+      Descripción: {{producto.descripcion}}
+    </div>
+  </div>
+  <div *ngIf="usuario && (usuario.rol == 'Profesional de Ventas' || usuario.rol == 'Administrador')">
+    <hr>
+    <br>
+    <h1>Detalles</h1>
+    <div class="table-wrapper-scroll-y my-custom-scrollbar">
+      <div class="table-responsive mt-5" style="max-width: 100%;">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th socpe="col">#</th>
+              <th scope="col">Cantidad</th>
+              <th scope="col">Precio </th>
+              <th scope="col">Total Descontado</th>
+              <th scope="col">Total IVA</th>
+              <th scope="col">SubTotal</th>
+              <th scope="col">Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let detalle of detalles index as i">
+              <td>{{ i+1}}</td>
+              <td>{{ detalle.cantidad }}</td>
+              <td>{{ detalle.precioBase }}</td>
+              <td>{{ detalle.valorDescontado }}</td>
+              <td>{{ detalle.valorIva }}</td>
+              <td>{{ detalle.subTotal }}</td>
+              <td>{{ detalle.total }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

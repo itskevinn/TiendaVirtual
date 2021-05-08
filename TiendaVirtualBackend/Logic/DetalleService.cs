@@ -65,6 +65,14 @@ namespace Logic
     {
       return context.Detalles.Find(id);
     }
+    public List<Detalle> ConsultarPorProducto(string id)
+    {
+      if (context.Productos.Where((p) => p.Id == id).Count() == 1)
+      {
+        return context.Detalles.Where((d) => d.IdProducto == id).ToList();
+      }
+      return null;
+    }
     public List<Detalle> ConsultarPorFactura(int id)
     {
       return context.Detalles.Where((d) => d.IdFactura == id).ToList();

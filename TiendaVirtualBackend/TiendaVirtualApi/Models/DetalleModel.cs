@@ -22,7 +22,15 @@ namespace Models
         /*IdFactura = detalle.IdFactura;*/
         PrecioBase = detalle.PrecioBase;
         Descuento = detalle.Descuento;
+        SubTotal = detalle.SubTotal;
+        ValorDescontado = detalle.ValorDescontado;
+        ValorIva = detalle.ValorIva;
+        Total = detalle.Total;
       }
+      public decimal Total { get; set; }
+      public decimal ValorIva { get; set; }
+      public decimal SubTotal { get; set; }
+      public decimal ValorDescontado { get; set; }
     }
   }
 }

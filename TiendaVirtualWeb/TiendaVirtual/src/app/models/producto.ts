@@ -2,9 +2,9 @@ export class Producto {
   id: string;
   nombre: string;
   descripcion: string;
-  precio: number;
+  precioBase: number;
   iva: number;
   descuento: number;
   nitProveedor: string;
-  cantidad: number;
+  cantidadDisponible: number;
 }

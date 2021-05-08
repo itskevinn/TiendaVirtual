@@ -1,8 +1,6 @@
 <div class="container">
-  <br>
-  <button (click)="volver()" type="button" class="btn">
-    <span class="btn-label"><i class="fas fa-arrow-left"></i></span> Regresar</button>
-  <h1>Registrar producto</h1>
+<app-back-button></app-back-button>
+  <h1>Editar producto</h1>
   <br>
   <form [formGroup]="formGroup">
     <p-toast position="top-center" preventOpenDuplicates=true autoZIndex=true key="tl"></p-toast>
@@ -21,8 +19,8 @@
         <input type="text" id="nit" class="form-control" formControlName="nitProveedor">
       </div>
       <div class="p-field p-col-12 p-md-3">
-        <label for="cantidad">Cantidad inicial disponible</label>
-        <input class="form-control" type="number" formControlName="cantidad" inputId="cantidad">
+        <label for="cantidad">Cantidad disponible</label>
+        <input class="form-control" type="number" formControlName="cantidadDisponible" inputId="cantidad">
       </div>
       <div class="p-field p-col-12 p-md-3">
         <label for="descuento">% de descuento</label>
@@ -34,7 +32,7 @@
       </div>
       <div class="p-field p-col-12 p-md-3">
         <label for="precio">Precio base</label>
-        <input class="form-control" type="number" inputId="precio" formControlName="precio">
+        <input class="form-control" type="number" inputId="precio" formControlName="precioBase">
       </div>
       <div class="p-field p-col-12">
         <label for="descripcion">Descripción</label>

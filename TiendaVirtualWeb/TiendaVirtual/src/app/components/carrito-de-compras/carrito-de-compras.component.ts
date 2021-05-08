@@ -37,6 +37,8 @@ export class CarritoDeComprasComponent implements OnInit {
           idProducto: producto.id,
           cantidad: null,
           idFactura: 0,
+          valorDescontado: 0,
+          valorIva: 0,
           descuento: 0,
           producto: producto,
           total: this.total,
@@ -46,7 +48,7 @@ export class CarritoDeComprasComponent implements OnInit {
           iva: this.ivaDetalle
         }
         this.detalle.descuento = this.detalle.descuento == 0 ? this.detalle.producto.descuento : this.detalle.descuento;
-        this.detalle.precioBase = this.detalle.precioBase == 0 ? this.detalle.producto.precio : this.detalle.precioBase;
+        this.detalle.precioBase = this.detalle.precioBase == 0 ? this.detalle.producto.precioBase : this.detalle.precioBase;
         console.log(this.detalle);
         this.calcularTotalDetalle();
         this.detalles.push(this.detalle);

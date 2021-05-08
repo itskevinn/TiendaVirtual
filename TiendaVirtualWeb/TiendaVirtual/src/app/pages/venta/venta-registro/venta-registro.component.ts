@@ -12,7 +12,5 @@ export class VentaRegistroComponent implements OnInit {
 
   ngOnInit(): void {
   }
-  volver() {
-    this.location.back();
-  }
+
 }

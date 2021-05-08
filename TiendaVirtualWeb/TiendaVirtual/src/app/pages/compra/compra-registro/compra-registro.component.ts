@@ -24,9 +24,7 @@ export class CompraRegistroComponent implements OnInit {
   crearFormulario() {
     
   }
-  volver(){
-    this.location.back();
-  }
+
   onSubmit() {
     if (this.formGroup.invalid) {
       this.mostrarToast("Aviso", "Complete todos los datos", "info");

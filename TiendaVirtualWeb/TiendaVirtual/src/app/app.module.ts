@@ -34,6 +34,12 @@ import { MenuItem } from 'primeng/api';
 import { LoginComponent } from './pages/login/login.component';
 import { InicioComponent } from './pages/inicio/inicio.component';
 import { EditarProductoComponent } from './pages/producto/editar-producto/editar-producto.component';
+import { ProveedorEdicionComponent } from './pages/proveedor/proveedor-edicion/proveedor-edicion.component';
+import { UsuarioEdicionComponent } from './pages/usuario/usuario-edicion/usuario-edicion.component';
+import { ProductoDetalleComponent } from './pages/producto/producto-detalle/producto-detalle.component';
+import { ProveedorDetalleComponent } from './pages/proveedor/proveedor-detalle/proveedor-detalle.component';
+import { UsuarioDetalleComponent } from './pages/usuario/usuario-detalle/usuario-detalle.component';
+import { BackButtonComponent } from './components/back-button/back-button.component';
 
 @NgModule({
   declarations: [
@@ -54,7 +60,13 @@ import { EditarProductoComponent } from './pages/producto/editar-producto/editar
     CarritoDeComprasComponent,
     LoginComponent,
     InicioComponent,
-    EditarProductoComponent
+    EditarProductoComponent,
+    ProveedorEdicionComponent,
+    UsuarioEdicionComponent,
+    ProductoDetalleComponent,
+    ProveedorDetalleComponent,
+    UsuarioDetalleComponent,
+    BackButtonComponent
   ],
   imports: [
     BrowserModule,

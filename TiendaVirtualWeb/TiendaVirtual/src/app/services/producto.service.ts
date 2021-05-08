@@ -28,6 +28,14 @@ export class ProductoService {
       })
     )
   }
+  get(id: string): Observable<Producto> {
+    let url = `${this.baseUrl + '/Producto/'}${id}`
+    return this.http.get<Producto>(url).pipe(
+      tap((p) => {
+        console.log(p);
+      })
+    )
+  }
   put(producto: Producto): Observable<Producto> {
     const url = `${this.baseUrl + '/Producto'}/${producto.id}`
     return this.http.put<Producto>(url, producto).pipe(
