@@ -2,7 +2,6 @@ C:\Users\kevin\OneDrive\Documentos\GitHub\TiendaVirtual\TiendaVirtualBackend\Ent
 C:\Users\kevin\OneDrive\Documentos\GitHub\TiendaVirtual\TiendaVirtualBackend\Entity\bin\Debug\net5.0\Entity.dll
 C:\Users\kevin\OneDrive\Documentos\GitHub\TiendaVirtual\TiendaVirtualBackend\Entity\bin\Debug\net5.0\ref\Entity.dll
 C:\Users\kevin\OneDrive\Documentos\GitHub\TiendaVirtual\TiendaVirtualBackend\Entity\bin\Debug\net5.0\Entity.pdb
-C:\Users\kevin\OneDrive\Documentos\GitHub\TiendaVirtual\TiendaVirtualBackend\Entity\obj\Debug\net5.0\Entity.csprojAssemblyReference.cache
 C:\Users\kevin\OneDrive\Documentos\GitHub\TiendaVirtual\TiendaVirtualBackend\Entity\obj\Debug\net5.0\Entity.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\kevin\OneDrive\Documentos\GitHub\TiendaVirtual\TiendaVirtualBackend\Entity\obj\Debug\net5.0\Entity.AssemblyInfoInputs.cache
 C:\Users\kevin\OneDrive\Documentos\GitHub\TiendaVirtual\TiendaVirtualBackend\Entity\obj\Debug\net5.0\Entity.AssemblyInfo.cs
@@ -10,3 +9,4 @@ C:\Users\kevin\OneDrive\Documentos\GitHub\TiendaVirtual\TiendaVirtualBackend\Ent
 C:\Users\kevin\OneDrive\Documentos\GitHub\TiendaVirtual\TiendaVirtualBackend\Entity\obj\Debug\net5.0\Entity.dll
 C:\Users\kevin\OneDrive\Documentos\GitHub\TiendaVirtual\TiendaVirtualBackend\Entity\obj\Debug\net5.0\ref\Entity.dll
 C:\Users\kevin\OneDrive\Documentos\GitHub\TiendaVirtual\TiendaVirtualBackend\Entity\obj\Debug\net5.0\Entity.pdb
+C:\Users\kevin\OneDrive\Documentos\GitHub\TiendaVirtual\TiendaVirtualBackend\Entity\obj\Debug\net5.0\Entity.csprojAssemblyReference.cache

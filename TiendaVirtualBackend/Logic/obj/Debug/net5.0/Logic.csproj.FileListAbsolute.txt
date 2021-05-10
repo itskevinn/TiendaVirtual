@@ -4,8 +4,10 @@ C:\Users\kevin\OneDrive\Documentos\GitHub\TiendaVirtual\TiendaVirtualBackend\Log
 C:\Users\kevin\OneDrive\Documentos\GitHub\TiendaVirtual\TiendaVirtualBackend\Logic\bin\Debug\net5.0\Logic.pdb
 C:\Users\kevin\OneDrive\Documentos\GitHub\TiendaVirtual\TiendaVirtualBackend\Logic\bin\Debug\net5.0\Data.dll
 C:\Users\kevin\OneDrive\Documentos\GitHub\TiendaVirtual\TiendaVirtualBackend\Logic\bin\Debug\net5.0\Entity.dll
+C:\Users\kevin\OneDrive\Documentos\GitHub\TiendaVirtual\TiendaVirtualBackend\Logic\bin\Debug\net5.0\Infraestructura.dll
 C:\Users\kevin\OneDrive\Documentos\GitHub\TiendaVirtual\TiendaVirtualBackend\Logic\bin\Debug\net5.0\Data.pdb
 C:\Users\kevin\OneDrive\Documentos\GitHub\TiendaVirtual\TiendaVirtualBackend\Logic\bin\Debug\net5.0\Entity.pdb
+C:\Users\kevin\OneDrive\Documentos\GitHub\TiendaVirtual\TiendaVirtualBackend\Logic\bin\Debug\net5.0\Infraestructura.pdb
 C:\Users\kevin\OneDrive\Documentos\GitHub\TiendaVirtual\TiendaVirtualBackend\Logic\obj\Debug\net5.0\Logic.csprojAssemblyReference.cache
 C:\Users\kevin\OneDrive\Documentos\GitHub\TiendaVirtual\TiendaVirtualBackend\Logic\obj\Debug\net5.0\Logic.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\kevin\OneDrive\Documentos\GitHub\TiendaVirtual\TiendaVirtualBackend\Logic\obj\Debug\net5.0\Logic.AssemblyInfoInputs.cache
@@ -15,5 +17,3 @@ C:\Users\kevin\OneDrive\Documentos\GitHub\TiendaVirtual\TiendaVirtualBackend\Log
 C:\Users\kevin\OneDrive\Documentos\GitHub\TiendaVirtual\TiendaVirtualBackend\Logic\obj\Debug\net5.0\Logic.dll
 C:\Users\kevin\OneDrive\Documentos\GitHub\TiendaVirtual\TiendaVirtualBackend\Logic\obj\Debug\net5.0\ref\Logic.dll
 C:\Users\kevin\OneDrive\Documentos\GitHub\TiendaVirtual\TiendaVirtualBackend\Logic\obj\Debug\net5.0\Logic.pdb
-C:\Users\kevin\OneDrive\Documentos\GitHub\TiendaVirtual\TiendaVirtualBackend\Logic\bin\Debug\net5.0\Infraestructura.dll
-C:\Users\kevin\OneDrive\Documentos\GitHub\TiendaVirtual\TiendaVirtualBackend\Logic\bin\Debug\net5.0\Infraestructura.pdb

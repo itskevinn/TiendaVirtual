@@ -15,8 +15,12 @@
 
       </div>
       <div class="p-field p-col-12 p-md-3">
-        <label for="nit">NIT del proveedor</label>
-        <input type="text" id="nit" class="form-control" formControlName="nitProveedor">
+        <label>Proveedor</label>
+        <select class="form-control" (change)="cambiarProveedor($event)">
+          <option>Seleccione un proveedor</option>
+          <option *ngFor="let proveedor of proveedores">{{proveedor.idProveedor}} - {{proveedor.documento}} -
+            {{proveedor.nombre}}</option>
+        </select>
       </div>
       <div class="p-field p-col-12 p-md-3">
         <label for="cantidad">Cantidad inicial disponible</label>

@@ -80,7 +80,7 @@ namespace Data.Migrations
                     PrecioBase = table.Column<decimal>(type: "decimal(18,0)", precision: 18, scale: 0, nullable: false),
                     Iva = table.Column<decimal>(type: "decimal(18,0)", precision: 18, scale: 0, nullable: false),
                     Descuento = table.Column<decimal>(type: "decimal(18,0)", precision: 18, scale: 0, nullable: false),
-                    DocumentoProveedor = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IdProveedor = table.Column<int>(type: "int", nullable: false),
                     CantidadDisponible = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>

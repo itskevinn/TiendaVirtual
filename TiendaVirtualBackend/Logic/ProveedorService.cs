@@ -10,7 +10,7 @@ namespace Logic
   public class ProveedorService
   {
     private readonly TiendaVirtualContext context;
-    private  ProductoService productoService;
+    private ProductoService productoService;
     public ProveedorService(TiendaVirtualContext tiendaVirtualContext)
     {
       context = tiendaVirtualContext;
@@ -43,7 +43,7 @@ namespace Logic
 
     private List<Proveedor> AsignarProductos(List<Proveedor> proveedores)
     {
-      proveedores.ForEach((p) => p.Productos = productoService.ProductosPorProveedor(p.Documento));
+      proveedores.ForEach((p) => p.Productos = productoService.ProductosPorProveedor(p.Id));
       return proveedores;
     }
 

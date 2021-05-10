@@ -18,7 +18,7 @@ namespace Logic
       try
       {
         Producto productoBuscado = ConsultarPorId(producto.Codigo);
-        if (context.Proveedores.Find(producto.DocumentoProveedor) == null)
+        if (context.Proveedores.Find(producto.IdProveedor) == null)
         {
           return new GuardarProductoResponse("No se encuentra el proveedor, por favor, regístrelo", true);
         }
@@ -81,9 +81,9 @@ namespace Logic
     {
       return context.Productos.Where((p) => p.Codigo == id).FirstOrDefault();
     }
-    public List<Producto> ProductosPorProveedor(string documento)
+    public List<Producto> ProductosPorProveedor(int documento)
     {
-      return context.Productos.Where(p => p.DocumentoProveedor == documento).ToList();
+      return context.Productos.Where(p => p.IdProveedor == documento).ToList();
     }
     public EditarProductoResponse Editar(string id, Producto productoActualizado)
     {
@@ -94,7 +94,7 @@ namespace Logic
         {
           productoAActualizar.CantidadDisponible = productoActualizado.CantidadDisponible;
           productoAActualizar.Descripcion = productoActualizado.Descripcion;
-          productoAActualizar.DocumentoProveedor = productoActualizado.DocumentoProveedor;
+          productoAActualizar.IdProveedor = productoActualizado.IdProveedor;
           productoAActualizar.PrecioBase = productoActualizado.PrecioBase;
           productoAActualizar.Iva = productoActualizado.Iva;
           productoAActualizar.Nombre = productoActualizado.Nombre;

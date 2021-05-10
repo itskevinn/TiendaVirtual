@@ -10,13 +10,16 @@
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" routerLink="/">Inicio</a>
         </li>
-        <li class="nav-item" *ngIf="usuario && usuario.rol.nombre == 'Lider de Avalúos'">
+        <li class="nav-item"
+          *ngIf="usuario && usuario.rol.nombre == 'Lider de Avalúos'|| usuario.rol.nombre == 'Administrador'">
           <a class="nav-link" routerLink="/Proveedores">Proveedores</a>
         </li>
-        <li class="nav-item" *ngIf="usuario && usuario.rol.nombre == 'Lider de Avalúos'">
+        <li class="nav-item"
+          *ngIf="usuario && usuario.rol.nombre == 'Lider de Avalúos'|| usuario.rol.nombre == 'Administrador'">
           <a class="nav-link" routerLink="/Usuarios">Usuarios</a>
         </li>
-        <li class="nav-item" *ngIf="usuario && usuario.rol.nombre == 'Lider de Avalúos'">
+        <li class="nav-item"
+          *ngIf="usuario && usuario.rol.nombre == 'Lider de Avalúos' || usuario.rol.nombre == 'Administrador'">
           <a class="nav-link" routerLink="/Rol">Roles</a>
         </li>
         <li class="nav-item">

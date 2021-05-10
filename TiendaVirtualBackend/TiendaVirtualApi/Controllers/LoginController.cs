@@ -1,3 +1,4 @@
+using System.Linq;
 using Data;
 using Entity;
 using Infraestructura;
@@ -16,16 +17,28 @@ namespace TiendaVirtualApi.Controllers
   {
     private readonly TiendaVirtualContext _tiendaContext;
     private UsuarioService usuarioService;
+
     public LoginController(TiendaVirtualContext tiendaContext)
     {
       _tiendaContext = tiendaContext;
-      var admin = _tiendaContext.Usuarios.Find(1);
+      var admin = _tiendaContext.Roles.Where((r) => r.Nombre == "Administrador").FirstOrDefault();
       if (admin == null)
       {
-        _tiendaContext.Usuarios.Add(new Entity.Usuario() { Rol = new Rol { Nombre = "Administrador", Id = 1 }, Contrasena = Hash.GetSha256("admin"), NombreUsuario = "admin" });
+        GuardarRolAdmin();
+        _tiendaContext.Usuarios.Add(new Entity.Usuario()
+        {
+          IdRol = _tiendaContext.Roles.Where((r) => r.Nombre == "Administrador").FirstOrDefault().Id,
+          Contrasena = Hash.GetSha256("admin"),
+          NombreUsuario = "admin"
+        });
         var i = _tiendaContext.SaveChanges();
       }
       usuarioService = new UsuarioService(tiendaContext);
+    }
+    public void GuardarRolAdmin()
+    {
+      _tiendaContext.Roles.Add(new Rol { Nombre = "Administrador" });
+      _tiendaContext.SaveChanges();
     }
     [HttpPost]
     public ActionResult<LoginViewModel> Post(LoginInputModel usuario)

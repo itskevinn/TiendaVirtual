@@ -46,7 +46,7 @@ namespace Entity
         Codigo = producto.Codigo,
         Id = producto.Id,
         Iva = producto.Iva,
-        DocumentoProveedor = producto.DocumentoProveedor,
+        IdProveedor = producto.IdProveedor,
         Nombre = producto.Nombre,
         PrecioBase = producto.PrecioBase
       };

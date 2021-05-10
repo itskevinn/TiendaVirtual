@@ -13,7 +13,7 @@ namespace Models
       public int CantidadDisponible { get; set; }
       public decimal Iva { get; set; }
       public decimal Descuento { get; set; }
-      public string NitProveedor { get; set; }
+      public int IdProveedor { get; set; }
 
     }
 
@@ -26,7 +26,7 @@ namespace Models
         Descripcion = producto.Descripcion;
         PrecioBase = producto.PrecioBase;
         CantidadDisponible = producto.CantidadDisponible;
-        NitProveedor = producto.DocumentoProveedor;
+        IdProveedor = producto.IdProveedor;
         Iva = producto.Iva;
         Descuento = producto.Descuento;
       }

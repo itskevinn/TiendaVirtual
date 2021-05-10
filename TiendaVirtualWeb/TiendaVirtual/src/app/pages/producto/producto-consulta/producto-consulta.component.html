@@ -1,6 +1,6 @@
 <div class="container">
   <br>
-  <div *ngIf="usuario.rol.nombre == 'Lider de Avalúos';else sinRedireccionamiento">
+  <div *ngIf="usuario.rol.nombre == 'Lider de Avalúos' || usuario.rol.nombre == 'Administrador';else sinRedireccionamiento">
     <app-page-header titulo="Productos" redireccionamiento="/RegistrarProducto"></app-page-header>
   </div>
   <ng-template #sinRedireccionamiento>

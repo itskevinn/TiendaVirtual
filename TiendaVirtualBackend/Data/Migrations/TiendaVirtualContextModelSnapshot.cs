@@ -176,9 +176,8 @@ namespace Data.Migrations
                         .HasPrecision(18)
                         .HasColumnType("decimal(18,0)");
 
-                    b.Property<string>("DocumentoProveedor")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("IdProveedor")
+                        .HasColumnType("int");
 
                     b.Property<decimal>("Iva")
                         .HasPrecision(18)

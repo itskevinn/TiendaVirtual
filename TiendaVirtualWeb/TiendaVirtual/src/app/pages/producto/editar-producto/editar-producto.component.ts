@@ -44,7 +44,7 @@ export class EditarProductoComponent implements OnInit {
     this.control.descripcion.setValue(p.descripcion);
     this.control.precioBase.setValue(p.precioBase);
     this.control.cantidadDisponible.setValue(p.cantidadDisponible);
-    this.control.nitProveedor.setValue(p.nitProveedor);
+    this.control.nitProveedor.setValue(p.idProveedor);
     this.control.descuento.setValue(p.descuento);
     this.control.iva.setValue(p.iva);
   }
@@ -55,12 +55,12 @@ export class EditarProductoComponent implements OnInit {
     this.producto.cantidadDisponible = null;
     this.producto.descuento = null;
     this.producto.iva = null;
-    this.producto.nitProveedor = '';
+    this.producto.idProveedor = null;
     this.producto.precioBase = null;
     this.formGroup = this.formBuilder.group({
       id: [this.producto.id, Validators.required],
       nombre: [this.producto.nombre, Validators.required],
-      nitProveedor: [this.producto.nitProveedor, Validators.required],
+      nitProveedor: [this.producto.idProveedor, Validators.required],
       cantidadDisponible: [{value: this.producto.cantidadDisponible, disabled: true}, Validators.required],
       descuento: [this.producto.descuento, Validators.required],
       iva: [this.producto.iva, Validators.required],

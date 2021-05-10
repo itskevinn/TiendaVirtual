@@ -5,6 +5,6 @@ export class Producto {
   precioBase: number;
   iva: number;
   descuento: number;
-  nitProveedor: string;
+  idProveedor: number;
   cantidadDisponible: number;
 }

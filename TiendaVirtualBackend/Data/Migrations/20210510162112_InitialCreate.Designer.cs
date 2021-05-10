@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Data.Migrations
 {
     [DbContext(typeof(TiendaVirtualContext))]
-    [Migration("20210510150531_InitialCreate")]
+    [Migration("20210510162112_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -178,9 +178,8 @@ namespace Data.Migrations
                         .HasPrecision(18)
                         .HasColumnType("decimal(18,0)");
 
-                    b.Property<string>("DocumentoProveedor")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("IdProveedor")
+                        .HasColumnType("int");
 
                     b.Property<decimal>("Iva")
                         .HasPrecision(18)
