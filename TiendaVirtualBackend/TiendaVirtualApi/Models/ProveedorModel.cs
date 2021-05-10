@@ -22,6 +22,7 @@ namespace Models
       {
         Documento = proveedor.Documento;
         IdProveedor = proveedor.IdProveedor;
+        TipoDocumento=proveedor.TipoDocumento;
         Nombre = proveedor.Nombre;
         Productos = proveedor.Productos;
       }

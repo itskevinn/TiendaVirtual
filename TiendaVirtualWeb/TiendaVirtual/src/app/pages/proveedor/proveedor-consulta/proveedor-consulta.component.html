@@ -6,16 +6,17 @@
       <thead>
         <tr>
           <th socpe="col">#</th>
-          <th scope="col">NIT</th>
+          <th scope="col">Tipo Documento</th>
+          <th scope="col">Número de Documento</th>
           <th scope="col">Nombre</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let proveedor of proveedores index as i">
           <td>{{ i + 1 }}</td>
-          <td>{{ proveedor.nit }}</td>
+          <td>{{proveedor.tipoDocumento}} </td>
+          <td>{{proveedor.documento}} </td>
           <td>{{ proveedor.nombre }}</td>
-
         </tr>
       </tbody>
     </table>

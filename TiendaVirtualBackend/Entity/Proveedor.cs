@@ -10,7 +10,7 @@ namespace Entity
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int IdProveedor { get; set; }
     [Required(ErrorMessage = "Se requiere el tipo de documento del proveedor")]
-    public string TipoDocumento { get; set; } //NIT, CÉDULA, CÉDULA DE EXTRANJERÍA, PASAPORTE...
+    public string TipoDocumento { get; set; } 
     [Required(ErrorMessage = "Se requiere el documento del proveedor")]
     public string Documento { get; set; }
     [Required(ErrorMessage = "Se requiere el nombre del proveedor")]

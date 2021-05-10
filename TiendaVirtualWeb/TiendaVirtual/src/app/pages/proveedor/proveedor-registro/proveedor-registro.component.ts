@@ -1,3 +1,4 @@
+import { environment } from 'src/environments/environment';
 import { MessageService } from 'primeng/api';
 import { ProveedorService } from './../../../services/proveedor.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
@@ -11,13 +12,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProveedorRegistroComponent implements OnInit {
   proveedor: Proveedor;
+  tipo: string;
+  tipoDocumentos: string[] = ["Cédula", "Nit", "Cédula de Extranjería", "Pasaporte"];
   formGroup: FormGroup;
   constructor(private formBuilder: FormBuilder, private proveedorService: ProveedorService, private messageService: MessageService) {
 
   }
   ngOnInit(): void {
-    this.proveedor = new Proveedor()
-    this.crearFormulario()
+
+    this.proveedor = new Proveedor();
+    this.crearFormulario();
   }
   crearFormulario() {
     this.proveedor.tipoDocumento = ''
@@ -31,6 +35,9 @@ export class ProveedorRegistroComponent implements OnInit {
         Validators.required,
       ],
     })
+  }
+  cambiarTipo(e) {
+    this.tipo = e.target.value;
   }
   onSubmit() {
     if (this.formGroup.invalid) {
@@ -47,6 +54,8 @@ export class ProveedorRegistroComponent implements OnInit {
 
   registrar() {
     this.proveedor = this.formGroup.value;
+    this.proveedor.tipoDocumento = this.tipo;
+    console.log(this.proveedor);
     this.proveedorService.post(this.proveedor).subscribe((r) => {
       if (r != null) {
         this.proveedor = r;

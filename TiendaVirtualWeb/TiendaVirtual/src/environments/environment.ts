@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  url: 'https://localhost:5001/api'
+  url: 'https://localhost:5001/api',
+  tipoDocumentos: ["Cédula", "Nit", "Cédula de Extranjería", "Pasaporte"]//NIT, CÉDULA, CÉDULA DE EXTRANJERÍA, PASAPORTE...
 };
 
 /*

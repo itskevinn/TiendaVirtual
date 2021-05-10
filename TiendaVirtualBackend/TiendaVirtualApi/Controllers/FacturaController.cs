@@ -14,13 +14,11 @@ namespace Controllers
   [ApiController]
   public class FacturaController : ControllerBase
   {
-    private readonly TiendaVirtualContext context;
     private FacturaService _facturaService;
 
     public FacturaController(TiendaVirtualContext _context)
     {
-      _facturaService = new FacturaService(context);
-      context = _context;
+      _facturaService = new FacturaService(_context);
     }
 
     // POST: api/factura
