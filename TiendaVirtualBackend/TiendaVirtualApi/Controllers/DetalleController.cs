@@ -19,8 +19,8 @@ namespace Controllers
 
     public DetalleController(TiendaVirtualContext _context)
     {
-      _detalleService = new DetalleService(context);
       context = _context;
+      _detalleService = new DetalleService(context);
     }
 
     // POST: api/detalle

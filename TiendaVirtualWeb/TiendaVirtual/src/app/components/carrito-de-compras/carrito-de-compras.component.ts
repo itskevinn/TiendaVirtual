@@ -96,6 +96,8 @@ export class CarritoDeComprasComponent implements OnInit {
       this.factura.descuentoTotal = this.calcularTotalDescuentoFactura();
       this.factura.ivaTotal = this.calcularTotalIvaFactura();
       this.factura.subTotal = this.calcularSubTotalFactura();
+      console.log(this.factura);
+
       this.facturaService.post(this.factura).subscribe((f) => {
         console.log(f);
         if (f.tipo.toLowerCase() == "venta") {

@@ -16,7 +16,7 @@ namespace Entity
     public decimal Iva { get; set; }
     public decimal Descuento { get; set; }
     [Required(ErrorMessage = "Se requiere el documento del proveedor")]
-    public int IdProveedor { get; set; }
+    public int idProveedor { get; set; }
     [Required(ErrorMessage = "Se requiere la cantidad disponible del producto")]
     public int CantidadDisponible { get; set; }
 

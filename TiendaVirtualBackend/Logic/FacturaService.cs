@@ -25,33 +25,28 @@ namespace Logic
     }
     public GuardarFacturaResponse Guardar(Factura factura)
     {
-      using (var transaccion = context.Database.BeginTransaction())
+      try
       {
-        try
+        Interesado interesado = context.Interesados.Find(factura.IdInteresado);
+        if (interesado == null && factura.Tipo == "venta")
         {
-          Interesado interesado = context.Interesados.Find(factura.IdInteresado);
-          if (interesado == null && factura.Tipo == "venta")
-          {
-            factura.IdInteresado = 0;
-          }
-          foreach (Detalle detalle in factura.ObtenerDetalles())
-          {
-            if (detalleService.Guardar(detalle).Error)
-            {
-              return new GuardarFacturaResponse(detalleService.Guardar(detalle).Mensaje, true);
-            }
-            detalleService.Guardar(detalle);
-          }
-          factura.CalcularTotales();
-          context.Facturas.Add(factura);
-          context.SaveChanges();
-          return new GuardarFacturaResponse(factura, "Factura guardada con éxito", false);
+          factura.IdInteresado = 0;
         }
-        catch (System.Exception e)
+        foreach (Detalle detalle in factura.ObtenerDetalles())
         {
-          transaccion.Rollback();
-          return new GuardarFacturaResponse($"Ha ocurrido un error en el servidor. {e.Message} Por favor, vuelva a internar más tarde", true);
+          if (detalleService.Guardar(detalle).Error)
+          {
+            return new GuardarFacturaResponse(detalleService.Guardar(detalle).Mensaje, true);
+          }
         }
+        factura.CalcularTotales();
+        context.Facturas.Add(factura);
+        context.SaveChanges();
+        return new GuardarFacturaResponse(factura, "Factura guardada con éxito", false);
+      }
+      catch (System.Exception e)
+      {
+        return new GuardarFacturaResponse($"Ha ocurrido un error en el servidor. {e.Message} Por favor, vuelva a internar más tarde", true);
       }
     }
     public List<Factura> Consultar()

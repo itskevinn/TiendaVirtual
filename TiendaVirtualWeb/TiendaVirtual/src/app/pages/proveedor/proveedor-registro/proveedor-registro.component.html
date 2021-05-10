@@ -7,11 +7,11 @@
       <div class="col-md-6 offset-md-3">
         <form [formGroup]="formGroup">
           <p-toast position="top-center" preventOpenDuplicates=true autoZIndex=true key="tl"></p-toast>
-          <select class="form-select" aria-label="Select de tipo" (change)="cambiarTipo($event)">
+          <select class="form-select mb-2" aria-label="Select de tipo" (change)="cambiarTipo($event)">
             <option selected>Seleccione un tipo de documento</option>
             <option *ngFor="let tipo of tipoDocumentos">{{tipo}}</option>
           </select>
-          <input type="text" formControlName="documento" class="form-control px-5"
+          <input type="text" formControlName="documento" class="form-control mb-2"
           placeholder="Documento del proveedor" aria-label="Documento del proveedor">
           <div class="input-group mb-2 ">
             <input type="text" formControlName="nombre" class="form-control" placeholder="Nombre del proveedor"

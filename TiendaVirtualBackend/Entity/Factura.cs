@@ -26,7 +26,6 @@ namespace Entity
         Tipo = this.Tipo == "venta" ? "resta" : "aumento",
         Cantidad = detalle.Cantidad,
         Descuento = detalle.Descuento,
-        Id = detalle.Id,
         IdFactura = detalle.IdFactura,
         IdProducto = detalle.IdProducto,
         PrecioBase = detalle.PrecioBase,

@@ -44,7 +44,7 @@ namespace Controllers
       var factura = new Factura
       {
         Id = facturaInputModel.IdFactura,
-        Tipo = facturaInputModel.Tipo,
+        Tipo = facturaInputModel.Tipo,        
         IdInteresado = facturaInputModel.IdInteresado
       };
       facturaInputModel.Detalles.ForEach((d) =>

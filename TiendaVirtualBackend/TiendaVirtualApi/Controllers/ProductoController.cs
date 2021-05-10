@@ -51,7 +51,7 @@ namespace Controllers
         PrecioBase = productoInputModel.PrecioBase,
         CantidadDisponible = productoInputModel.CantidadDisponible,
         Descuento = productoInputModel.Descuento,
-        IdProveedor = productoInputModel.IdProveedor,
+        idProveedor = productoInputModel.IdProveedor,
         Iva = productoInputModel.Iva,
       };
       return producto;
