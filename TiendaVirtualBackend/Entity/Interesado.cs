@@ -7,12 +7,11 @@ namespace Entity
   public class Interesado
   {
     [Key]
-    public string Id { get; set; }
-    public string IdInteresado { get; set; }
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    public int IdInteresado { get; set; }
     [NotMapped]
     public Usuario Usuario { get; set; }
-    public string Rol { get; set; }
-    public string IdUsuario { get; set; }
+    public int IdUsuario { get; set; }
     public List<Factura> Facturas { get; set; }
   }
 }

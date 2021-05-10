@@ -35,10 +35,10 @@ export class ProductoRegistroComponent implements OnInit {
       id: [this.producto.id, Validators.required],
       nombre: [this.producto.nombre, Validators.required],
       nitProveedor: [this.producto.nitProveedor, Validators.required],
-      cantidad: [this.producto.cantidadDisponible, Validators.required],
+      cantidadDisponible: [this.producto.cantidadDisponible, Validators.required],
       descuento: [this.producto.descuento, Validators.required],
       iva: [this.producto.iva, Validators.required],
-      precio: [this.producto.precioBase, Validators.required],
+      precioBase: [this.producto.precioBase, Validators.required],
       descripcion: [this.producto.descripcion],
     })
   }

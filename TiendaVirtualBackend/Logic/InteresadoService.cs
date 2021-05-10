@@ -10,29 +10,41 @@ namespace Logic
   public class InteresadoService
   {
     private TiendaVirtualContext context;
-    private readonly FacturaService facturaService;
+    private FacturaService facturaService;
+    private UsuarioService usuarioService;
     public InteresadoService(TiendaVirtualContext tiendaVirtualContext)
     {
       context = tiendaVirtualContext;
       facturaService = new FacturaService(tiendaVirtualContext);
+      usuarioService = new UsuarioService(tiendaVirtualContext);
     }
     public GuardarInteresadoResponse Guardar(Interesado interesado)
     {
       try
       {
-        Interesado interesadoBuscado = context.Interesados.Where((u) => u.IdInteresado == interesado.IdInteresado).FirstOrDefault();
-        if (interesadoBuscado == null)
+        var usuario = usuarioService.Consultar(interesado.IdUsuario);
+        if (usuario != null)
         {
-          interesado.Facturas = facturaService.ConsultarPorInteresado(interesado.IdInteresado);
-          context.Interesados.Add(interesado);
-          context.SaveChanges();
-          return new GuardarInteresadoResponse(interesado, "Interesado guardado con éxito", false);
+          interesado.Usuario = usuario;
+          interesado.IdUsuario = usuario.IdUsuario;
         }
-        return new GuardarInteresadoResponse("Interesado duplicado, por favor, rectifique la información", true);
+        else
+        {
+          var response = usuarioService.Guardar(interesado.Usuario);
+          if (response.Error)
+          {
+            return new GuardarInteresadoResponse(usuarioService.Guardar(interesado.Usuario).Mensaje, true);
+          }
+          usuarioService.Guardar(interesado.Usuario);
+          interesado.IdUsuario = response.Usuario.IdUsuario;
+        }
+        context.Interesados.Add(interesado);
+        context.SaveChanges();
+        return new GuardarInteresadoResponse(interesado, "Interesado guardado con éxito", false);
       }
-      catch (System.Exception)
+      catch (System.Exception e)
       {
-        return new GuardarInteresadoResponse("Ha ocurrido un error en el servidor. Por favor, vuelva a internar más tarde", true);
+        return new GuardarInteresadoResponse($"Ha ocurrido un error en el servidor. {e.Message} Por favor, vuelva a internar más tarde", true);
       }
 
     }
@@ -42,20 +54,19 @@ namespace Logic
       interesados.ForEach((u) => u.Facturas = facturaService.ConsultarPorInteresado(u.IdInteresado));
       return interesados;
     }
-    public Interesado Consultar(string id)
+    public Interesado Consultar(int id)
     {
       Interesado interesado = context.Interesados.Where((i) => i.IdInteresado == id).FirstOrDefault();
       interesado.Facturas = facturaService.ConsultarPorInteresado(interesado.IdInteresado);
       return interesado;
     }
-    public EditarInteresadoResponse Editar(string id, Interesado interesadoActualizado)
+    public EditarInteresadoResponse Editar(int id, Interesado interesadoActualizado)
     {
       try
       {
         var interesadoAActualizar = context.Interesados.Where((i) => i.IdInteresado == id).FirstOrDefault();
         if (interesadoAActualizar != null)
         {
-          interesadoAActualizar.IdInteresado = interesadoActualizado.IdInteresado;
           interesadoAActualizar.Facturas = interesadoActualizado.Facturas;
           interesadoAActualizar.Usuario = interesadoActualizado.Usuario;
           interesadoAActualizar.IdUsuario = interesadoAActualizar.IdUsuario;
@@ -71,41 +82,6 @@ namespace Logic
       catch (Exception e)
       {
         return new EditarInteresadoResponse($"Ocurrió un error al editar el interesado {e.Message}", true);
-      }
-    }
-    public EliminarInteresadoResponse Eliminar(string id)
-    {
-      try
-      {
-        var interesadoAEliminar = context.Interesados.Where((i) => i.IdInteresado == id).FirstOrDefault();
-        if (interesadoAEliminar != null)
-        {
-          context.Interesados.Remove(interesadoAEliminar);
-          context.SaveChanges();
-          return new EliminarInteresadoResponse(interesadoAEliminar, "Interesado eliminado correctamente");
-        }
-        return new EliminarInteresadoResponse("No se encontró el interesado");
-      }
-      catch (Exception e)
-      {
-        return new EliminarInteresadoResponse("Ocurrió un error al eliminar el interesado " + e.Message);
-      }
-    }
-    public class EliminarInteresadoResponse
-    {
-      public Interesado Interesado { get; set; }
-      public string Mensaje { get; set; }
-      public bool Error { get; set; }
-      public EliminarInteresadoResponse(Interesado interesado, string mensaje)
-      {
-        Mensaje = mensaje;
-        Interesado = interesado;
-        Error = false;
-      }
-      public EliminarInteresadoResponse(string mensaje)
-      {
-        Mensaje = mensaje;
-        Error = true;
       }
     }
     public class EditarInteresadoResponse

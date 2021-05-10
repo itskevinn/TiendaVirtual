@@ -9,8 +9,8 @@ namespace Logic
 {
   public class ProveedorService
   {
-    private TiendaVirtualContext context;
-    private readonly ProductoService productoService;
+    private readonly TiendaVirtualContext context;
+    private  ProductoService productoService;
     public ProveedorService(TiendaVirtualContext tiendaVirtualContext)
     {
       context = tiendaVirtualContext;
@@ -20,7 +20,7 @@ namespace Logic
     {
       try
       {
-        Proveedor proveedorBuscado = context.Proveedores.Find(proveedor.Nit);
+        Proveedor proveedorBuscado = context.Proveedores.Where((p) => p.Documento == proveedor.Documento).FirstOrDefault();
         if (proveedorBuscado == null)
         {
           context.Proveedores.Add(proveedor);
@@ -43,7 +43,7 @@ namespace Logic
 
     private List<Proveedor> AsignarProductos(List<Proveedor> proveedores)
     {
-      proveedores.ForEach((p) => p.Productos = productoService.ProductosPorProveedor(p.Nit));
+      proveedores.ForEach((p) => p.Productos = productoService.ProductosPorProveedor(p.Documento));
       return proveedores;
     }
 

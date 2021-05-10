@@ -11,7 +11,7 @@ namespace Entity
     }
     [Key]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-    public string IdDetalle { get; set; }
+    public int IdDetalle { get; set; }
     [Required(ErrorMessage = "Se requiere la cantidad del producto")]
     public int Cantidad { get; set; }
     public string Tipo { get; set; }
@@ -49,7 +49,7 @@ namespace Entity
         Id = producto.Id,
         IdObjeto = producto.IdObjeto,
         Iva = producto.Iva,
-        NitProveedor = producto.NitProveedor,
+        DocumentoProveedor = producto.DocumentoProveedor,
         Nombre = producto.Nombre,
         PrecioBase = producto.PrecioBase
       };

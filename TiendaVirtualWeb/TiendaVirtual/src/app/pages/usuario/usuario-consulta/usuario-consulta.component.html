@@ -8,19 +8,13 @@
           <th socpe="col">#</th>
           <th scope="col">Usuario</th>
           <th scope="col">Rol</th>
-          <th scope="col">Acción</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let usuario of usuarios index as i">
           <td>{{ i + 1 }}</td>
-          <td>{{ usuario._Usuario }}</td>
-          <td>{{ usuario.rol }}</td>
-          <td>
-            <a routerLink="/EditarUsuario/{{
-            usuario.id
-            }}">Editar</a>
-          </td>
+          <td>{{ usuario.nombreUsuario }}</td>
+          <td>{{ usuario.rol.nombre }}</td>
         </tr>
       </tbody>
     </table>

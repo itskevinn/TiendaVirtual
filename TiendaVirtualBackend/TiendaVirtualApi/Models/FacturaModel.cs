@@ -9,7 +9,7 @@ namespace Models
     {
       public int IdFactura { get; set; }
       public List<Detalle> Detalles { get; set; }
-      public string IdInteresado { get; set; }
+      public int IdInteresado { get; set; }
       public string Tipo { get; set; }
     }
 

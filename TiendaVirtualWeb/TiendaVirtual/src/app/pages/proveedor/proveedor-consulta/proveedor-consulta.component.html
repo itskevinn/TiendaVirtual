@@ -8,7 +8,6 @@
           <th socpe="col">#</th>
           <th scope="col">NIT</th>
           <th scope="col">Nombre</th>
-          <th scope="col">Acción</th>
         </tr>
       </thead>
       <tbody>
@@ -16,11 +15,7 @@
           <td>{{ i + 1 }}</td>
           <td>{{ proveedor.nit }}</td>
           <td>{{ proveedor.nombre }}</td>
-          <td>
-            <a routerLink="/EditarProveedor/{{
-              proveedor.nit
-              }}">Editar</a>
-          </td>
+
         </tr>
       </tbody>
     </table>

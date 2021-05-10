@@ -22,7 +22,7 @@ export class AutentificacionLiderAvaluosGuard implements CanActivate {
       this.router.navigate(['/Login'])
       return true;
     }
-    if (this.usuario.rol == "Lider de Avalúos" || this.usuario.rol == "Administrador") {
+    if (this.usuario.rol.nombre == "Lider de Avalúos" || this.usuario.rol.nombre == "Administrador") {
       return true;
     }
     return false;

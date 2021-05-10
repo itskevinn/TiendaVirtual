@@ -3,69 +3,93 @@ using System.Collections.Generic;
 using System.Linq;
 using Data;
 using Entity;
+using Infraestructura;
 using Microsoft.EntityFrameworkCore;
-
 namespace Logic
 {
   public class UsuarioService
   {
-    private TiendaVirtualContext context;
-    private readonly FacturaService facturaService;
+    private readonly TiendaVirtualContext context;
+    private RolService rolService;
+    private PersonaService personaService;
+    private FacturaService facturaService;
     public UsuarioService(TiendaVirtualContext tiendaVirtualContext)
     {
       context = tiendaVirtualContext;
+      rolService = new RolService(tiendaVirtualContext);
       facturaService = new FacturaService(tiendaVirtualContext);
+      personaService = new PersonaService(tiendaVirtualContext);
     }
     public GuardarUsuarioResponse Guardar(Usuario usuario)
     {
       try
       {
-        Usuario usuarioBuscado = context.Usuarios.Where((u) => u._Usuario == usuario._Usuario).FirstOrDefault();
+        Usuario usuarioBuscado = context.Usuarios.Where((u) => u.NombreUsuario == usuario.NombreUsuario).FirstOrDefault();
         if (usuarioBuscado == null)
         {
-          context.Usuarios.Add(usuario);
-          context.SaveChanges();
-          return new GuardarUsuarioResponse(usuario, "Usuario guardado con éxito", false);
+          var idPersona = usuario.IdPersona;
+          var idRol = usuario.IdRol;
+          if (rolService.ValidarRol(idRol) != null)
+          {
+            if (personaService.Consultar(usuario.Persona.IdPersona) == null)
+            {
+              var personaRegistrada = personaService.Guardar(usuario.Persona).Persona;
+              usuario.IdPersona = personaRegistrada.IdPersona;
+            }
+            else
+            {
+              usuario.Persona = personaService.Consultar(idPersona);
+              usuario.IdPersona = usuario.Persona.IdPersona;
+              if (usuario.Persona == null)
+              {
+                return new GuardarUsuarioResponse("Persona no registrada", true);
+              }
+            }
+            usuario.Contrasena = Hash.GetSha256(usuario.Contrasena);
+            context.Usuarios.Add(usuario);
+            context.SaveChanges();
+            return new GuardarUsuarioResponse(usuario, "Usuario guardado con éxito", false);
+          }
+          return new GuardarUsuarioResponse("Rol inexistente, por favor, rectifique la información", true);
         }
         return new GuardarUsuarioResponse("Usuario duplicado, por favor, rectifique la información", true);
       }
-      catch (System.Exception)
+      catch (System.Exception e)
       {
-        return new GuardarUsuarioResponse("Ha ocurrido un error en el servidor. Por favor, vuelva a internar más tarde", true);
+        return new GuardarUsuarioResponse($"Ha ocurrido un error en el servidor. {e.Message} Por favor, vuelva a internar más tarde", true);
       }
 
     }
     public List<Usuario> Consultar()
     {
       List<Usuario> usuarios = context.Usuarios.ToList();
+      usuarios.ForEach((u) => u.Rol = rolService.Consultar(u.IdRol));
+      usuarios.ForEach((u) => u.Persona = personaService.Consultar(u.IdPersona));
+      usuarios.ForEach((u) => u.IdRol = u.Rol.IdRol);
       return usuarios;
     }
-    public Usuario Consultar(string id)
+    public Usuario Consultar(int id)
     {
       Usuario usuario = context.Usuarios.Find(id);
+      if (usuario != null)
+      {
+        usuario.Rol = rolService.Consultar(usuario.IdRol);
+        usuario.Persona = personaService.Consultar(usuario.IdPersona);
+        usuario.IdRol = usuario.Rol.IdRol;
+      }
       return usuario;
     }
-    public Usuario IniciarSesion(string usuario, string contrasena)
-    {
-      try
-      {
-        return context.Usuarios.Where((u) => u._Usuario.ToLower() == usuario.ToLower() && u.Contrasena == contrasena).FirstOrDefault();
-      }
-      catch (Exception)
-      {
-        return null;
-      }
-    }
-    public EditarUsuarioResponse Editar(string id, Usuario usuarioActualizado)
+    public EditarUsuarioResponse Editar(int id, Usuario usuarioActualizado)
     {
       try
       {
         var usuarioAActualizar = context.Usuarios.Find(id);
         if (usuarioAActualizar != null)
         {
-          usuarioAActualizar._Usuario = usuarioActualizado._Usuario;
+          usuarioAActualizar.NombreUsuario = usuarioActualizado.NombreUsuario;
           usuarioAActualizar.Contrasena = usuarioActualizado.Contrasena;
           usuarioAActualizar.Rol = usuarioActualizado.Rol;
+          usuarioAActualizar.IdRol = usuarioAActualizar.IdRol;
           context.Usuarios.Update(usuarioAActualizar);
           context.SaveChanges();
           return new EditarUsuarioResponse(usuarioAActualizar, "Usuario editado correctamente", false);
@@ -80,39 +104,18 @@ namespace Logic
         return new EditarUsuarioResponse($"Ocurrió un error al editar el usuario {e.Message}", true);
       }
     }
-    public EliminarUsuarioResponse Eliminar(string id)
+    public Usuario IniciarSesion(string usuario, string contrasena)
     {
       try
       {
-        var usuarioAEliminar = context.Usuarios.Find(id);
-        if (usuarioAEliminar != null)
-        {
-          context.Usuarios.Remove(usuarioAEliminar);
-          context.SaveChanges();
-          return new EliminarUsuarioResponse(usuarioAEliminar, "Usuario eliminado correctamente");
-        }
-        return new EliminarUsuarioResponse("No se encontró el usuario");
+        Usuario usuarioBuscado = context.Usuarios.Where((u) => u.NombreUsuario.ToLower() == usuario.ToLower() && u.Contrasena == Hash.GetSha256(contrasena)).FirstOrDefault();
+        usuarioBuscado.Rol = context.Roles.Where((r) => r.IdRol == usuarioBuscado.IdRol).FirstOrDefault();
+        usuarioBuscado.Persona = context.Personas.Where((p) => p.IdPersona == usuarioBuscado.IdPersona).FirstOrDefault();
+        return usuarioBuscado;
       }
-      catch (Exception e)
+      catch (Exception)
       {
-        return new EliminarUsuarioResponse("Ocurrió un error al eliminar el usuario " + e.Message);
-      }
-    }
-    public class EliminarUsuarioResponse
-    {
-      public Usuario Usuario { get; set; }
-      public string Mensaje { get; set; }
-      public bool Error { get; set; }
-      public EliminarUsuarioResponse(Usuario usuario, string mensaje)
-      {
-        Mensaje = mensaje;
-        Usuario = usuario;
-        Error = false;
-      }
-      public EliminarUsuarioResponse(string mensaje)
-      {
-        Mensaje = mensaje;
-        Error = true;
+        return null;
       }
     }
     public class EditarUsuarioResponse

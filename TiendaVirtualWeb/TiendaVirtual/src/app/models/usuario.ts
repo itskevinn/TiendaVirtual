@@ -1,6 +1,12 @@
+import { Persona } from "./persona";
+import { Rol } from "./rol";
+
 export class Usuario {
-  _usuario: string
-  contrasena: string
-  rol: string
-  id: string
+  idRol: number;
+  contrasena: string;
+  nombreUsuario: string;
+  idUsuario: number;
+  rol: Rol;
+  persona: Persona
 }
+

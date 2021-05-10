@@ -1,34 +1,34 @@
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using Entity;
 using Data;
+using Entity;
 using Logic;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using static Models.InteresadoModel;
 
-namespace Controllers
+namespace TiendaVirtualApi.Controllers
 {
-  [Route("api/[controller]")]
   [ApiController]
-  public class InteresadoController : Controller
+  [Route("api/[controller]")]
+  public class InteresadoController : ControllerBase
   {
-    private readonly InteresadoService _interesadoService;
-    public InteresadoController(TiendaVirtualContext context)
+    private readonly TiendaVirtualContext context;
+    private InteresadoService interesadoService;
+    public InteresadoController(TiendaVirtualContext _context)
     {
-      _interesadoService = new InteresadoService(context);
+      interesadoService = new InteresadoService(_context);
+      context = _context;
     }
-    // POST: api/Interesado
+    //POST: api/LiderAvaluo
     [HttpPost]
     public ActionResult<InteresadoViewModel> Post(InteresadoInputModel interesadoInputModel)
     {
-      Interesado interesado = MapToInteresado(interesadoInputModel);
-      var response = _interesadoService.Guardar(interesado);
+      Interesado interesado = MapearAInteresado(interesadoInputModel);
+      var response = interesadoService.Guardar(interesado);
       if (response.Error)
       {
-        ModelState.AddModelError("Error al registrar el interesado", response.Mensaje);
+        ModelState.AddModelError("Error al registrar al líder de avalúos", response.Mensaje);
         var detallesProblema = new ValidationProblemDetails(ModelState)
         {
           Status = StatusCodes.Status400BadRequest
@@ -38,61 +38,29 @@ namespace Controllers
       return Ok(response.Interesado);
     }
 
-    private Interesado MapToInteresado(InteresadoInputModel interesadoInputModel)
+    private Interesado MapearAInteresado(InteresadoInputModel interesadoInputModel)
     {
       var interesado = new Interesado
       {
-        IdUsuario = interesadoInputModel.IdUsuario,
-        IdInteresado = interesadoInputModel.IdInteresado,
-        Facturas = interesadoInputModel.Facturas,
         Usuario = interesadoInputModel.Usuario
       };
       return interesado;
     }
-
-    // GET: api/AjusteInventario
-    [HttpGet]
-    public IEnumerable<InteresadoViewModel> Gets()
-    {
-      var response = _interesadoService.Consultar().ConvertAll(p => new InteresadoViewModel(p));
-
-      return response;
-    }
+    //GET: api/Interesado/{id}
     [HttpGet("{id}")]
-    public ActionResult<InteresadoViewModel> Get(string id)
+    public ActionResult<InteresadoViewModel> Get(int id)
     {
-      var interesado = _interesadoService.Consultar(id);
+      var interesado = interesadoService.Consultar(id);
       if (interesado == null) return NotFound();
       var interesadoViewModel = new InteresadoViewModel(interesado);
       return interesadoViewModel;
     }
-    [HttpPut("{id}")]
-    public ActionResult<string> Put(Interesado interesado, string id)
+    //GET: api/Interesado
+    [HttpGet]
+    public IEnumerable<InteresadoViewModel> Gets()
     {
-      var interesadoAEditar = _interesadoService.Consultar(id);
-      if (interesadoAEditar == null)
-      {
-        return BadRequest("No se encontró el interesado");
-      }
-      else
-      {
-        var mensaje = _interesadoService.Editar(id, interesado).Mensaje;
-        return Ok(mensaje);
-      }
-    }
-    [HttpDelete("{id}")]
-    public ActionResult<string> Delete(string id)
-    {
-      var interesadoAEliminar = _interesadoService.Consultar(id);
-      if (interesadoAEliminar == null)
-      {
-        return BadRequest("Interesado no econtrado");
-      }
-      else
-      {
-        var mensaje = _interesadoService.Eliminar(id).Mensaje;
-        return Ok(mensaje);
-      }
+      var response = interesadoService.Consultar().Select(p => new InteresadoViewModel(p));
+      return response.ToList();
     }
   }
 }

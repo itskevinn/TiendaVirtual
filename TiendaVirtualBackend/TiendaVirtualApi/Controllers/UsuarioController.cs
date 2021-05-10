@@ -42,10 +42,9 @@ namespace Controllers
     {
       var usuario = new Usuario
       {
-        IdUsuario = usuarioInputModel.IdUsuario,
-        _Usuario = usuarioInputModel._Usuario,
+        NombreUsuario = usuarioInputModel.NombreUsuario,
         Contrasena = usuarioInputModel.Contrasena,
-        Rol = usuarioInputModel.Rol,
+        IdRol = usuarioInputModel.IdRol,
       };
       return usuario;
     }
@@ -59,7 +58,7 @@ namespace Controllers
       return response;
     }
     [HttpGet("{id}")]
-    public ActionResult<UsuarioViewModel> Get(string id)
+    public ActionResult<UsuarioViewModel> Get(int id)
     {
       var usuario = _usuarioService.Consultar(id);
       if (usuario == null) return NotFound();
@@ -67,7 +66,7 @@ namespace Controllers
       return usuarioViewModel;
     }
     [HttpPut("{id}")]
-    public ActionResult<string> Put(Usuario usuario, string id)
+    public ActionResult<string> Put(Usuario usuario, int id)
     {
       var usuarioAEditar = _usuarioService.Consultar(id);
       if (usuarioAEditar == null)
@@ -77,20 +76,6 @@ namespace Controllers
       else
       {
         var mensaje = _usuarioService.Editar(id, usuario).Mensaje;
-        return Ok(mensaje);
-      }
-    }
-    [HttpDelete("{id}")]
-    public ActionResult<string> Delete(string id)
-    {
-      var usuarioAEliminar = _usuarioService.Consultar(id);
-      if (usuarioAEliminar == null)
-      {
-        return BadRequest("Usuario no econtrado");
-      }
-      else
-      {
-        var mensaje = _usuarioService.Eliminar(id).Mensaje;
         return Ok(mensaje);
       }
     }

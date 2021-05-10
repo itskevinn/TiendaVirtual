@@ -4,18 +4,22 @@ namespace Models
 {
   public class UsuarioModel
   {
-    public class UsuarioInputModel : Usuario
+    public class UsuarioInputModel
     {
-
+      public int IdRol { get; set; }
+      public string Contrasena { get; set; }
+      public string NombreUsuario { get; set; }
     }
     public class UsuarioViewModel : UsuarioInputModel
     {
       public UsuarioViewModel(Usuario usuario)
       {
         IdUsuario = usuario.IdUsuario;
-        _Usuario = usuario._Usuario;
+        NombreUsuario = usuario.NombreUsuario;
         Rol = usuario.Rol;
       }
+      public int IdUsuario { get; set; }
+      public Rol Rol { get; set; }
     }
   }
 }

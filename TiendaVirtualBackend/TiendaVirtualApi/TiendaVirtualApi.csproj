@@ -12,6 +12,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Entity\Entity.csproj" />
     <ProjectReference Include="..\Logic\Logic.csproj" />
+    <ProjectReference Include="..\Infraestructura\Infraestructura.csproj" />
   </ItemGroup>
 
 </Project>

@@ -19,7 +19,7 @@ namespace Entity
     public decimal Iva { get; set; }
     public decimal Descuento { get; set; }
     [Required(ErrorMessage = "Se requiere el nit del proveedor")]
-    public string NitProveedor { get; set; }
+    public string DocumentoProveedor { get; set; }
     [Required(ErrorMessage = "Se requiere la cantidad disponible del producto")]
     public int CantidadDisponible { get; set; }
 

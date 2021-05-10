@@ -8,8 +8,11 @@ namespace Data
   public class TiendaVirtualContext : DbContext
   {
     public TiendaVirtualContext(DbContextOptions options) : base(options) { }
-
+    public DbSet<Persona> Personas { get; set; }
+    public DbSet<Rol> Roles { get; set; }
     public DbSet<Usuario> Usuarios { get; set; }
+    public DbSet<LiderAvaluo> LiderAvaluos { get; set; }
+    public DbSet<ProfesionalVenta> ProfesionalVentas { get; set; }
     public DbSet<Detalle> Detalles { get; set; }
     public DbSet<Factura> Facturas { get; set; }
     public DbSet<Interesado> Interesados { get; set; }

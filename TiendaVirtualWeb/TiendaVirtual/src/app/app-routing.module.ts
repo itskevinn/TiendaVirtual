@@ -1,3 +1,4 @@
+import { RolComponent } from './pages/rol/rol.component';
 import { UsuarioDetalleComponent } from './pages/usuario/usuario-detalle/usuario-detalle.component';
 import { ProveedorDetalleComponent } from './pages/proveedor/proveedor-detalle/proveedor-detalle.component';
 import { ProductoDetalleComponent } from './pages/producto/producto-detalle/producto-detalle.component';
@@ -42,7 +43,8 @@ const routes: Routes = [
   { path: 'Login', component: LoginComponent },
   { path: 'Producto/:id', component: ProductoDetalleComponent },
   { path: 'Proveedor/:id', component: ProveedorDetalleComponent },
-  { path: 'Usuario/:id', component: UsuarioDetalleComponent }
+  { path: 'Usuario/:id', component: UsuarioDetalleComponent },
+  { path: 'Rol', component: RolComponent }
 ];
 
 @NgModule({

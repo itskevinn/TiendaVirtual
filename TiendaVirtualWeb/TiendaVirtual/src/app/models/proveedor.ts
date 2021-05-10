@@ -1,7 +1,9 @@
 import { Producto } from "./producto";
 
 export class Proveedor {
-  nit: string;
+  tipoDocumento: string;
+  documento: string;
   nombre: string;
-  productos: Producto[]
+  productos: Producto[];
+  idProveedor: number;
 }

@@ -15,10 +15,12 @@ namespace Controllers
   [ApiController]
   public class ProveedorController : Controller
   {
-    private readonly ProveedorService _proveedorService;
-    public ProveedorController(TiendaVirtualContext context)
+    private readonly TiendaVirtualContext context;
+    private ProveedorService _proveedorService;
+    public ProveedorController(TiendaVirtualContext _context)
     {
-      _proveedorService = new ProveedorService(context);
+      _proveedorService = new ProveedorService(_context);
+      context = _context;
     }
     // POST: api/proveedor
     [HttpPost]
@@ -42,7 +44,8 @@ namespace Controllers
     {
       var proveedor = new Proveedor
       {
-        Nit = proveedorInputModel.Nit,
+        TipoDocumento = proveedorInputModel.TipoDocumento,
+        Documento = proveedorInputModel.Documento,
         Nombre = proveedorInputModel.Nombre,
         Productos = proveedorInputModel.Productos
       };

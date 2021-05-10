@@ -5,7 +5,7 @@
     <p class="card-text">{{ producto.descripcion }}</p>
   </div>
   <div class="card-footer">
-    <div *ngIf="usuario.rol=='Lider de Avalúos'; else noLider">
+    <div *ngIf="usuario.rol.nombre =='Lider de Avalúos'; else noLider">
       <div class="btn-group">
         <button type="button" routerLink="/EditarProducto/{{producto.id}}"
           class="btn btn-sm col-sm-12 btn-outline-info mx-1 card-button">Editar</button>
@@ -19,7 +19,7 @@
           class="btn btn-sm col-sm-12 btn-outline-success mx-1 card-button">Añadir
           al Carrito</button>
       </div>
-      <div *ngIf="validarRutaProducto() && usuario.rol=='Profesional de Ventas'">
+      <div *ngIf="validarRutaProducto() && usuario.rol.nombre =='Profesional de Ventas'">
         <button type="button" routerLink="/Producto/{{producto.id}}"
           class="btn btn-sm col-sm-12 btn-outline-secondary card-button">Ver detalles</button>
       </div>

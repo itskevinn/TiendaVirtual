@@ -26,7 +26,7 @@ namespace Models
         Descripcion = producto.Descripcion;
         PrecioBase = producto.PrecioBase;
         CantidadDisponible = producto.CantidadDisponible;
-        NitProveedor = producto.NitProveedor;
+        NitProveedor = producto.DocumentoProveedor;
         Iva = producto.Iva;
         Descuento = producto.Descuento;
       }

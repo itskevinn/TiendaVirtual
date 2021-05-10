@@ -14,11 +14,13 @@ namespace Controllers
   [ApiController]
   public class DetalleController : ControllerBase
   {
-    private readonly DetalleService _detalleService;
+    private readonly TiendaVirtualContext context;
+    private DetalleService _detalleService;
 
-    public DetalleController(TiendaVirtualContext context)
+    public DetalleController(TiendaVirtualContext _context)
     {
       _detalleService = new DetalleService(context);
+      context = _context;
     }
 
     // POST: api/detalle

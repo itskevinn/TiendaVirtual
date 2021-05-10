@@ -1,22 +1,30 @@
 <div class="container">
- <app-back-button></app-back-button>
+  <app-back-button></app-back-button>
   <h1>Registrar usuario</h1>
   <br>
   <div class="row">
     <div class="col align-self-center">
       <div class="col-md-6 offset-md-3">
-        <form [formGroup]="formGroup">
+        <form [formGroup]="formGroupPersona">
           <p-toast position="top-center" preventOpenDuplicates=true autoZIndex=true key="tl"></p-toast>
           <div class="input-group mb-2 ">
-            <input type="text" formControlName="_usuario" class="form-control px-5" placeholder="Usuario"
-              aria-label="Usuario">
+            <input type="text" formControlName="nombre" class="form-control px-5" placeholder="Nombre"
+              aria-label="Nombre">
+            <input type="text" formControlName="apellido" class="form-control" placeholder="Apellido"
+              aria-label="Apellido">
+          </div>
+        </form>
+        <form [formGroup]="formGroupUsuario">
+          <div class="input-group mb-2 ">
+            <input type="text" formControlName="nombreUsuario" class="form-control px-5" placeholder="Nombre Usuario"
+              aria-label="Nombre Usuario">
             <input type="password" formControlName="contrasena" class="form-control" placeholder="Contraseña"
               aria-label="Contraseña">
           </div>
           <div class="input-group mb-2">
             <select class="form-select" aria-label="Select de rol" (change)="cambiarRol($event)">
               <option selected>Seleccione un rol</option>
-              <option *ngFor="let rol of roles">{{rol}}</option>
+              <option *ngFor="let rol of roles">{{rol.idRol}} - {{rol.nombre}}</option>
             </select>
           </div>
         </form>

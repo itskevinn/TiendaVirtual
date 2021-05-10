@@ -16,13 +16,17 @@ namespace Models
     {
       public LoginViewModel(Usuario usuario)
       {
-        Usuario = usuario._Usuario;
+        Usuario = usuario.NombreUsuario;
         Contrasena = usuario.Contrasena;
         Rol = usuario.Rol;
         IdUsuario = usuario.IdUsuario;
+        Persona = usuario.Persona;
+        IdPersona = usuario.IdPersona;
       }
-      public string IdUsuario { get; set; }
-      public string Rol { get; set; }
+      public int IdPersona { get; set; }
+      public Persona Persona { get; set; }
+      public int IdUsuario { get; set; }
+      public Rol Rol { get; set; }
     }
   }
 }

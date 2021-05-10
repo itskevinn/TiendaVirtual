@@ -1,5 +1,6 @@
 using Data;
 using Entity;
+using Infraestructura;
 using Logic;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -18,10 +19,10 @@ namespace TiendaVirtualApi.Controllers
     public LoginController(TiendaVirtualContext tiendaContext)
     {
       _tiendaContext = tiendaContext;
-      var admin = _tiendaContext.Usuarios.Find("admin");
+      var admin = _tiendaContext.Usuarios.Find(1);
       if (admin == null)
       {
-        _tiendaContext.Usuarios.Add(new Entity.Usuario() { IdUsuario = "admin", Rol = "Administrador", Contrasena = "admin", _Usuario = "admin" });
+        _tiendaContext.Usuarios.Add(new Entity.Usuario() { Rol = new Rol { Nombre = "Administrador", IdRol = 1 }, Contrasena = Hash.GetSha256("admin"), NombreUsuario = "admin" });
         var i = _tiendaContext.SaveChanges();
       }
       usuarioService = new UsuarioService(tiendaContext);

@@ -1,0 +1,26 @@
+<div class="container">
+  <app-back-button></app-back-button>
+  <h1>Registrar rol</h1>
+  <br>
+  <div class="row row-cols-2">
+    <div class="col-6">
+      <ul class="list-group">
+        <li class="list-group-item" *ngFor="let rol of roles">
+          <p>{{rol.idRol}} - {{rol.nombre}}</p>
+        </li>
+      </ul>
+    </div>
+    <div class="col-6 align-self-center">
+      <form [formGroup]="formGroup">
+        <p-toast position="top-center" preventOpenDuplicates=true autoZIndex=true key="tl"></p-toast>
+        <div class="input-group">
+          <input type="text" formControlName="nombre" class="form-control px-5" placeholder="Nombre"
+            aria-label="Nombre">
+        </div>
+      </form>
+      <div class="text-center mt-1">
+        <button type="button" (click)="onSubmit()" class="btn btn-outline-success">Registrar</button>
+      </div>
+    </div>
+  </div>
+</div>

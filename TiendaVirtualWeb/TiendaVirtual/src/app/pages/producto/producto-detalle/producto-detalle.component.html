@@ -20,7 +20,7 @@
       Descripción: {{producto.descripcion}}
     </div>
   </div>
-  <div *ngIf="usuario && (usuario.rol == 'Profesional de Ventas' || usuario.rol == 'Administrador')">
+  <div *ngIf="usuario && (usuario.rol.nombre == 'Profesional de Ventas' || usuario.rol.nombre == 'Administrador')">
     <hr>
     <br>
     <h1>Detalles</h1>
@@ -29,7 +29,7 @@
         <table class="table table-bordered">
           <thead>
             <tr>
-              <th socpe="col">#</th>
+              <th socpe="col">Id Factura</th>
               <th scope="col">Cantidad</th>
               <th scope="col">Precio </th>
               <th scope="col">Total Descontado</th>
@@ -40,7 +40,7 @@
           </thead>
           <tbody>
             <tr *ngFor="let detalle of detalles index as i">
-              <td>{{ i+1}}</td>
+              <td>{{ i+1 }}</td>
               <td>{{ detalle.cantidad }}</td>
               <td>{{ detalle.precioBase }}</td>
               <td>{{ detalle.valorDescontado }}</td>

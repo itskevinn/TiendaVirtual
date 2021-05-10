@@ -9,7 +9,7 @@ namespace Logic
   public class DetalleService
   {
     private TiendaVirtualContext context;
-    private readonly ProductoService productoService;
+    private ProductoService productoService;
     public DetalleService(TiendaVirtualContext tiendaVirtualContext)
     {
       context = tiendaVirtualContext;
@@ -17,43 +17,47 @@ namespace Logic
     }
     public GuardarDetalleResponse Guardar(Detalle detalle)
     {
-      try
+      using (var transaccion = context.Database.BeginTransaction())
       {
-        Detalle detalleBuscado = context.Detalles.Find(detalle.IdDetalle);
-        Producto productoBuscado = productoService.ConsultarPorId(detalle.IdProducto);
-        if (productoBuscado == null)
+        try
         {
-          return new GuardarDetalleResponse("No se encontró el producto", true);
-        }
-        if (detalleBuscado != null)
-        {
-          return new GuardarDetalleResponse("Detalle duplicado", true);
-        }
-        if (detalle.Tipo.ToLower() == "aumento")
-        {
-          if (productoService.AumentarCantidad(productoBuscado, detalle.Cantidad).Error)
+          Detalle detalleBuscado = context.Detalles.Find(detalle.IdDetalle);
+          Producto productoBuscado = productoService.ConsultarPorId(detalle.IdProducto);
+          if (productoBuscado == null)
           {
-            var mensajeModificacion = productoService.AumentarCantidad(productoBuscado, detalle.Cantidad).Mensaje;
-            return new GuardarDetalleResponse(detalle, mensajeModificacion, true);
-          };
-        }
-        if (detalle.Tipo.ToLower() == "resta")
-        {
-          if (productoService.ReducirCantidad(productoBuscado, detalle.Cantidad).Error)
+            return new GuardarDetalleResponse("No se encontró el producto", true);
+          }
+          if (detalleBuscado != null)
           {
-            var mensajeModificacion = productoService.ReducirCantidad(productoBuscado, detalle.Cantidad).Mensaje;
-            return new GuardarDetalleResponse(detalle, mensajeModificacion, true);
-          };
-        }
-        detalle.CalcularTotal();
-        context.Detalles.Add(detalle);
-        context.SaveChanges();
-        return new GuardarDetalleResponse(detalle, "Detalle guardado con éxito", false);
+            return new GuardarDetalleResponse("Detalle duplicado", true);
+          }
+          if (detalle.Tipo.ToLower() == "aumento")
+          {
+            if (productoService.AumentarCantidad(productoBuscado, detalle.Cantidad).Error)
+            {
+              var mensajeModificacion = productoService.AumentarCantidad(productoBuscado, detalle.Cantidad).Mensaje;
+              return new GuardarDetalleResponse(detalle, mensajeModificacion, true);
+            };
+          }
+          if (detalle.Tipo.ToLower() == "resta")
+          {
+            if (productoService.ReducirCantidad(productoBuscado, detalle.Cantidad).Error)
+            {
+              var mensajeModificacion = productoService.ReducirCantidad(productoBuscado, detalle.Cantidad).Mensaje;
+              return new GuardarDetalleResponse(detalle, mensajeModificacion, true);
+            };
+          }
+          detalle.CalcularTotal();
+          context.Detalles.Add(detalle);
+          context.SaveChanges();
+          return new GuardarDetalleResponse(detalle, "Detalle guardado con éxito", false);
 
-      }
-      catch (Exception e)
-      {
-        return new GuardarDetalleResponse($"Ha ocurrido un error en el servidor. {e.Message} Por favor, vuelva a internar más tarde", true);
+        }
+        catch (Exception e)
+        {
+          transaccion.Rollback();
+          return new GuardarDetalleResponse($"Ha ocurrido un error en el servidor. {e.Message} Por favor, vuelva a internar más tarde", true);
+        }
       }
 
     }

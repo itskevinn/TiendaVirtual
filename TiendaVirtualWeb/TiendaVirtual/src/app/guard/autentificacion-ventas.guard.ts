@@ -22,7 +22,7 @@ export class AutentificacionVentasGuard implements CanActivate {
       this.router.navigate(['/Login'])
       return true;
     }
-    if (this.usuario.rol == "Profesional de Ventas"  || this.usuario.rol == "Administrador") {
+    if (this.usuario.rol.nombre == "Profesional de Ventas" || this.usuario.rol.nombre == "Administrador") {
       return true;
     }
     return false;

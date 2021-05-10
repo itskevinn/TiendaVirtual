@@ -87,7 +87,7 @@ export class CarritoDeComprasComponent implements OnInit {
       this.factura.detalles = this.detalles;
       this.factura.tipo = this.tipo;
       if (this.tipo == "compra") {
-        this.factura.idInteresado = JSON.parse(localStorage.getItem("usuarioLoggeado"))._Usuario;
+        this.factura.idInteresado = JSON.parse(localStorage.getItem("usuarioLoggeado")).NombreUsuario;
       }
       if (this.tipo == "venta") {
         this.factura.idInteresado = this.idInteresado;

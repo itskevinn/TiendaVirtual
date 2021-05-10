@@ -2011,12 +2011,23 @@
           "bin/placeholder/Entity.dll": {}
         }
       },
+      "Infraestructura/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v5.0",
+        "compile": {
+          "bin/placeholder/Infraestructura.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Infraestructura.dll": {}
+        }
+      },
       "Logic/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v5.0",
         "dependencies": {
           "Data": "1.0.0",
-          "Entity": "1.0.0"
+          "Entity": "1.0.0",
+          "Infraestructura": "1.0.0"
         },
         "compile": {
           "bin/placeholder/Logic.dll": {}
@@ -6877,6 +6888,11 @@
       "path": "../Entity/Entity.csproj",
       "msbuildProject": "../Entity/Entity.csproj"
     },
+    "Infraestructura/1.0.0": {
+      "type": "project",
+      "path": "../Infraestructura/Infraestructura.csproj",
+      "msbuildProject": "../Infraestructura/Infraestructura.csproj"
+    },
     "Logic/1.0.0": {
       "type": "project",
       "path": "../Logic/Logic.csproj",
@@ -6886,6 +6902,7 @@
   "projectFileDependencyGroups": {
     "net5.0": [
       "Entity >= 1.0.0",
+      "Infraestructura >= 1.0.0",
       "Logic >= 1.0.0",
       "Microsoft.EntityFrameworkCore.Design >= 5.0.5",
       "Swashbuckle.AspNetCore >= 5.6.3"
@@ -6920,6 +6937,9 @@
           "projectReferences": {
             "C:\\Users\\kevin\\OneDrive\\Documentos\\GitHub\\TiendaVirtual\\TiendaVirtualBackend\\Entity\\Entity.csproj": {
               "projectPath": "C:\\Users\\kevin\\OneDrive\\Documentos\\GitHub\\TiendaVirtual\\TiendaVirtualBackend\\Entity\\Entity.csproj"
+            },
+            "C:\\Users\\kevin\\OneDrive\\Documentos\\GitHub\\TiendaVirtual\\TiendaVirtualBackend\\Infraestructura\\Infraestructura.csproj": {
+              "projectPath": "C:\\Users\\kevin\\OneDrive\\Documentos\\GitHub\\TiendaVirtual\\TiendaVirtualBackend\\Infraestructura\\Infraestructura.csproj"
             },
             "C:\\Users\\kevin\\OneDrive\\Documentos\\GitHub\\TiendaVirtual\\TiendaVirtualBackend\\Logic\\Logic.csproj": {
               "projectPath": "C:\\Users\\kevin\\OneDrive\\Documentos\\GitHub\\TiendaVirtual\\TiendaVirtualBackend\\Logic\\Logic.csproj"

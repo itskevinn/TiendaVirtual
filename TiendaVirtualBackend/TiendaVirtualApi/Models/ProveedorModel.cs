@@ -7,7 +7,8 @@ namespace Models
   {
     public class ProveedorInputModel
     {
-      public string Nit { get; set; }
+      public string TipoDocumento { get; set; }
+      public string Documento { get; set; }
       public string Nombre { get; set; }
       public List<Producto> Productos { get; set; }
       public ProveedorInputModel()
@@ -19,10 +20,12 @@ namespace Models
     {
       public ProveedorViewModel(Proveedor proveedor)
       {
-        Nit = proveedor.Nit;
+        Documento = proveedor.Documento;
+        IdProveedor = proveedor.IdProveedor;
         Nombre = proveedor.Nombre;
         Productos = proveedor.Productos;
       }
+      public int IdProveedor { get; set; }
     }
   }
 }

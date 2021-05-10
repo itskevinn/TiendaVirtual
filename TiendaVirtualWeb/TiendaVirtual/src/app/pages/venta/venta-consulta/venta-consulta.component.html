@@ -11,7 +11,6 @@
           <th scope="col">Total IVA</th>
           <th scope="col">SubTotal</th>
           <th scope="col">Total</th>
-          <th scope="col">Acción</th>
         </tr>
       </thead>
       <tbody>
@@ -22,9 +21,6 @@
           <td>{{ factura.ivaTotal }}</td>
           <td>{{ factura.subTotal }}</td>
           <td>{{ factura.total }}</td>
-          <td>
-            <a routerLink="/Factura/{{ factura.id }}">Ver</a>
-          </td>
         </tr>
       </tbody>
     </table>

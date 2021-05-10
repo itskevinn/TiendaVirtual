@@ -20,11 +20,12 @@ export class ProveedorRegistroComponent implements OnInit {
     this.crearFormulario()
   }
   crearFormulario() {
-    this.proveedor.nit = ''
+    this.proveedor.tipoDocumento = ''
+    this.proveedor.documento = ''
     this.proveedor.nombre = ''
     this.proveedor.productos = [];
     this.formGroup = this.formBuilder.group({
-      nit: [this.proveedor.nit, Validators.required],
+      documento: [this.proveedor.documento, Validators.required],
       nombre: [
         this.proveedor.nombre,
         Validators.required,

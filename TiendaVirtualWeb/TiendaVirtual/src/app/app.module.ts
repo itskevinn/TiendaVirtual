@@ -40,6 +40,7 @@ import { ProductoDetalleComponent } from './pages/producto/producto-detalle/prod
 import { ProveedorDetalleComponent } from './pages/proveedor/proveedor-detalle/proveedor-detalle.component';
 import { UsuarioDetalleComponent } from './pages/usuario/usuario-detalle/usuario-detalle.component';
 import { BackButtonComponent } from './components/back-button/back-button.component';
+import { RolComponent } from './pages/rol/rol.component';
 
 @NgModule({
   declarations: [
@@ -66,7 +67,8 @@ import { BackButtonComponent } from './components/back-button/back-button.compon
     ProductoDetalleComponent,
     ProveedorDetalleComponent,
     UsuarioDetalleComponent,
-    BackButtonComponent
+    BackButtonComponent,
+    RolComponent
   ],
   imports: [
     BrowserModule,

@@ -9,12 +9,17 @@ namespace Entity
   {
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     [Key]
-    public string IdUsuario { get; set; }
+    public int IdUsuario { get; set; }
     [Required(ErrorMessage = "Ingrese un usuario")]
-    public string _Usuario { get; set; }
+    public string NombreUsuario { get; set; }
     [Required(ErrorMessage = "Ingrese una contraseña")]
     public string Contrasena { get; set; }
+    public int IdRol { get; set; }
     [Required(ErrorMessage = "Seleccione un rol")]
-    public string Rol { get; set; }
+    [NotMapped]
+    public Rol Rol { get; set; }
+    public int IdPersona { get; set; }
+    [NotMapped]
+    public Persona Persona { get; set; }
   }
 }

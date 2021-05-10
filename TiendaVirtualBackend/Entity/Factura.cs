@@ -10,7 +10,6 @@ namespace Entity
     public Factura()
     {
       Detalles = new List<Detalle>();
-      Detalle = new Detalle();
     }
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     [Key]
@@ -20,14 +19,13 @@ namespace Entity
     [NotMapped]
     private List<Detalle> Detalles { get; set; }
     public decimal DescuentoTotal { get; set; }
-    private Detalle Detalle { get; set; }
     public decimal IvaTotal { get; set; }
     public decimal Total { get; set; }
     public decimal SubTotal { get; set; }
-    public string IdInteresado { get; set; }
+    public int IdInteresado { get; set; }
     public void AgregarDetalle(Detalle detalle)
     {
-      Detalle = new Detalle
+      Detalle Detalle = new Detalle
       {
         Tipo = this.Tipo == "venta" ? "resta" : "aumento",
         Cantidad = detalle.Cantidad,

@@ -67,3 +67,5 @@ C:\Users\kevin\OneDrive\Documentos\GitHub\TiendaVirtual\TiendaVirtualBackend\Tie
 C:\Users\kevin\OneDrive\Documentos\GitHub\TiendaVirtual\TiendaVirtualBackend\TiendaVirtualApi\obj\Debug\net5.0\ref\TiendaVirtualApi.dll
 C:\Users\kevin\OneDrive\Documentos\GitHub\TiendaVirtual\TiendaVirtualBackend\TiendaVirtualApi\obj\Debug\net5.0\TiendaVirtualApi.pdb
 C:\Users\kevin\OneDrive\Documentos\GitHub\TiendaVirtual\TiendaVirtualBackend\TiendaVirtualApi\obj\Debug\net5.0\TiendaVirtualApi.genruntimeconfig.cache
+C:\Users\kevin\OneDrive\Documentos\GitHub\TiendaVirtual\TiendaVirtualBackend\TiendaVirtualApi\bin\Debug\net5.0\Infraestructura.dll
+C:\Users\kevin\OneDrive\Documentos\GitHub\TiendaVirtual\TiendaVirtualBackend\TiendaVirtualApi\bin\Debug\net5.0\Infraestructura.pdb

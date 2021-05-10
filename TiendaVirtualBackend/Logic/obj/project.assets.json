@@ -1910,6 +1910,16 @@
         "runtime": {
           "bin/placeholder/Entity.dll": {}
         }
+      },
+      "Infraestructura/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v5.0",
+        "compile": {
+          "bin/placeholder/Infraestructura.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Infraestructura.dll": {}
+        }
       }
     }
   },
@@ -6623,12 +6633,18 @@
       "type": "project",
       "path": "../Entity/Entity.csproj",
       "msbuildProject": "../Entity/Entity.csproj"
+    },
+    "Infraestructura/1.0.0": {
+      "type": "project",
+      "path": "../Infraestructura/Infraestructura.csproj",
+      "msbuildProject": "../Infraestructura/Infraestructura.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net5.0": [
       "Data >= 1.0.0",
-      "Entity >= 1.0.0"
+      "Entity >= 1.0.0",
+      "Infraestructura >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -6663,6 +6679,9 @@
             },
             "C:\\Users\\kevin\\OneDrive\\Documentos\\GitHub\\TiendaVirtual\\TiendaVirtualBackend\\Entity\\Entity.csproj": {
               "projectPath": "C:\\Users\\kevin\\OneDrive\\Documentos\\GitHub\\TiendaVirtual\\TiendaVirtualBackend\\Entity\\Entity.csproj"
+            },
+            "C:\\Users\\kevin\\OneDrive\\Documentos\\GitHub\\TiendaVirtual\\TiendaVirtualBackend\\Infraestructura\\Infraestructura.csproj": {
+              "projectPath": "C:\\Users\\kevin\\OneDrive\\Documentos\\GitHub\\TiendaVirtual\\TiendaVirtualBackend\\Infraestructura\\Infraestructura.csproj"
             }
           }
         }

@@ -14,11 +14,13 @@ namespace Controllers
   [ApiController]
   public class ProductoController : ControllerBase
   {
-    private readonly ProductoService _productoService;
+    private ProductoService _productoService;
+    private readonly TiendaVirtualContext context;
 
-    public ProductoController(TiendaVirtualContext context)
+    public ProductoController(TiendaVirtualContext _context)
     {
-      _productoService = new ProductoService(context);
+      _productoService = new ProductoService(_context);
+      context = _context;
     }
 
     // POST: api/Producto
@@ -49,7 +51,7 @@ namespace Controllers
         PrecioBase = productoInputModel.PrecioBase,
         CantidadDisponible = productoInputModel.CantidadDisponible,
         Descuento = productoInputModel.Descuento,
-        NitProveedor = productoInputModel.NitProveedor,
+        DocumentoProveedor = productoInputModel.NitProveedor,
         Iva = productoInputModel.Iva,
       };
       return producto;
