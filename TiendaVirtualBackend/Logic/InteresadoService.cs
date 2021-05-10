@@ -26,7 +26,7 @@ namespace Logic
         if (usuario != null)
         {
           interesado.Usuario = usuario;
-          interesado.IdUsuario = usuario.IdUsuario;
+          interesado.IdUsuario = usuario.Id;
         }
         else
         {
@@ -36,7 +36,7 @@ namespace Logic
             return new GuardarInteresadoResponse(usuarioService.Guardar(interesado.Usuario).Mensaje, true);
           }
           usuarioService.Guardar(interesado.Usuario);
-          interesado.IdUsuario = response.Usuario.IdUsuario;
+          interesado.IdUsuario = response.Usuario.Id;
         }
         context.Interesados.Add(interesado);
         context.SaveChanges();
@@ -51,20 +51,20 @@ namespace Logic
     public List<Interesado> Consultar()
     {
       List<Interesado> interesados = context.Interesados.ToList();
-      interesados.ForEach((u) => u.Facturas = facturaService.ConsultarPorInteresado(u.IdInteresado));
+      interesados.ForEach((u) => u.Facturas = facturaService.ConsultarPorInteresado(u.Id));
       return interesados;
     }
     public Interesado Consultar(int id)
     {
-      Interesado interesado = context.Interesados.Where((i) => i.IdInteresado == id).FirstOrDefault();
-      interesado.Facturas = facturaService.ConsultarPorInteresado(interesado.IdInteresado);
+      Interesado interesado = context.Interesados.Where((i) => i.Id == id).FirstOrDefault();
+      interesado.Facturas = facturaService.ConsultarPorInteresado(interesado.Id);
       return interesado;
     }
     public EditarInteresadoResponse Editar(int id, Interesado interesadoActualizado)
     {
       try
       {
-        var interesadoAActualizar = context.Interesados.Where((i) => i.IdInteresado == id).FirstOrDefault();
+        var interesadoAActualizar = context.Interesados.Where((i) => i.Id == id).FirstOrDefault();
         if (interesadoAActualizar != null)
         {
           interesadoAActualizar.Facturas = interesadoActualizado.Facturas;

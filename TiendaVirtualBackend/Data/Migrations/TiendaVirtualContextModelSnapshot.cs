@@ -21,7 +21,7 @@ namespace Data.Migrations
 
             modelBuilder.Entity("Entity.Detalle", b =>
                 {
-                    b.Property<int>("IdDetalle")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -63,14 +63,14 @@ namespace Data.Migrations
                         .HasPrecision(18)
                         .HasColumnType("decimal(18,0)");
 
-                    b.HasKey("IdDetalle");
+                    b.HasKey("Id");
 
                     b.ToTable("Detalles");
                 });
 
             modelBuilder.Entity("Entity.Factura", b =>
                 {
-                    b.Property<int>("IdFactura")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -82,7 +82,7 @@ namespace Data.Migrations
                     b.Property<int>("IdInteresado")
                         .HasColumnType("int");
 
-                    b.Property<int?>("InteresadoIdInteresado")
+                    b.Property<int?>("InteresadoId")
                         .HasColumnType("int");
 
                     b.Property<decimal>("IvaTotal")
@@ -100,16 +100,16 @@ namespace Data.Migrations
                         .HasPrecision(18)
                         .HasColumnType("decimal(18,0)");
 
-                    b.HasKey("IdFactura");
+                    b.HasKey("Id");
 
-                    b.HasIndex("InteresadoIdInteresado");
+                    b.HasIndex("InteresadoId");
 
                     b.ToTable("Facturas");
                 });
 
             modelBuilder.Entity("Entity.Interesado", b =>
                 {
-                    b.Property<int>("IdInteresado")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -117,14 +117,14 @@ namespace Data.Migrations
                     b.Property<int>("IdUsuario")
                         .HasColumnType("int");
 
-                    b.HasKey("IdInteresado");
+                    b.HasKey("Id");
 
                     b.ToTable("Interesados");
                 });
 
             modelBuilder.Entity("Entity.LiderAvaluo", b =>
                 {
-                    b.Property<int>("IdLiderAvaluo")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -132,14 +132,14 @@ namespace Data.Migrations
                     b.Property<int>("IdUsuario")
                         .HasColumnType("int");
 
-                    b.HasKey("IdLiderAvaluo");
+                    b.HasKey("Id");
 
                     b.ToTable("LiderAvaluos");
                 });
 
             modelBuilder.Entity("Entity.Persona", b =>
                 {
-                    b.Property<int>("IdPersona")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -150,19 +150,24 @@ namespace Data.Migrations
                     b.Property<string>("Nombre")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("IdPersona");
+                    b.HasKey("Id");
 
                     b.ToTable("Personas");
                 });
 
             modelBuilder.Entity("Entity.Producto", b =>
                 {
-                    b.Property<string>("IdObjeto")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int>("CantidadDisponible")
                         .HasColumnType("int");
+
+                    b.Property<string>("Codigo")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Descripcion")
                         .HasColumnType("nvarchar(max)");
@@ -172,10 +177,6 @@ namespace Data.Migrations
                         .HasColumnType("decimal(18,0)");
 
                     b.Property<string>("DocumentoProveedor")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Id")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -191,14 +192,14 @@ namespace Data.Migrations
                         .HasPrecision(18)
                         .HasColumnType("decimal(18,0)");
 
-                    b.HasKey("IdObjeto");
+                    b.HasKey("Id");
 
                     b.ToTable("Productos");
                 });
 
             modelBuilder.Entity("Entity.ProfesionalVenta", b =>
                 {
-                    b.Property<int>("IdProfesionalVenta")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -206,14 +207,14 @@ namespace Data.Migrations
                     b.Property<int>("IdUsuario")
                         .HasColumnType("int");
 
-                    b.HasKey("IdProfesionalVenta");
+                    b.HasKey("Id");
 
                     b.ToTable("ProfesionalVentas");
                 });
 
             modelBuilder.Entity("Entity.Proveedor", b =>
                 {
-                    b.Property<int>("IdProveedor")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -230,14 +231,14 @@ namespace Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("IdProveedor");
+                    b.HasKey("Id");
 
                     b.ToTable("Proveedores");
                 });
 
             modelBuilder.Entity("Entity.Rol", b =>
                 {
-                    b.Property<int>("IdRol")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -245,14 +246,14 @@ namespace Data.Migrations
                     b.Property<string>("Nombre")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("IdRol");
+                    b.HasKey("Id");
 
                     b.ToTable("Roles");
                 });
 
             modelBuilder.Entity("Entity.Usuario", b =>
                 {
-                    b.Property<int>("IdUsuario")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -271,7 +272,7 @@ namespace Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("IdUsuario");
+                    b.HasKey("Id");
 
                     b.ToTable("Usuarios");
                 });
@@ -280,7 +281,7 @@ namespace Data.Migrations
                 {
                     b.HasOne("Entity.Interesado", null)
                         .WithMany("Facturas")
-                        .HasForeignKey("InteresadoIdInteresado");
+                        .HasForeignKey("InteresadoId");
                 });
 
             modelBuilder.Entity("Entity.Interesado", b =>

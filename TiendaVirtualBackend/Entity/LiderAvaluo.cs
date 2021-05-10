@@ -3,11 +3,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Entity
 {
-  public class LiderAvaluo
+  public class LiderAvaluo : Entity<int>
   {
-    [Key]
-    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-    public int IdLiderAvaluo { get; set; }
     public int IdUsuario { get; set; }
     [NotMapped]
     public Usuario Usuario { get; set; }

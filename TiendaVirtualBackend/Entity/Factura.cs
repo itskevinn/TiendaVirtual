@@ -5,16 +5,12 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Entity
 {
-  public class Factura
+  public class Factura : Entity<int>
   {
     public Factura()
     {
       Detalles = new List<Detalle>();
     }
-    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-    [Key]
-
-    public int IdFactura { get; set; }
     public string Tipo { get; set; }
     [NotMapped]
     private List<Detalle> Detalles { get; set; }
@@ -30,7 +26,7 @@ namespace Entity
         Tipo = this.Tipo == "venta" ? "resta" : "aumento",
         Cantidad = detalle.Cantidad,
         Descuento = detalle.Descuento,
-        IdDetalle = detalle.IdDetalle,
+        Id = detalle.Id,
         IdFactura = detalle.IdFactura,
         IdProducto = detalle.IdProducto,
         PrecioBase = detalle.PrecioBase,

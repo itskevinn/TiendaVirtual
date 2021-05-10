@@ -19,7 +19,7 @@ namespace Logic
     {
       try
       {
-        Rol rolBuscado = context.Roles.Find(rol.IdRol);
+        Rol rolBuscado = context.Roles.Find(rol.Id);
         if (rolBuscado == null)
         {
           context.Roles.Add(rol);

@@ -3,15 +3,12 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Entity
 {
-  public class Detalle
+  public class Detalle : Entity<int>
   {
     public Detalle()
     {
       Producto = new Producto();
     }
-    [Key]
-    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-    public int IdDetalle { get; set; }
     [Required(ErrorMessage = "Se requiere la cantidad del producto")]
     public int Cantidad { get; set; }
     public string Tipo { get; set; }
@@ -46,8 +43,8 @@ namespace Entity
         CantidadDisponible = producto.CantidadDisponible,
         Descripcion = producto.Descripcion,
         Descuento = producto.Descuento,
+        Codigo = producto.Codigo,
         Id = producto.Id,
-        IdObjeto = producto.IdObjeto,
         Iva = producto.Iva,
         DocumentoProveedor = producto.DocumentoProveedor,
         Nombre = producto.Nombre,

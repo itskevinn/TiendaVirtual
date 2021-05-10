@@ -25,7 +25,7 @@ namespace Logic
         if (usuario != null)
         {
           profesional.Usuario = usuario;
-          profesional.IdUsuario = usuario.IdUsuario;
+          profesional.IdUsuario = usuario.Id;
         }
         else
         {
@@ -35,7 +35,7 @@ namespace Logic
             return new GuardarProfesionalVentaResponse(usuarioService.Guardar(profesional.Usuario).Mensaje, true);
           }
           usuarioService.Guardar(profesional.Usuario);
-          profesional.IdUsuario = response.Usuario.IdUsuario;
+          profesional.IdUsuario = response.Usuario.Id;
         }
         context.ProfesionalVentas.Add(profesional);
         context.SaveChanges();
@@ -56,7 +56,7 @@ namespace Logic
     public ProfesionalVenta Consultar(int id)
     {
       ProfesionalVenta profesional = context.ProfesionalVentas.Find(id);
-      profesional.IdUsuario = usuarioService.Consultar(profesional.IdUsuario).IdUsuario;
+      profesional.IdUsuario = usuarioService.Consultar(profesional.IdUsuario).Id;
       return profesional;
     }
     public EditarProfesionalVentaResponse Editar(string id, ProfesionalVenta profesionalActualizado)

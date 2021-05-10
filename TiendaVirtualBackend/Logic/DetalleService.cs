@@ -21,7 +21,7 @@ namespace Logic
       {
         try
         {
-          Detalle detalleBuscado = context.Detalles.Find(detalle.IdDetalle);
+          Detalle detalleBuscado = context.Detalles.Find(detalle.Id);
           Producto productoBuscado = productoService.ConsultarPorId(detalle.IdProducto);
           if (productoBuscado == null)
           {
@@ -71,7 +71,7 @@ namespace Logic
     }
     public List<Detalle> ConsultarPorProducto(string id)
     {
-      if (context.Productos.Where((p) => p.Id == id).Count() == 1)
+      if (context.Productos.Where((p) => p.Codigo == id).Count() == 1)
       {
         return context.Detalles.Where((d) => d.IdProducto == id).ToList();
       }

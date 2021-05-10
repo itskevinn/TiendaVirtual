@@ -25,7 +25,7 @@ namespace Logic
         if (usuario != null)
         {
           lider.Usuario = usuario;
-          lider.IdUsuario = usuario.IdUsuario;
+          lider.IdUsuario = usuario.Id;
         }
         else
         {
@@ -35,7 +35,7 @@ namespace Logic
             return new GuardarLiderAvaluoResponse(usuarioService.Guardar(lider.Usuario).Mensaje, true);
           }
           usuarioService.Guardar(lider.Usuario);
-          lider.IdUsuario = response.Usuario.IdUsuario;
+          lider.IdUsuario = response.Usuario.Id;
         }
         context.LiderAvaluos.Add(lider);
         context.SaveChanges();
@@ -56,7 +56,7 @@ namespace Logic
     public LiderAvaluo Consultar(int id)
     {
       LiderAvaluo lider = context.LiderAvaluos.Find(id);
-      lider.IdUsuario = usuarioService.Consultar(lider.IdUsuario).IdUsuario;
+      lider.IdUsuario = usuarioService.Consultar(lider.IdUsuario).Id;
       return lider;
     }
     public EditarLiderAvaluoResponse Editar(string id, LiderAvaluo liderActualizado)

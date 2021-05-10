@@ -4,11 +4,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Entity
 {
-  public class ProfesionalVenta
+  public class ProfesionalVenta : Entity<int>
   {
-    [Key]
-    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-    public int IdProfesionalVenta { get; set; }
     public int IdUsuario { get; set; }
     [NotMapped]
     public Usuario Usuario { get; set; }

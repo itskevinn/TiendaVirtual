@@ -13,7 +13,7 @@ namespace Models
       public RolViewModel(Rol rol)
       {
         Nombre = rol.Nombre;
-        IdRol = rol.IdRol;
+        IdRol = rol.Id;
       }
       public int IdRol { get; set; }
     }

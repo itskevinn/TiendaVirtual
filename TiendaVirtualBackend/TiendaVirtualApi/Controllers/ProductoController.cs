@@ -45,7 +45,7 @@ namespace Controllers
     {
       var producto = new Producto
       {
-        Id = productoInputModel.Id,
+        Codigo = productoInputModel.Id,
         Nombre = productoInputModel.Nombre,
         Descripcion = productoInputModel.Descripcion,
         PrecioBase = productoInputModel.PrecioBase,

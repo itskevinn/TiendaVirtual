@@ -31,15 +31,15 @@ namespace Logic
           var idRol = usuario.IdRol;
           if (rolService.ValidarRol(idRol) != null)
           {
-            if (personaService.Consultar(usuario.Persona.IdPersona) == null)
+            if (personaService.Consultar(usuario.Persona.Id) == null)
             {
               var personaRegistrada = personaService.Guardar(usuario.Persona).Persona;
-              usuario.IdPersona = personaRegistrada.IdPersona;
+              usuario.IdPersona = personaRegistrada.Id;
             }
             else
             {
               usuario.Persona = personaService.Consultar(idPersona);
-              usuario.IdPersona = usuario.Persona.IdPersona;
+              usuario.IdPersona = usuario.Persona.Id;
               if (usuario.Persona == null)
               {
                 return new GuardarUsuarioResponse("Persona no registrada", true);
@@ -65,7 +65,7 @@ namespace Logic
       List<Usuario> usuarios = context.Usuarios.ToList();
       usuarios.ForEach((u) => u.Rol = rolService.Consultar(u.IdRol));
       usuarios.ForEach((u) => u.Persona = personaService.Consultar(u.IdPersona));
-      usuarios.ForEach((u) => u.IdRol = u.Rol.IdRol);
+      usuarios.ForEach((u) => u.IdRol = u.Rol.Id);
       return usuarios;
     }
     public Usuario Consultar(int id)
@@ -75,7 +75,7 @@ namespace Logic
       {
         usuario.Rol = rolService.Consultar(usuario.IdRol);
         usuario.Persona = personaService.Consultar(usuario.IdPersona);
-        usuario.IdRol = usuario.Rol.IdRol;
+        usuario.IdRol = usuario.Rol.Id;
       }
       return usuario;
     }
@@ -109,8 +109,8 @@ namespace Logic
       try
       {
         Usuario usuarioBuscado = context.Usuarios.Where((u) => u.NombreUsuario.ToLower() == usuario.ToLower() && u.Contrasena == Hash.GetSha256(contrasena)).FirstOrDefault();
-        usuarioBuscado.Rol = context.Roles.Where((r) => r.IdRol == usuarioBuscado.IdRol).FirstOrDefault();
-        usuarioBuscado.Persona = context.Personas.Where((p) => p.IdPersona == usuarioBuscado.IdPersona).FirstOrDefault();
+        usuarioBuscado.Rol = context.Roles.Where((r) => r.Id == usuarioBuscado.IdRol).FirstOrDefault();
+        usuarioBuscado.Persona = context.Personas.Where((p) => p.Id == usuarioBuscado.IdPersona).FirstOrDefault();
         return usuarioBuscado;
       }
       catch (Exception)

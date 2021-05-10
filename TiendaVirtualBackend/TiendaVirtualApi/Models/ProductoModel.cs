@@ -21,7 +21,7 @@ namespace Models
     {
       public ProductoViewModel(Producto producto)
       {
-        Id = producto.Id;
+        Id = producto.Codigo;
         Nombre = producto.Nombre;
         Descripcion = producto.Descripcion;
         PrecioBase = producto.PrecioBase;

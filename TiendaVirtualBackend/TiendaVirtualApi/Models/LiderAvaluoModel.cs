@@ -14,7 +14,7 @@ namespace Models
     {
       public LiderAvaluoViewModel(LiderAvaluo liderAvaluo)
       {
-        IdLiderAvaluo = liderAvaluo.IdLiderAvaluo;
+        IdLiderAvaluo = liderAvaluo.Id;
         Usuario = liderAvaluo.Usuario;
       }
       public int IdLiderAvaluo { get; set; }

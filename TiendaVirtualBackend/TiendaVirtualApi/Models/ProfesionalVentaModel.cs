@@ -15,7 +15,7 @@ namespace Models
       public ProfesionalVentaViewModel(ProfesionalVenta profesionalVenta)
       {
         Usuario = profesionalVenta.Usuario;
-        IdProfesionalVenta = profesionalVenta.IdProfesionalVenta;
+        IdProfesionalVenta = profesionalVenta.Id;
       }
       public int IdProfesionalVenta { get; set; }
     }

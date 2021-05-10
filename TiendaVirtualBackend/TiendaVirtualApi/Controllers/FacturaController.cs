@@ -43,7 +43,7 @@ namespace Controllers
     {
       var factura = new Factura
       {
-        IdFactura = facturaInputModel.IdFactura,
+        Id = facturaInputModel.IdFactura,
         Tipo = facturaInputModel.Tipo,
         IdInteresado = facturaInputModel.IdInteresado
       };

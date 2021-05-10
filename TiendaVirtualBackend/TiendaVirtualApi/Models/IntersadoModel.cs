@@ -14,7 +14,7 @@ namespace Models
     {
       public InteresadoViewModel(Interesado interesado)
       {
-        IdInteresado = interesado.IdInteresado;
+        IdInteresado = interesado.Id;
         Facturas = interesado.Facturas;
         Usuario = interesado.Usuario;
       }

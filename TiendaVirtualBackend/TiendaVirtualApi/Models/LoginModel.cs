@@ -19,7 +19,7 @@ namespace Models
         Usuario = usuario.NombreUsuario;
         Contrasena = usuario.Contrasena;
         Rol = usuario.Rol;
-        IdUsuario = usuario.IdUsuario;
+        IdUsuario = usuario.Id;
         Persona = usuario.Persona;
         IdPersona = usuario.IdPersona;
       }

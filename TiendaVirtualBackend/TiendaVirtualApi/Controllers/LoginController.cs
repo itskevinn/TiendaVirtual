@@ -22,7 +22,7 @@ namespace TiendaVirtualApi.Controllers
       var admin = _tiendaContext.Usuarios.Find(1);
       if (admin == null)
       {
-        _tiendaContext.Usuarios.Add(new Entity.Usuario() { Rol = new Rol { Nombre = "Administrador", IdRol = 1 }, Contrasena = Hash.GetSha256("admin"), NombreUsuario = "admin" });
+        _tiendaContext.Usuarios.Add(new Entity.Usuario() { Rol = new Rol { Nombre = "Administrador", Id = 1 }, Contrasena = Hash.GetSha256("admin"), NombreUsuario = "admin" });
         var i = _tiendaContext.SaveChanges();
       }
       usuarioService = new UsuarioService(tiendaContext);

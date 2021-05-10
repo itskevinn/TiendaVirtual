@@ -3,13 +3,10 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Entity
 {
-  public class Producto
+  public class Producto : Entity<int>
   {
-    [Key]
-    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-    public string IdObjeto { get; set; }
-    [Required(ErrorMessage = "Se requiere el id del producto")]
-    public string Id { get; set; }
+    [Required(ErrorMessage = "Se requiere el código del producto")]
+    public string Codigo { get; set; }
     [Required(ErrorMessage = "Se requiere el nombre del producto")]
     public string Nombre { get; set; }
     public string Descripcion { get; set; }

@@ -17,7 +17,7 @@ namespace Logic
     {
       try
       {
-        Producto productoBuscado = ConsultarPorId(producto.Id);
+        Producto productoBuscado = ConsultarPorId(producto.Codigo);
         if (context.Proveedores.Find(producto.DocumentoProveedor) == null)
         {
           return new GuardarProductoResponse("No se encuentra el proveedor, por favor, regístrelo", true);
@@ -41,7 +41,7 @@ namespace Logic
       List<Producto> productos = context.Productos.ToList();
       foreach (Producto producto in productos)
       {
-        if (producto.Id == id)
+        if (producto.Codigo == id)
         {
           return producto;
         }
@@ -51,7 +51,7 @@ namespace Logic
 
     public ModificarCantidadResponse AumentarCantidad(Producto producto, int cantidad)
     {
-      var productoAModificar = context.Productos.Find(producto.IdObjeto);
+      var productoAModificar = context.Productos.Find(producto.Id);
       productoAModificar.CantidadDisponible += cantidad;
       context.Productos.Update(productoAModificar);
       context.SaveChanges();
@@ -59,7 +59,7 @@ namespace Logic
     }
     public ModificarCantidadResponse ReducirCantidad(Producto producto, int cantidad)
     {
-      var productoAModificar = context.Productos.Find(producto.IdObjeto);
+      var productoAModificar = context.Productos.Find(producto.Id);
       if (producto.CantidadDisponible == 0)
       {
         return new ModificarCantidadResponse($"El producto {producto.Nombre} no está disponible", true);
@@ -79,7 +79,7 @@ namespace Logic
     }
     public Producto Consultar(string id)
     {
-      return context.Productos.Where((p) => p.Id == id).FirstOrDefault();
+      return context.Productos.Where((p) => p.Codigo == id).FirstOrDefault();
     }
     public List<Producto> ProductosPorProveedor(string documento)
     {
@@ -89,7 +89,7 @@ namespace Logic
     {
       try
       {
-        var productoAActualizar = context.Productos.Where((p) => p.Id == id).FirstOrDefault();
+        var productoAActualizar = context.Productos.Where((p) => p.Codigo == id).FirstOrDefault();
         if (productoAActualizar != null)
         {
           productoAActualizar.CantidadDisponible = productoActualizado.CantidadDisponible;
@@ -98,7 +98,7 @@ namespace Logic
           productoAActualizar.PrecioBase = productoActualizado.PrecioBase;
           productoAActualizar.Iva = productoActualizado.Iva;
           productoAActualizar.Nombre = productoActualizado.Nombre;
-          productoAActualizar.Id = productoActualizado.Id;
+          productoAActualizar.Codigo = productoActualizado.Codigo;
           context.Productos.Update(productoAActualizar);
           context.SaveChanges();
           return new EditarProductoResponse(productoAActualizar, "Producto editado correctamente", false);

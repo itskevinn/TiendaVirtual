@@ -14,7 +14,7 @@ namespace Models
     {
       public UsuarioViewModel(Usuario usuario)
       {
-        IdUsuario = usuario.IdUsuario;
+        IdUsuario = usuario.Id;
         NombreUsuario = usuario.NombreUsuario;
         Rol = usuario.Rol;
       }

@@ -5,11 +5,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Entity
 {
-  public class Usuario
+  public class Usuario : Entity<int>
   {
-    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-    [Key]
-    public int IdUsuario { get; set; }
     [Required(ErrorMessage = "Ingrese un usuario")]
     public string NombreUsuario { get; set; }
     [Required(ErrorMessage = "Ingrese una contraseña")]

@@ -4,11 +4,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Entity
 {
-  public class Proveedor
+  public class Proveedor : Entity<int>
   {
-    [Key]
-    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-    public int IdProveedor { get; set; }
+
     [Required(ErrorMessage = "Se requiere el tipo de documento del proveedor")]
     public string TipoDocumento { get; set; } 
     [Required(ErrorMessage = "Se requiere el documento del proveedor")]

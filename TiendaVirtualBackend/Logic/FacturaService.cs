@@ -57,13 +57,13 @@ namespace Logic
     public List<Factura> Consultar()
     {
       List<Factura> facturas = context.Facturas.ToList();
-      facturas.ForEach((f) => detalleService.ConsultarPorFactura(f.IdFactura).ForEach((d) => f.AgregarDetalle(d)));
+      facturas.ForEach((f) => detalleService.ConsultarPorFactura(f.Id).ForEach((d) => f.AgregarDetalle(d)));
       return facturas;
     }
     public List<Factura> ConsultarPorTipo(string tipo)
     {
       List<Factura> facturas = context.Facturas.Where((f) => f.Tipo.ToLower() == tipo).ToList();
-      facturas.ForEach((f) => detalleService.ConsultarPorFactura(f.IdFactura).ForEach((d) => f.AgregarDetalle(d)));
+      facturas.ForEach((f) => detalleService.ConsultarPorFactura(f.Id).ForEach((d) => f.AgregarDetalle(d)));
       return facturas;
     }
     public List<Factura> ConsultarPorInteresado(int idInteresado)

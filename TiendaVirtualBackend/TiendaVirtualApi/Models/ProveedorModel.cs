@@ -21,7 +21,7 @@ namespace Models
       public ProveedorViewModel(Proveedor proveedor)
       {
         Documento = proveedor.Documento;
-        IdProveedor = proveedor.IdProveedor;
+        IdProveedor = proveedor.Id;
         TipoDocumento=proveedor.TipoDocumento;
         Nombre = proveedor.Nombre;
         Productos = proveedor.Productos;

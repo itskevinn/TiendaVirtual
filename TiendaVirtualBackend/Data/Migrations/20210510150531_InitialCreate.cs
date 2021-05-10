@@ -10,7 +10,7 @@ namespace Data.Migrations
                 name: "Detalles",
                 columns: table => new
                 {
-                    IdDetalle = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Cantidad = table.Column<int>(type: "int", nullable: false),
                     Tipo = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -25,55 +25,56 @@ namespace Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Detalles", x => x.IdDetalle);
+                    table.PrimaryKey("PK_Detalles", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Interesados",
                 columns: table => new
                 {
-                    IdInteresado = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     IdUsuario = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Interesados", x => x.IdInteresado);
+                    table.PrimaryKey("PK_Interesados", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
                 name: "LiderAvaluos",
                 columns: table => new
                 {
-                    IdLiderAvaluo = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     IdUsuario = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_LiderAvaluos", x => x.IdLiderAvaluo);
+                    table.PrimaryKey("PK_LiderAvaluos", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Personas",
                 columns: table => new
                 {
-                    IdPersona = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Nombre = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Apellido = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Personas", x => x.IdPersona);
+                    table.PrimaryKey("PK_Personas", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Productos",
                 columns: table => new
                 {
-                    IdObjeto = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Id = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Codigo = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Nombre = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Descripcion = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     PrecioBase = table.Column<decimal>(type: "decimal(18,0)", precision: 18, scale: 0, nullable: false),
@@ -84,27 +85,27 @@ namespace Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Productos", x => x.IdObjeto);
+                    table.PrimaryKey("PK_Productos", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
                 name: "ProfesionalVentas",
                 columns: table => new
                 {
-                    IdProfesionalVenta = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     IdUsuario = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ProfesionalVentas", x => x.IdProfesionalVenta);
+                    table.PrimaryKey("PK_ProfesionalVentas", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Proveedores",
                 columns: table => new
                 {
-                    IdProveedor = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     TipoDocumento = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Documento = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -112,27 +113,27 @@ namespace Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Proveedores", x => x.IdProveedor);
+                    table.PrimaryKey("PK_Proveedores", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Roles",
                 columns: table => new
                 {
-                    IdRol = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Nombre = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Roles", x => x.IdRol);
+                    table.PrimaryKey("PK_Roles", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Usuarios",
                 columns: table => new
                 {
-                    IdUsuario = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     NombreUsuario = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Contrasena = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -141,14 +142,14 @@ namespace Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Usuarios", x => x.IdUsuario);
+                    table.PrimaryKey("PK_Usuarios", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Facturas",
                 columns: table => new
                 {
-                    IdFactura = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Tipo = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     DescuentoTotal = table.Column<decimal>(type: "decimal(18,0)", precision: 18, scale: 0, nullable: false),
@@ -156,23 +157,23 @@ namespace Data.Migrations
                     Total = table.Column<decimal>(type: "decimal(18,0)", precision: 18, scale: 0, nullable: false),
                     SubTotal = table.Column<decimal>(type: "decimal(18,0)", precision: 18, scale: 0, nullable: false),
                     IdInteresado = table.Column<int>(type: "int", nullable: false),
-                    InteresadoIdInteresado = table.Column<int>(type: "int", nullable: true)
+                    InteresadoId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Facturas", x => x.IdFactura);
+                    table.PrimaryKey("PK_Facturas", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Facturas_Interesados_InteresadoIdInteresado",
-                        column: x => x.InteresadoIdInteresado,
+                        name: "FK_Facturas_Interesados_InteresadoId",
+                        column: x => x.InteresadoId,
                         principalTable: "Interesados",
-                        principalColumn: "IdInteresado",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Facturas_InteresadoIdInteresado",
+                name: "IX_Facturas_InteresadoId",
                 table: "Facturas",
-                column: "InteresadoIdInteresado");
+                column: "InteresadoId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
